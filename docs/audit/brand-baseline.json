@@ -1,0 +1,339 @@
+{
+  "note": "Brand literals the config has not absorbed yet. Shrinks with every stage; --write updates it.",
+  "generated": "2026-11-09",
+  "config": [
+    "src/lib/site.config.ts"
+  ],
+  "total": 103,
+  "files": {
+    "src/video/compositions/KineticShowcaseStory.tsx": {
+      "total": 6,
+      "rules": {
+        "brand": 4,
+        "domain": 2
+      }
+    },
+    "src/app/admin/content/ContentClientLayout.tsx": {
+      "total": 5,
+      "rules": {
+        "brand": 4,
+        "domain": 1
+      }
+    },
+    "src/app/admin/content/settings/page.tsx": {
+      "total": 4,
+      "rules": {
+        "brand": 2,
+        "domain": 2
+      }
+    },
+    "public/custom-sw.js": {
+      "total": 3,
+      "rules": {
+        "brand": 2,
+        "domain": 1
+      }
+    },
+    "src/app/admin/content/franchises/page.tsx": {
+      "total": 3,
+      "rules": {
+        "brand": 3
+      }
+    },
+    "src/app/globals.css": {
+      "total": 3,
+      "rules": {
+        "brand": 2,
+        "domain": 1
+      }
+    },
+    "src/video/compositions/KineticStory15s.tsx": {
+      "total": 3,
+      "rules": {
+        "brand": 1,
+        "domain": 2
+      }
+    },
+    "src/video/compositions/KineticStory20s-Case2.tsx": {
+      "total": 3,
+      "rules": {
+        "brand": 1,
+        "domain": 2
+      }
+    },
+    "src/video/compositions/KineticStory20s.tsx": {
+      "total": 3,
+      "rules": {
+        "brand": 1,
+        "domain": 2
+      }
+    },
+    "src/video/compositions/KineticStory20sParametric.tsx": {
+      "total": 3,
+      "rules": {
+        "brand": 1,
+        "domain": 2
+      }
+    },
+    "src/video/compositions/solar2/kit.tsx": {
+      "total": 3,
+      "rules": {
+        "brand": 1,
+        "domain": 2
+      }
+    },
+    "src/video/compositions/solar3/ShowroomTypeLoopC.tsx": {
+      "total": 3,
+      "rules": {
+        "brand": 1,
+        "domain": 2
+      }
+    },
+    "src/worker/index.ts": {
+      "total": 3,
+      "rules": {
+        "brand": 3
+      }
+    },
+    "public/offline.html": {
+      "total": 2,
+      "rules": {
+        "brand": 2
+      }
+    },
+    "src/app/admin/AdminClientLayout.tsx": {
+      "total": 2,
+      "rules": {
+        "brand": 2
+      }
+    },
+    "src/app/admin/layout.tsx": {
+      "total": 2,
+      "rules": {
+        "brand": 2
+      }
+    },
+    "src/app/admin/leads/[id]/page.tsx": {
+      "total": 2,
+      "rules": {
+        "domain": 2
+      }
+    },
+    "src/app/api/admin/content/generate/route.ts": {
+      "total": 2,
+      "rules": {
+        "brand": 2
+      }
+    },
+    "src/app/api/admin/summarize/route.ts": {
+      "total": 2,
+      "rules": {
+        "brand": 2
+      }
+    },
+    "src/app/api/pdf/proposal/route.ts": {
+      "total": 2,
+      "rules": {
+        "domain": 2
+      }
+    },
+    "src/components/admin/content/PostEditor.tsx": {
+      "total": 2,
+      "rules": {
+        "brand": 2
+      }
+    },
+    "src/lib/hashid.ts": {
+      "total": 2,
+      "rules": {
+        "domain": 2
+      }
+    },
+    "src/lib/supabase.ts": {
+      "total": 2,
+      "rules": {
+        "domain": 2
+      }
+    },
+    "src/video/compositions/KrabiCaseStory.tsx": {
+      "total": 2,
+      "rules": {
+        "brand": 2
+      }
+    },
+    "src/video/compositions/LandingStory.tsx": {
+      "total": 2,
+      "rules": {
+        "brand": 1,
+        "domain": 1
+      }
+    },
+    "src/video/compositions/ProductEcosystemStory.tsx": {
+      "total": 2,
+      "rules": {
+        "brand": 2
+      }
+    },
+    "src/video/compositions/solar2/CaseVillaStory.tsx": {
+      "total": 2,
+      "rules": {
+        "brand": 1,
+        "domain": 1
+      }
+    },
+    "src/video/compositions/solar2/CaseVillaStoryH.tsx": {
+      "total": 2,
+      "rules": {
+        "brand": 1,
+        "domain": 1
+      }
+    },
+    "src/video/compositions/solar2/RoofTeamStory.tsx": {
+      "total": 2,
+      "rules": {
+        "brand": 1,
+        "domain": 1
+      }
+    },
+    "src/video/compositions/solar3/ShowroomTypeLoop.tsx": {
+      "total": 2,
+      "rules": {
+        "brand": 1,
+        "domain": 1
+      }
+    },
+    "src/video/compositions/solar3/ShowroomTypeLoopB.tsx": {
+      "total": 2,
+      "rules": {
+        "brand": 1,
+        "domain": 1
+      }
+    },
+    "src/video/showroom/Showroom.tsx": {
+      "total": 2,
+      "rules": {
+        "domain": 2
+      }
+    },
+    "src/app/admin/page.tsx": {
+      "total": 1,
+      "rules": {
+        "domain": 1
+      }
+    },
+    "src/app/api/pdf/download/route.ts": {
+      "total": 1,
+      "rules": {
+        "domain": 1
+      }
+    },
+    "src/app/api/pdf/spec/route.ts": {
+      "total": 1,
+      "rules": {
+        "domain": 1
+      }
+    },
+    "src/app/login/page.tsx": {
+      "total": 1,
+      "rules": {
+        "domain": 1
+      }
+    },
+    "src/components/admin/CustomOfferHub.tsx": {
+      "total": 1,
+      "rules": {
+        "domain": 1
+      }
+    },
+    "src/components/admin/NotificationHandler.tsx": {
+      "total": 1,
+      "rules": {
+        "brand": 1
+      }
+    },
+    "src/components/admin/super/QuizTab.tsx": {
+      "total": 1,
+      "rules": {
+        "brand": 1
+      }
+    },
+    "src/lib/__tests__/line-messages.test.ts": {
+      "total": 1,
+      "rules": {
+        "brand": 1
+      }
+    },
+    "src/lib/line-handlers.ts": {
+      "total": 1,
+      "rules": {
+        "domain": 1
+      }
+    },
+    "src/lib/notifications.ts": {
+      "total": 1,
+      "rules": {
+        "brand": 1
+      }
+    },
+    "src/lib/telegram.ts": {
+      "total": 1,
+      "rules": {
+        "domain": 1
+      }
+    },
+    "src/video/compositions/AIConsultStory.tsx": {
+      "total": 1,
+      "rules": {
+        "brand": 1
+      }
+    },
+    "src/video/compositions/BrandStory.tsx": {
+      "total": 1,
+      "rules": {
+        "brand": 1
+      }
+    },
+    "src/video/compositions/ProductCarouselStory.tsx": {
+      "total": 1,
+      "rules": {
+        "domain": 1
+      }
+    },
+    "src/video/compositions/ROICalculatorStory.tsx": {
+      "total": 1,
+      "rules": {
+        "brand": 1
+      }
+    },
+    "src/video/compositions/solar2/BusinessRoiStory.tsx": {
+      "total": 1,
+      "rules": {
+        "domain": 1
+      }
+    },
+    "src/video/compositions/solar2/BusinessRoiStoryH.tsx": {
+      "total": 1,
+      "rules": {
+        "domain": 1
+      }
+    },
+    "src/video/compositions/solar2/FamilySavingsStory.tsx": {
+      "total": 1,
+      "rules": {
+        "domain": 1
+      }
+    },
+    "src/video/compositions/solar2/InverterTier1Story.tsx": {
+      "total": 1,
+      "rules": {
+        "domain": 1
+      }
+    },
+    "src/video/compositions/solar2/KrabiWeatherStory.tsx": {
+      "total": 1,
+      "rules": {
+        "domain": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TAWAN POWER — Mindmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+:root{--sand:#faf8f4;--sand1:#f4f2ee;--sand3:#d8d0c4;--amber:#a06808;--txt:#2a2520;--txt2:#6a6560;--txt3:#999}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--sand);color:var(--txt);overflow:hidden;height:100vh}
+
+.hdr{position:fixed;top:0;left:0;right:0;height:44px;background:rgba(250,248,244,0.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(216,208,196,0.5);display:flex;align-items:center;padding:0 16px;z-index:100;gap:12px}
+.logo{font-family:'Fraunces',serif;font-weight:700;font-size:14px;color:var(--amber);letter-spacing:-0.02em;white-space:nowrap}
+.logo span{color:var(--txt3);font-weight:400;font-size:11px;font-family:'DM Sans',sans-serif;margin-left:6px}
+.stats{font-size:10.5px;color:var(--txt2);display:flex;gap:10px}
+.stats b{color:var(--amber);font-weight:600}
+.srch{position:relative;margin-left:auto}
+.srch input{width:170px;padding:4px 10px 4px 24px;border:1px solid var(--sand3);border-radius:5px;background:var(--sand1);font:inherit;font-size:11px;color:var(--txt);outline:none;transition:border-color .12s}
+.srch input:focus{border-color:#c8942a}
+.srch svg{position:absolute;left:6px;top:50%;transform:translateY(-50%);width:11px;height:11px;stroke:var(--txt3);fill:none;stroke-width:2}
+
+svg#tree{position:fixed;top:44px;left:0;right:0;bottom:0;transition:right .3s ease}
+body.panel-open svg#tree{right:420px}
+
+.link{fill:none;stroke:#d0c8b8;stroke-width:1}
+.link.root{stroke:#b8b0a0;stroke-width:1.5}
+
+.node circle{cursor:pointer;transition:r .12s,opacity .12s}
+.node text{font-family:'DM Sans',sans-serif;fill:var(--txt2)}
+.node:hover circle{filter:brightness(1.12)}
+
+.tip{position:fixed;background:#fffcf8;border:1px solid var(--sand3);border-radius:6px;padding:8px 12px;font-size:11.5px;pointer-events:none;opacity:0;z-index:200;max-width:260px;box-shadow:0 3px 12px rgba(42,37,32,0.07);transition:opacity .1s}
+.tip.on{opacity:1}
+.tip b{display:block;font-family:'Fraunces',serif;font-weight:600;font-size:12px;color:var(--txt);margin-bottom:1px}
+.tip .d{color:var(--txt2);font-size:10.5px;line-height:1.35}
+.tip .p{margin-top:3px;font-size:9.5px;font-weight:600;color:var(--amber);letter-spacing:0.03em}
+
+.ctrls{position:fixed;bottom:10px;left:10px;display:flex;gap:3px;z-index:80}
+.cb{width:26px;height:26px;border-radius:5px;border:1px solid var(--sand3);background:rgba(250,248,244,0.85);backdrop-filter:blur(6px);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--txt2);transition:all .12s}
+.cb:hover{background:var(--sand1);color:var(--txt);border-color:#c8942a}
+.cb svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2}
+
+.leg{position:fixed;bottom:10px;right:10px;background:rgba(250,248,244,0.9);backdrop-filter:blur(6px);border:1px solid rgba(216,208,196,0.5);border-radius:6px;padding:8px 12px;z-index:80;font-size:9.5px;color:var(--txt3);display:flex;flex-wrap:wrap;gap:4px 12px;transition:right .3s ease}
+body.panel-open .leg{right:430px}
+.li{display:flex;align-items:center;gap:4px}
+.ld{width:5px;height:5px;border-radius:50%}
+
+/* Doc panel */
+.panel{position:fixed;top:44px;right:-420px;width:420px;bottom:0;background:rgba(250,248,244,0.96);backdrop-filter:blur(12px);border-left:1px solid rgba(216,208,196,0.5);z-index:95;transition:right .3s ease;display:flex;flex-direction:column}
+body.panel-open .panel{right:0}
+.panel-head{padding:14px 16px 10px;border-bottom:1px solid rgba(216,208,196,0.4);display:flex;align-items:flex-start;gap:10px;flex-shrink:0}
+.panel-title{font-family:'Fraunces',serif;font-weight:600;font-size:15px;color:var(--txt);flex:1;line-height:1.3}
+.panel-path{font-size:10px;color:var(--txt3);margin-top:2px;font-family:monospace}
+.panel-sec{display:inline-block;font-size:9.5px;font-weight:600;padding:2px 7px;border-radius:4px;margin-top:4px;color:#fff}
+.panel-close{width:24px;height:24px;border-radius:5px;border:1px solid var(--sand3);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--txt3);flex-shrink:0;transition:all .12s}
+.panel-close:hover{background:var(--sand1);color:var(--txt)}
+.panel-close svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
+.panel-body{flex:1;overflow-y:auto;padding:16px;font-size:13px;line-height:1.65;color:var(--txt2)}
+.panel-body::-webkit-scrollbar{width:4px}
+.panel-body::-webkit-scrollbar-thumb{background:var(--sand3);border-radius:4px}
+.panel-body h1{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--txt);margin:0 0 12px;line-height:1.2}
+.panel-body h2{font-family:'Fraunces',serif;font-size:16px;font-weight:600;color:var(--txt);margin:20px 0 8px;line-height:1.25;border-bottom:1px solid var(--sand3);padding-bottom:4px}
+.panel-body h3{font-size:13px;font-weight:600;color:var(--txt);margin:14px 0 6px}
+.panel-body h4{font-size:12px;font-weight:600;color:var(--txt2);margin:10px 0 4px}
+.panel-body p{margin:0 0 8px}
+.panel-body ul,.panel-body ol{margin:0 0 8px;padding-left:20px}
+.panel-body li{margin-bottom:3px}
+.panel-body code{background:var(--sand1);padding:1px 4px;border-radius:3px;font-size:11.5px;font-family:'SF Mono',Consolas,monospace;color:#7c4a6b}
+.panel-body pre{background:var(--sand1);border:1px solid var(--sand3);border-radius:6px;padding:10px 12px;overflow-x:auto;margin:8px 0;font-size:11px;line-height:1.5}
+.panel-body pre code{background:none;padding:0;color:var(--txt)}
+.panel-body a{color:var(--amber);text-decoration:none}
+.panel-body a:hover{text-decoration:underline}
+.panel-body blockquote{border-left:3px solid var(--sand3);padding-left:12px;margin:8px 0;color:var(--txt3)}
+.panel-body table{border-collapse:collapse;width:100%;margin:8px 0;font-size:11.5px}
+.panel-body th,.panel-body td{border:1px solid var(--sand3);padding:5px 8px;text-align:left}
+.panel-body th{background:var(--sand1);font-weight:600}
+.panel-empty{color:var(--txt3);font-style:italic;text-align:center;padding:40px 20px}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="logo">TAWAN POWER<span>Mindmap</span></div>
+  <div class="stats"><span><b id="nN">0</b> docs</span><span><b id="nE">0</b> links</span></div>
+  <div class="srch">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="search" placeholder="Фильтр...">
+  </div>
+</header>
+
+<svg id="tree"></svg>
+
+<div class="tip" id="tip"><b id="tT"></b><div class="d" id="tD"></div><div class="p" id="tP"></div></div>
+
+<div class="panel" id="panel">
+  <div class="panel-head">
+    <div>
+      <div class="panel-title" id="pTitle">—</div>
+      <div class="panel-path" id="pPath"></div>
+      <div class="panel-sec" id="pSec"></div>
+    </div>
+    <button class="panel-close" id="pClose"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="panel-body" id="pBody"><div class="panel-empty">Кликни на документ чтобы увидеть содержимое</div></div>
+</div>
+
+<div class="ctrls">
+  <button class="cb" id="bIn" title="+"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+  <button class="cb" id="bOut" title="-"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+  <button class="cb" id="bRst" title="Reset"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
+</div>
+
+<div class="leg" id="legend"></div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="docs-data.js"></script>
+<script>
+if(typeof d3==='undefined'){
+  document.body.innerHTML='<div style="padding:40px;font-size:14px;color:#a0522d;text-align:center;margin-top:20vh">D3.js не загрузился. Проверьте интернет-соединение и обновите страницу.</div>';
+}else{
+(function(){
+var cats={
+  strategy:{c:'#b8710a',l:'Strategy & Vision'},
+  pwa:{c:'#0e7c6b',l:'PWA Admin'},
+  business:{c:'#1a6b8a',l:'Business & Ops'},
+  research:{c:'#4a7c59',l:'Research'},
+  design:{c:'#a08520',l:'Design & UX'},
+  tech:{c:'#7c4a6b',l:'Technical'},
+  data:{c:'#3a6b9f',l:'Data & Pricing'},
+  seo:{c:'#6b4a8a',l:'SEO & Content'},
+  mkt:{c:'#2a7a6a',l:'Marketing'},
+  line:{c:'#8a4a5a',l:'LINE & Chat'},
+  bug:{c:'#a0522d',l:'Bug Reports'},
+  blog:{c:'#5a8a4a',l:'Blog'},
+  plan:{c:'#4a5a8a',l:'Plans'},
+  review:{c:'#6a6a6a',l:'Code Review'},
+  deploy:{c:'#3a7a5a',l:'Deployment'}
+};
+
+var treeData={name:"TAWAN POWER",children:[
+  {name:"Strategy",g:"strategy",children:[
+    {name:"STRATEGY.md",p:"P0",d:"Revenue Engine v2.0"},
+    {name:"STRATEGY_v2.md",p:"P0",d:"Обновлённая стратегия"},
+    {name:"VISION.md",p:"P1",d:"Solar Revenue Engine, воронка"},
+    {name:"ROADMAP.md",p:"P0",d:"Roadmap v1.2"},
+    {name:"ROADMAP_V2.md",p:"P0",d:"Расширенный roadmap"},
+    {name:"PENDING_TASKS.md",p:"P0",d:"Master task list"},
+    {name:"FINANCIAL_MODEL.md",p:"P1",d:"Unit economics CAC/LTV"},
+    {name:"FIRST_100_LEADS.md",p:"P1",d:"Обработка лидов"},
+    {name:"REAL_WORLD_EVOLUTION.md",p:"P0",d:"Roadmap развития"},
+    {name:"PRODUCT_LIFECYCLE.md",p:"P1",d:"5 фаз продукта"},
+    {name:"PLAN.md",p:"P0",d:"Общий план"},
+    {name:"PLAN_SOLAR_KRABI.md",p:"P1",d:"План Solar Krabi"},
+    {name:"COMPLIANCE.md",p:"P1",d:"Комплаенс"},
+    {name:"IMPLEMENTATION_PLAN.md",p:"P1",d:"Имплементация"},
+    {name:"IMPLEMENTATION_SUMMARY.md",p:"P1",d:"Сводка"},
+    {name:"BUSINESS_OWNER_BRIEF.md",p:"P1",d:"Бриф владельца"},
+    {name:"THAI_MARKET_ANALYSIS.md",p:"P1",d:"Рынок Таиланда"},
+    {name:"LAUNCH_PLAYBOOK.md",p:"P0",d:"Pre/post-launch"},
+    {name:"FIRST_90_DAYS.md",p:"P0",d:"План 90 дней"},
+    {name:"ROADMAP_TO_LAUNCH.md",p:"P0",d:"Главный навигатор"},
+    {name:"RESEARCH_MASTER_PLAN.md",p:"P0",d:"15 тем"}
+  ]},
+  {name:"PWA Admin",g:"pwa",children:[
+    {name:"BLIND_SPOTS.md",p:"P0",d:"Security audit"},
+    {name:"PWA_ADMIN_SECRETS.md",p:"P0",d:"VAPID, Firebase"},
+    {name:"line-api-reference.md",p:"P0",d:"LINE API"},
+    {name:"pwa-admin-architecture.md",p:"P0",d:"Архитектура PWA"},
+    {name:"ADMIN_IMPROVEMENT.md",p:"P1",d:"Улучшение админки"}
+  ]},
+  {name:"Business",g:"business",children:[
+    {name:"TONE_OF_VOICE.md",p:"P1",d:'AI "Tan"'},
+    {name:"KNOWLEDGE_BASE.md",p:"P2",d:"Case studies, FAQ"},
+    {name:"MANPOWER_TEAM_SCALING.md",p:"P1",d:"Команда"},
+    {name:"quick-reference.md",p:"P2",d:"Справочник"},
+    {name:"escalation-matrix.md",p:"P3",d:"Эскалация"},
+    {name:"leads-template.md",p:"P2",d:"Шаблон лидов"},
+    {name:"consultation-form.md",p:"P3",d:"Форма"},
+    {name:"support-scripts.md",p:"P2",d:"Scripts"}
+  ]},
+  {name:"Research",g:"research",children:[
+    {name:"01 company registration",p:"P0",d:"Регистрация бизнеса"},
+    {name:"02 suppliers equipment",p:"P0",d:"Поставщики"},
+    {name:"03 permits regulations",p:"P0",d:"Разрешения"},
+    {name:"04 insurance",p:"P0",d:"Страхование"},
+    {name:"05 customer financing",p:"P1",d:"Финансирование"},
+    {name:"06 certifications",p:"P1",d:"Сертификации"},
+    {name:"07 competitor analysis",p:"P1",d:"Конкуренты"},
+    {name:"08 digital marketing",p:"P1",d:"Digital Marketing"},
+    {name:"09 after sales",p:"P2",d:"After-Sales"},
+    {name:"10 integrations",p:"P2",d:"Интеграции"},
+    {name:"11 waste mgmt",p:"P2",d:"Отходы"},
+    {name:"12 import/export",p:"P2",d:"Импорт/экспорт"},
+    {name:"13 data privacy",p:"P2",d:"Data Privacy"},
+    {name:"14 esg",p:"P2",d:"ESG"},
+    {name:"15 pricing elasticity",p:"P2",d:"Pricing"}
+  ]},
+  {name:"Design",g:"design",children:[
+    {name:"DESIGN.md",p:"P1",d:"Design tokens"},
+    {name:"DESIGN_IMPROVEMENT.md",p:"P3",d:"План улучшения"},
+    {name:"TAN_AVATAR.md",p:"P3",d:"Аватар Tan"},
+    {name:"TAN_AVATAR_PROMPT.md",p:"P3",d:"Промпт аватара"},
+    {name:"DARK_MODE_PLAN.md",p:"P3",d:"Dark mode"},
+    {name:".impeccable.md",p:"P2",d:"Config"}
+  ]},
+  {name:"Technical",g:"tech",children:[
+    {name:"AGENTS.md",p:"P1",d:"Контекст агента"},
+    {name:"GEMINI.md",p:"P1",d:"AI провайдеры"},
+    {name:"AI_PROVIDERS_DOCS.md",p:"P1",d:"Документация AI"},
+    {name:"AI_EXPERIENCE_TRANSFER.md",p:"P2",d:"Передача опыта"},
+    {name:"GROQ_TEST_RESULTS.md",p:"P2",d:"Тесты Groq"},
+    {name:"solar_catalog_rag.md",p:"P1",d:"RAG план"},
+    {name:"seller-scripts/01-DB",p:"P0",d:"Database"},
+    {name:"seller-scripts/02-engine",p:"P0",d:"Generator"},
+    {name:"seller-scripts/03-knowledge",p:"P0",d:"Content"},
+    {name:"seller-scripts/04-rec",p:"P0",d:"Vector search"},
+    {name:"seller-scripts/05-auto",p:"P0",d:"Triggers"},
+    {name:"NEXTJS_CHECKLIST.md",p:"P2",d:"Next.js"},
+    {name:"TECH_STACK_SAAS.md",p:"P1",d:"SaaS stack"},
+    {name:"CRYPTO_BLOCKCHAIN.md",p:"P2",d:"Crypto"},
+    {name:"SCRAPING_APIS.md",p:"P1",d:"Scraping APIs"},
+    {name:"PDF_STRUCTURE.md",p:"P0",d:"PDF"}
+  ]},
+  {name:"Deployment",g:"deploy",children:[
+    {name:"DEPLOY_FINAL.md",p:"P0",d:"Деплой-гайд"},
+    {name:"DEPLOY_GUIDE.md",p:"P0",d:"Гайд по деплою"},
+    {name:"DEPLOYMENT_PROCEDURE.md",p:"P0",d:"Процедура"},
+    {name:"OPERATIONS_PLAYBOOK.md",p:"P1",d:"Оперплейбук"}
+  ]},
+  {name:"Data",g:"data",children:[
+    {name:"PRICE_LIST_2026.md",p:"P1",d:"Прайс-лист"},
+    {name:"synergy-allinone.md",p:"P2",d:"Synergy"}
+  ]},
+  {name:"SEO",g:"seo",children:[
+    {name:"AI_SEO_STRATEGY.md",p:"P0",d:"SEO через AI"},
+    {name:"SEO_BLIND_SPOTS.md",p:"P0",d:"Слепые зоны"},
+    {name:"SEO_CONTENT_PLAN.md",p:"P1",d:"Контент-план"},
+    {name:"SEO_GUIDE_BEGINNER.md",p:"P2",d:"Гайд SEO"},
+    {name:"SEO_KNOWLEDGE_BASE_SYSTEM.md",p:"P1",d:"SEO KB"},
+    {name:"CONTENT_STRATEGY.md",p:"P0",d:"Контент-стратегия"},
+    {name:"SOLAR_KEYWORDS.md",p:"P1",d:"Ключевые слова"},
+    {name:"SOLAR_POST_PROMPT.md",p:"P1",d:"Master prompt"}
+  ]},
+  {name:"Marketing",g:"mkt",children:[
+    {name:"MARKET_RESEARCH.md",p:"P1",d:"Экспаты"},
+    {name:"MARKETING_BLIND_SPOTS.md",p:"P1",d:"Слепые зоны"},
+    {name:"COMPETITOR_ANALYSIS.md",p:"P1",d:"Конкуренты"},
+    {name:"MEDIA_WORKFLOW.md",p:"P2",d:"Медиа"},
+    {name:"UGC_CONTENT_PLAN.md",p:"P2",d:"UGC"},
+    {name:"PARTNER_OUTREACH.md",p:"P2",d:"Партнёры"}
+  ]},
+  {name:"LINE",g:"line",children:[
+    {name:"LINE_STRATEGY.md",p:"P0",d:"Стратегия LINE"},
+    {name:"LINE_ROADMAP_2026.md",p:"P1",d:"Roadmap"},
+    {name:"CHAT_EXPERIMENT.md",p:"P1",d:"AI-чат"},
+    {name:"LINE_FLEX_REFERENCE.md",p:"P1",d:"Flex"}
+  ]},
+  {name:"Bugs",g:"bug",children:[
+    {name:"BUG_REPORT.md",p:"P0",d:"Главный баг"},
+    {name:"BUG_CHAT_API.md",p:"P1",d:"Chat API"},
+    {name:"BUG_CHAT_FLICKER.md",p:"P1",d:"Flicker"},
+    {name:"BUG_NOTIFICATIONS.md",p:"P2",d:"Нотификации"}
+  ]},
+  {name:"Blog",g:"blog",children:[
+    {name:"seed_blog.sql",p:"P1",d:"Best Investment"},
+    {name:"seed_article_2.sql",p:"P1",d:"Solar Price"},
+    {name:"seed_article_3.sql",p:"P1",d:"Inverters"},
+    {name:"seed_article_4.sql",p:"P1",d:"Maintenance"}
+  ]},
+  {name:"Plans",g:"plan",children:[
+    {name:"thai-localization.md",p:"P1",d:"Локализация"},
+    {name:"redis-integration.md",p:"P2",d:"Redis"},
+    {name:"line_liff_setup.md",p:"P1",d:"LIFF"},
+    {name:"flex-message-spec.md",p:"P1",d:"Flex Message"}
+  ]},
+  {name:"Review",g:"review",children:[
+    {name:"MASTER-PROMPT.md",p:"P1",d:"Промпт"},
+    {name:"part-1 security.md",p:"P0",d:"Безопасность"},
+    {name:"part-2 typescript.md",p:"P1",d:"TypeScript"},
+    {name:"part-3 react.md",p:"P1",d:"React"}
+  ]}
+]};
+
+// Legend
+var leg=document.getElementById('legend');
+Object.keys(cats).forEach(function(k){
+  var d=document.createElement('div');d.className='li';
+  d.innerHTML='<span class="ld" style="background:'+cats[k].c+'"></span>'+cats[k].l;
+  leg.appendChild(d);
+});
+
+// SVG setup
+var svgEl=document.getElementById('tree');
+var W=window.innerWidth,H=window.innerHeight-44;
+svgEl.setAttribute('width',W);
+svgEl.setAttribute('height',H);
+
+var svg=d3.select('#tree');
+var gMain=svg.append('g');
+
+var zoomBehavior=d3.zoom()
+  .scaleExtent([0.15,5])
+  .on('zoom',function(e){gMain.attr('transform',e.transform);});
+svg.call(zoomBehavior);
+
+// Build hierarchy
+var root=d3.hierarchy(treeData);
+var treeLayout=d3.tree()
+  .nodeSize([22,200])
+  .separation(function(a,b){return a.parent===b.parent?1:1.2;});
+
+treeLayout(root);
+
+// Count — only leaf docs, not section hubs or root
+var nc=0,lc=0;
+root.leaves().forEach(function(){nc++;});
+root.links().forEach(function(){lc++;});
+document.getElementById('nN').textContent=nc;
+document.getElementById('nE').textContent=lc;
+
+// Draw links
+gMain.selectAll('.link')
+  .data(root.links())
+  .join('path')
+  .attr('class',function(d){return d.source.depth===0?'link root':'link';})
+  .attr('d',function(d){
+    return 'M'+d.source.y+','+d.source.x
+      +'C'+(d.source.y+d.target.y)/2+','+d.source.x
+      +' '+(d.source.y+d.target.y)/2+','+d.target.x
+      +' '+d.target.y+','+d.target.x;
+  })
+  .attr('stroke',function(d){
+    var gn=d.target.data.g||d.source.data.g;
+    return gn&&cats[gn]?cats[gn].c+'55':'#d0c8b8';
+  });
+
+// Nodes
+var nodes=gMain.selectAll('.node')
+  .data(root.descendants())
+  .join('g')
+  .attr('class','node')
+  .attr('transform',function(d){return 'translate('+d.y+','+d.x+')';});
+
+nodes.append('circle')
+  .attr('r',function(d){
+    if(d.depth===0)return 7;
+    if(d.depth===1)return 5;
+    return d.data.p==='P0'?4:3;
+  })
+  .attr('fill',function(d){
+    if(d.depth===0)return '#a06808';
+    var gn=d.data.g;
+    if(!gn&&d.parent)gn=d.parent.data.g;
+    return cats[gn]?cats[gn].c:'#bbb';
+  })
+  .attr('stroke',function(d){
+    if(d.depth===0)return '#805010';
+    var gn=d.data.g;
+    if(!gn&&d.parent)gn=d.parent.data.g;
+    return cats[gn]?cats[gn].c:'#bbb';
+  })
+  .attr('stroke-width',function(d){return d.depth<=1?1.5:0.8;})
+  .attr('opacity',function(d){return d.depth===0?1:d.depth===1?0.85:0.7;});
+
+nodes.append('text')
+  .attr('dy','0.32em')
+  .attr('x',function(d){return d.children?-8:7;})
+  .attr('text-anchor',function(d){return d.children?'end':'start';})
+  .text(function(d){
+    if(d.depth===0)return '';
+    return d.data.name;
+  })
+  .attr('font-size',function(d){return d.depth===1?'11px':'10px';})
+  .attr('font-weight',function(d){return d.depth===1?600:400;})
+  .attr('fill',function(d){
+    if(d.depth===0)return '#a06808';
+    if(d.depth===1)return '#3a3530';
+    return '#7a7570';
+  });
+
+var data=window.DOCS_DATA||{};
+var nameMap={
+  '01 company registration':'01_company_registration_thailand.md',
+  '02 suppliers equipment':'02_suppliers_equipment_research.md',
+  '03 permits regulations':'03_permits_regulations_thailand.md',
+  '04 insurance':'04_insurance_requirements_thailand.md',
+  '05 customer financing':'05_customer_financing_thailand.md',
+  '06 certifications':'06_certifications_standards_thailand.md',
+  '07 competitor analysis':'07_competitor_analysis_thailand.md',
+  '08 digital marketing':'08_digital_marketing_thailand.md',
+  '09 after sales':'09_after_sales_service_model.md',
+  '10 integrations':'10_integrations_third_party.md',
+  '11 waste mgmt':'11_waste_management.md',
+  '12 import/export':'12_import_export_thailand.md',
+  '13 data privacy':'13_data_privacy_beyond_pdpA.md',
+  '14 esg':'14_esg_sustainability.md',
+  '15 pricing elasticity':'15_pricing_elasticity.md',
+  'seller-scripts/01-DB':'seller-scripts-integration/01-database-foundation.md',
+  'seller-scripts/02-engine':'seller-scripts-integration/02-seller-scripts-engine.md',
+  'seller-scripts/03-knowledge':'seller-scripts-integration/03-knowledge-enrichment.md',
+  'seller-scripts/04-rec':'seller-scripts-integration/04-recommendation-engine.md',
+  'seller-scripts/05-auto':'seller-scripts-integration/05-automation-integration.md',
+  'AI_PROVIDERS_DOCS.md':'AI_PROVIDERS_DOCS.md',
+  'AI_EXPERIENCE_TRANSFER.md':'AI_EXPERIENCE_TRANSFER.md',
+  'GROQ_TEST_RESULTS.md':'GROQ_TEST_RESULTS.md',
+  'solar_catalog_rag.md':'solar_catalog_rag_enhancement_plan.md',
+  'NEXTJS_CHECKLIST.md':'NEXTJS_BEST_PRACTICES_CHECKLIST.md',
+  'TECH_STACK_SAAS.md':'TECH_STACK_SAAS_PLATFORMS.md',
+  'CRYPTO_BLOCKCHAIN.md':'CRYPTO_BLOCKCHAIN_OPPORTUNITIES.md',
+  'DEPLOY_FINAL.md':'DEPLOY_FINAL.md',
+  'DEPLOY_GUIDE.md':'DEPLOY_GUIDE.md',
+  'IMPLEMENTATION_PLAN.md':'IMPLEMENTATION_PLAN.md',
+  'PRICE_LIST_2026.md':'PRICE_LIST_2026.md',
+  'synergy-allinone.md':'synergy-allinone.md',
+  'AI_SEO_STRATEGY.md':'AI_ASSISTANT_SEO_STRATEGY.md',
+  'SEO_BLIND_SPOTS.md':'SEO_BLIND_SPOTS_ANALYSIS.md',
+  'SEO_CONTENT_PLAN.md':'SEO_CONTENT_PLAN.md',
+  'SEO_GUIDE_BEGINNER.md':'SEO_GUIDE_BEGINNER.md',
+  'SEO_KNOWLEDGE_BASE_SYSTEM.md':'SEO_KNOWLEDGE_BASE_SYSTEM.md',
+  'CONTENT_STRATEGY.md':'CONTENT_STRATEGY_MASTER_PLAN.md',
+  'SOLAR_KEYWORDS.md':'SOLAR_KEYWORDS_ANALYSIS.md',
+  'SOLAR_POST_PROMPT.md':'SOLAR_POST_MASTER_PROMPT.md',
+  'UGC_CONTENT_PLAN.md':'UGC_CONTENT_PLAN.md',
+  'MARKET_RESEARCH.md':'MARKET_RESEARCH_EXPATS_BLUE_OCEAN.md',
+  'MARKETING_BLIND_SPOTS.md':'MARKETING_BLIND_SPOTS_ANALYSIS.md',
+  'COMPETITOR_ANALYSIS.md':'COMPETITOR_ANALYSIS.md',
+  'MEDIA_WORKFLOW.md':'MEDIA_WORKFLOW.md',
+  'PARTNER_OUTREACH.md':'PARTNER_OUTREACH_EMAIL_TEMPLATES.md',
+  'LINE_STRATEGY.md':'LINE_STRATEGY_AND_LOGIC.md',
+  'LINE_ROADMAP_2026.md':'LINE_ROADMAP_2026_RU.md',
+  'CHAT_EXPERIMENT.md':'CHAT_ISSUES_EXPERIMENT.md',
+  'LINE_FLEX_REFERENCE.md':'LINE_FLEX_MASTER_REFERENCE.md',
+  'PDF_STRUCTURE.md':'PDF_STRUCTURE.md',
+  'BUG_REPORT.md':'BUG_REPORT.md',
+  'BUG_CHAT_API.md':'BUG_REPORT_CHAT_API.md',
+  'BUG_CHAT_FLICKER.md':'BUG_REPORT_CHAT_FLICKER.md',
+  'BUG_NOTIFICATIONS.md':'BUG_REPORT_NOTIFICATIONS_JOIN.md',
+  'seed_blog.sql':'seed_blog.sql',
+  'seed_article_2.sql':'seed_blog_article_2.sql',
+  'seed_article_3.sql':'seed_blog_article_3.sql',
+  'seed_article_4.sql':'seed_blog_article_4.sql',
+  'thai-localization.md':'thai-localization-audit.md',
+  'redis-integration.md':'redis-integration.md',
+  'line_liff_setup.md':'line_liff_integration_setup.md',
+  'flex-message-spec.md':'flex-message-v4-v13-spec.md',
+  'MASTER-PROMPT.md':'MASTER-PROMPT-RU.md',
+  'part-1 security.md':'part-1-security-auth.md',
+  'part-2 typescript.md':'part-2-typescript-code-quality.md',
+  'part-3 react.md':'part-3-performance-react-patterns.md',
+  'DESIGN_IMPROVEMENT.md':'DESIGN_IMPROVEMENT_PLAN.md',
+  'BLIND_SPOTS.md':'BLIND_SPOTS.md',
+  'PWA_ADMIN_SECRETS.md':'PWA_ADMIN_SECRETS.md',
+  'pwa-admin-architecture.md':'pwa-admin-architecture.md',
+  'ADMIN_IMPROVEMENT.md':'ADMIN_IMPROVEMENT_PLAN.md',
+  'FIRST_90_DAYS.md':'FIRST_90_DAYS_ACTION_PLAN.md',
+  'COMPLIANCE.md':'COMPLIANCE_CHECKLIST.md',
+  'REAL_WORLD_EVOLUTION.md':'REAL_WORLD_EVOLUTION_PLAN.md',
+  'FIRST_100_LEADS.md':'FIRST_100_LEADS_CHECKLIST.md',
+  'PLAN_SOLAR_KRABI.md':'PLAN_2026-04-17_SOLAR_KRABI.md',
+  'DEPLOYMENT_PROCEDURE.md':'DEPLOYMENT_PROCEDURE.md',
+  'OPERATIONS_PLAYBOOK.md':'OPERATIONS_PLAYBOOK.md',
+  'SCRAPING_APIS.md':'SCRAPING_APIS_ANALYSIS.md',
+  'TAN_AVATAR.md':'TAN_AVATAR.md',
+  'TAN_AVATAR_PROMPT.md':'TAN_AVATAR_PROMPT.md',
+  'DARK_MODE_PLAN.md':'DARK_MODE_PLAN.md',
+  'MANPOWER_TEAM_SCALING.md':'MANPOWER_TEAM_SCALING.md',
+  'quick-reference.md':'quick-reference.md',
+  'escalation-matrix.md':'escalation-matrix.md',
+  'leads-template.md':'leads-template.md',
+  'consultation-form.md':'consultation-form.md',
+  'support-scripts.md':'support-scripts.md'
+};
+function resolveFile(short){
+  if(nameMap[short])return nameMap[short];
+  return short;
+}
+
+function openDoc(d){
+  var shortName=d.data.name;
+  var fullName=resolveFile(shortName);
+  var secNode=d.parent;
+  while(secNode&&secNode.depth!==1)secNode=secNode.parent;
+  var secName=secNode?secNode.data.name:'';
+  var secG=secNode?secNode.data.g:'';
+  var secColor=cats[secG]?cats[secG].c:'#999';
+
+  document.getElementById('pTitle').textContent=shortName;
+  document.getElementById('pPath').textContent=fullName;
+  var secEl=document.getElementById('pSec');
+  secEl.textContent=secName;
+  secEl.style.background=secColor;
+
+  var body=document.getElementById('pBody');
+  var entry=data[fullName];
+  if(entry&&entry.content){
+    try{body.innerHTML=marked.parse(entry.content);}
+    catch(ex){body.textContent=entry.content;}
+  }else{
+    var keys=Object.keys(data);
+    var match=keys.find(function(k){return k.indexOf(fullName.replace('.md',''))>=0;});
+    if(match&&data[match].content){
+      try{body.innerHTML=marked.parse(data[match].content);}
+      catch(ex){body.textContent=data[match].content;}
+    }else{
+      body.innerHTML='<div class="panel-empty">Файл не найден.<br><small>Запусти <code>node generate-docs.js</code></small></div>';
+    }
+  }
+  document.body.classList.add('panel-open');
+  setTimeout(function(){svgEl.setAttribute('width',window.innerWidth-420);},50);
+}
+
+document.getElementById('pClose').onclick=function(){
+  document.body.classList.remove('panel-open');
+  setTimeout(function(){svgEl.setAttribute('width',window.innerWidth);},50);
+};
+
+// Tooltip — use e.clientX/clientY directly, NO cv reference
+var tip=document.getElementById('tip');
+nodes.on('mouseover',function(e,d){
+  if(d.depth<1)return;
+  tip.classList.add('on');
+  tip.style.left=(e.clientX+12)+'px';
+  tip.style.top=(e.clientY-8)+'px';
+  document.getElementById('tT').textContent=d.data.name;
+  document.getElementById('tD').textContent=d.data.d||'';
+  var gn=d.data.g||'';
+  document.getElementById('tP').textContent=d.data.p?(d.data.p+' — '+(cats[gn]?cats[gn].l:'')):'';
+}).on('mousemove',function(e){
+  tip.style.left=(e.clientX+12)+'px';
+  tip.style.top=(e.clientY-8)+'px';
+}).on('mouseout',function(){
+  tip.classList.remove('on');
+});
+
+// Click on leaf → open panel
+nodes.on('click',function(e,d){
+  if(d.depth<2)return;
+  e.stopPropagation();
+  openDoc(d);
+});
+
+// Hover highlight
+nodes.on('mouseover.h',function(e,d){
+  if(d.depth<1)return;
+  var conn=new Set();
+  conn.add(d);
+  if(d.parent)conn.add(d.parent);
+  if(d.children)d.children.forEach(function(c){conn.add(c);});
+  if(d.parent&&d.parent.children)d.parent.children.forEach(function(c){conn.add(c);});
+
+  nodes.select('circle').attr('opacity',function(n){return conn.has(n)?1:0.1;});
+  nodes.select('text').attr('opacity',function(n){return conn.has(n)?1:0.1;});
+  gMain.selectAll('.link').attr('opacity',function(l){
+    return(l.source===d||l.target===d)?1:0.06;
+  });
+}).on('mouseout.h',function(){
+  nodes.select('circle').attr('opacity',function(d){return d.depth===0?1:d.depth===1?0.85:0.7;});
+  nodes.select('text').attr('opacity',1);
+  gMain.selectAll('.link').attr('opacity',1);
+});
+
+// Initial center
+var initT=d3.zoomIdentity.translate(80,H/2).scale(0.8);
+svg.call(zoomBehavior.transform,initT);
+
+// Reset
+document.getElementById('bRst').onclick=function(){
+  svg.transition().duration(350).call(zoomBehavior.transform,initT);
+};
+
+// Zoom buttons
+document.getElementById('bIn').onclick=function(){
+  svg.transition().duration(250).call(zoomBehavior.scaleBy,1.35);
+};
+document.getElementById('bOut').onclick=function(){
+  svg.transition().duration(250).call(zoomBehavior.scaleBy,0.7);
+};
+
+// Search
+document.getElementById('search').addEventListener('input',function(e){
+  var q=e.target.value.toLowerCase();
+  if(!q){
+    nodes.select('circle').attr('opacity',function(d){return d.depth===0?1:d.depth===1?0.85:0.7;});
+    nodes.select('text').attr('opacity',1);
+    gMain.selectAll('.link').attr('opacity',1);
+    return;
+  }
+  nodes.select('circle').attr('opacity',function(d){
+    var m=d.data.name.toLowerCase().indexOf(q)>=0||(d.data.d||'').toLowerCase().indexOf(q)>=0;
+    return m?1:0.06;
+  });
+  nodes.select('text').attr('opacity',function(d){
+    var m=d.data.name.toLowerCase().indexOf(q)>=0||(d.data.d||'').toLowerCase().indexOf(q)>=0;
+    return m?1:0.06;
+  });
+  gMain.selectAll('.link').attr('opacity',0.04);
+});
+
+})();
+}
+</script>
+</body>
+</html>

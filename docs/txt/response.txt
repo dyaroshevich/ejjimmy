@@ -1,0 +1,494 @@
+The user has asked for a document that might benefit from a structured table. I want to include sections like scope based on the current landing text and intended flow, as well as the goals for the project.
+
+For the fix list table, I'll have columns like Block, Observation, Problem, Why it Matters, Concrete Fix, Priority, and Expected Metric Impact. I should include around 15 items covering various blocks like the header nav, hero section, and CTA hierarchy.
+
+I think it’s important to also lay out the MVP implementation sprint order, with draft copy for some elements, while keeping a strong yet supportive tone. Let’s draft this together!
+Ниже — готовый документ Landing audit → fix list.
+Я сделал его как рабочий продуктовый аудит: что оставить, что исправить, почему это мешает, как починить, и в каком приоритете.
+
+Landing Audit → Fix List
+
+Project: TAWAN POWER
+
+Scope
+
+Аудит сделан по текущей структуре и тексту лендинга, который ты прислал.
+Фокус: MVP-конверсия, UX, lead generation, chat entry, mobile-first, LINE-friendly behavior.
+
+1\. Executive summary
+
+Что уже хорошо
+
+Лендинг уже выглядит как реальный solar consultation product, а не как “демо AI-чата”.
+
+Сильные стороны:
+
+понятный локальный бренд
+
+сильный hero-месседж
+
+сегментация home / business
+
+сочетание AI + engineer support
+
+knowledge section для доверия
+
+fallback form для тех, кто не любит чат
+
+Главная проблема сейчас
+
+Не нужно всё переделывать.
+Нужно собрать более дисциплинированный conversion flow.
+
+Сейчас основные слабые места:
+
+слишком много конкурирующих CTA
+
+часть блоков пока “информационные”, а не интерактивные
+
+chat entry не до конца управляет следующим шагом
+
+copy местами обещает больше, чем реально делает MVP
+
+не везде есть ясная иерархия: что пользователь делает первым
+
+2\. Audit table
+
+P0 = критично для MVP
+
+P1 = сильно улучшит конверсию
+
+P2 = polishing / growth
+
+| Block | Observation | Problem | Why it hurts | Fix | Priority |
+|---|---|---|---|---|---|
+| Global CTA structure | На странице много CTA: AI, engineer, quote, ROI, contact, estimate | Пользователь теряется, нет одного главного next step | Снижает клики и увеличивает hesitation | Оставить 2 глобальных CTA: เริ่มประเมินฟรี и ติดต่อวิศวกร / คุยผ่าน LINE. Остальные — локально внутри блоков | P0 |
+| Hero section | Hero сильный, но subtext обещает “ประเมินราคาเบื้องต้นทันทีผ่านระบบ AI อัจฉริยะ” | Может завысить ожидания, если AI ещё не даёт действительно точный estimate | Риск разочарования и недоверия | Смягчить формулировку: акцент на “preliminary guidance”, не на “точную оценку” | P0 |
+| Hero CTA pair | “เริ่มปรึกษา AI” и “ติดต่อวิศวกร” в целом хороши | Но первый CTA говорит про технологию, а не про ценность | Люди покупают не AI, а экономию/подбор/решение | Переименовать primary в เริ่มประเมินฟรี или เริ่มต้นปรึกษาฟรี | P0 |
+| Segment intro | “การประเมินที่แม่นยำเริ่มจากการเลือกประเภทอาคาร” | Слово “แม่นยำ” слишком сильное для MVP | Повышает ожидание точности | Заменить на “เลือกประเภทอาคารเพื่อรับคำแนะนำที่เหมาะกับคุณมากขึ้น” | P0 |
+| Residential card | CTA “ขอใบเสนอราคา” слишком ранний | Для жилого сегмента quote часто не первый шаг | Человек ещё не прогрет, рано просить formal quote | Поменять на คุยกับวิศวกร или รับคำแนะนำเบื้องต้น | P0 |
+| Business card | Бизнес-карточка сильнее residential по рациональности | Хорошо, но можно усилить self-identification | Не все бизнес-пользователи узнают себя сразу | Добавить подзаголовок: “เหมาะสำหรับโรงแรม ร้านอาหาร อาคารพาณิชย์ และกิจการที่ใช้ไฟช่วงกลางวันสูง” | P1 |
+| Segment cards interactivity | По тексту блок хороший, но неясно, ведут ли кнопки в chat flow с уже выбранным сегментом | Если кнопки просто открывают чат без контекста, теряется смысл сегментации | Ухудшается qualification и UX continuity | Каждая кнопка должна открывать чат с параметром segment=residential / segment=business | P0 |
+| Value block (“สิ่งที่คุณจะได้รับจากเรา”) | Хороший контентный блок | Сейчас может восприниматься как просто инфо, а не вход в сценарий | Потеря вовлечения | Сделать все 4 карточки кликабельными и связать с конкретными chat flows | P0 |
+| Knowledge section | Контент сильный и хорошо формирует доверие | Если вопросы не интерактивные, это упущенная конверсия | Пользователь читает, но не начинает разговор | Каждый вопрос = trigger для открытия чата с готовым prompt | P0 |
+| Knowledge copy | Вопросы удачные | Но business question про ROI и tax benefits может обещать слишком широкий консалтинг | Может вызвать ожидания, которых MVP пока не закрывает | Уточнить: “วิเคราะห์แนวทางความคุ้มค่าเบื้องต้นสำหรับธุรกิจในกระบี่” | P1 |
+| 3-step section | Хорошая структура | Шаг 3 “รับคำปรึกษาจริง” обесценивает AI-этап | Получается, что до этого консультация “не настоящая” | Заменить на ปรึกษากับวิศวกร или ยืนยันแนวทางกับทีมวิศวกร | P0 |
+| CTA before contact section | “เริ่มประเมินทันที” — хороший strong CTA | Но важно, чтобы он открывал guided flow, а не просто пустой чат | Иначе теряется импульс действия | CTA должен открывать chat view с первым сообщением и quick actions | P0 |
+| Contact section title | “Contact Us” выбивается по языку | Ломает локальный и премиальный тон | Снижает целостность интерфейса | Заменить на ฝากข้อมูลให้ทีมงานติดต่อกลับ | P0 |
+| Contact section copy | Текст хороший, но длинный и слегка официальный | Можно сделать легче для mobile scanning | Длинный текст хуже читается на мобиле | Разбить на короткий headline + 2 bullets + form | P1 |
+| Contact form | Форма полезна, но пока универсальная | Нет адаптации под residential/business | Слабая qualification | Динамически менять одно поле: для дома — monthly bill; для бизнеса — business type + monthly bill | P1 |
+| Contact trust bullets | “ข้อมูลส่วนตัวของคุณปลอดภัย / ติดต่อกลับภายใน 24 ชม.” хорошие | Хорошо, но можно усилить | Повышает confidence на этапе отправки | Добавить 3-й bullet: ไม่มีค่าใช้จ่ายในการประเมินเบื้องต้น | P2 |
+| Footer trust | Footer нормальный | Не хватает маленького trust strip выше футера | Не хватает последнего толчка к доверию | Добавить перед footer: “AI Assistant + Thai Engineers + Local Krabi Support + Preliminary Estimate Free” | P2 |
+| Chat launcher strip | Нижняя строка “ถามเรื่องโซลาร์ หรือกดเพื่อพูด...” — хорошая идея | Но если это выглядит как полноценный чат-input, может быть ложное ожидание | Люди ждут instant inline chat на той же поверхности | Позиционировать это как consultation launcher, а не real inline input | P0 |
+| Chat opening experience | Открытие чата должно быть guided | Если открывается пустой экран с инпутом — провал UX | Снижает first-message rate | При открытии показывать first assistant message + quick actions + segment memory | P0 |
+| Chat first message | Сейчас не описан явно | Это ключевая точка запуска | Без guided start люди часто выпадают | Первое сообщение: объяснение + 4–5 quick actions | P0 |
+| Post-value lead capture | Не видно, как захватывается контакт после полезного ответа | Если contact only в footer form — теряется много тёплых лидов | Лид может уйти после chat insight | После первого value moment показывать micro-CTA: “ส่งผลนี้ให้ฉันทาง LINE / ให้ทีมงานช่วยดูต่อ” | P0 |
+| Social proof / proof-of-work | На странице нет кейсов, installed projects или proof markers | Недостаточно доверия для дорогого решения | Solar — high-consideration purchase | Добавить мини-блок: examples of use cases / served segments / installed capacity or “ดูตัวอย่างการใช้งาน” | P1 |
+| Product grounding | Есть разговор про Jinko/Longi и инверторы, но не видно связи с каталогом пакетов | Может возникнуть ощущение общей информации без реального продукта | Ослабляет коммерческую предметность | Добавить блок “แพ็กเกจที่แนะนำ” или “ตัวอย่างขนาดระบบยอดนิยม” | P1 |
+| SEO / intent capture | Структура уже хорошая для SEO | Но текущий лендинг не капитализирует пакетный intent | Упускаются запросы типа 5kW/10kW/hotel solar | Добавить internal links/anchors на package/knowledge pages | P2 |
+| Analytics | Не видно event structure | Без событий сложно улучшать воронку | MVP будет “на ощущениях” | Трекать CTA clicks, segment selection, knowledge topic click, chat open, first message sent, contact form submit | P0 |
+| LINE/browser continuity | Если чат открывается, важно сохранять сегмент и источник | Иначе поведение кажется “тупым” и несвязанным | Падает ощущение персонализации | Сохранять segment, utm, source, entry\_point, session\_id | P1 |
+
+3\. Exact fixes by section
+
+A. Header / Navigation
+
+Current
+
+โซลูชัน
+
+จุดเด่น
+
+ศูนย์ความรู้
+
+ขั้นตอน
+
+ประเมินราคาฟรี
+
+Fix
+
+Сделать последнее меню не абстрактной секцией, а CTA-якорем:
+
+เริ่มประเมินฟรี
+
+Why
+
+Хедер должен не просто информировать, а вести к действию.
+
+Priority
+
+P1
+
+B. Hero
+
+What to keep
+
+“เปลี่ยนแสงแดดเป็นความประหยัด” — оставить
+
+“ผู้เชี่ยวชาญด้านโซลาร์ในกระบี่” — оставить
+
+Fix copy
+
+Replace:
+
+ออกแบบระบบโซลาร์เซลล์ที่คุ้มค่าที่สุดสำหรับบ้านและธุรกิจของคุณ
+รับคำปรึกษาและประเมินราคาเบื้องต้นทันทีผ่านระบบ AI อัจฉริยะ
+
+With:
+
+ช่วยคุณเลือกแนวทางระบบโซลาร์เซลล์ที่เหมาะกับบ้านหรือธุรกิจ
+เริ่มต้นประเมินเบื้องต้นผ่าน AI Assistant และคุยต่อกับทีมวิศวกรได้ทันที
+
+CTA fix
+
+Primary:
+
+เริ่มประเมินฟรี
+
+Secondary:
+
+ติดต่อวิศวกร
+
+Priority
+
+P0
+
+C. Segment section
+
+What to keep
+
+2-карточная сегментация — очень хорошо
+
+Fixes
+
+Residential CTA
+
+Было:
+
+คุยกับ AI
+
+ขอใบเสนอราคา
+
+Стало:
+
+เริ่มประเมินฟรี
+
+คุยกับวิศวกร
+
+Business CTA
+
+Было:
+
+คุยกับ AI
+
+ปรึกษาโครงการ
+
+Стало:
+
+ประเมินความคุ้มค่าเบื้องต้น
+
+ปรึกษาโครงการกับวิศวกร
+
+Interaction rule
+
+Каждая кнопка передаёт в чат:
+
+segment
+
+CTA source
+
+initial intent
+
+Priority
+
+P0
+
+D. Value block
+
+Fix
+
+Карточки должны быть не просто преимуществами, а интерактивными стартами:
+
+ถามเรื่องโซลาร์ → open chat with intent=general
+
+ดูข้อมูลอุปกรณ์ → open chat with intent=product\_compare
+
+ประเมินเบื้องต้น → open chat with intent=estimate
+
+คุยกับวิศวกร → open contact/LINE route
+
+Priority
+
+P0
+
+E. Knowledge section
+
+Fix
+
+Каждый knowledge item должен:
+
+быть clickable
+
+открывать chat
+
+подставлять готовый вопрос
+
+Example
+
+Клик по:
+คุ้มไหมถ้าติดโซลาร์เซลล์ที่บ้าน?
+
+Открывает:
+
+chat
+
+selected segment = residential
+
+seeded prompt = this exact question
+
+Priority
+
+P0
+
+F. 3-step section
+
+Replace
+
+Current:
+
+03 รับคำปรึกษาจริง
+
+Better:
+
+03 ปรึกษากับวิศวกร
+
+или
+
+03 ยืนยันแนวทางกับทีมวิศวกร
+
+Priority
+
+P0
+
+G. Contact section
+
+Replace title
+
+Contact Us → ฝากข้อมูลให้ทีมงานติดต่อกลับ
+
+Simplify copy
+
+Better version:
+
+หากไม่สะดวกใช้แชท ฝากข้อมูลเบื้องต้นไว้ได้เลย
+ทีมวิศวกรจะช่วยประเมินและติดต่อกลับพร้อมแนวทางที่เหมาะกับคุณ
+
+Form logic
+
+Residential form
+
+ชื่อ
+
+เบอร์โทร / LINE ID
+
+พื้นที่ติดตั้ง
+
+ค่าไฟเฉลี่ยต่อเดือน
+
+Business form
+
+ชื่อ
+
+เบอร์โทร / LINE ID
+
+ประเภทธุรกิจ
+
+พื้นที่ติดตั้ง
+
+ค่าไฟเฉลี่ยต่อเดือน
+
+Priority
+
+P1
+
+H. Chat launcher / bottom input
+
+Current concept
+
+Хорошая идея, но важно не обмануть ожидание.
+
+Fix
+
+Этот элемент должен быть подписан и работать как:
+consultation starter, а не “полноценный чат прямо здесь”.
+
+Suggested placeholder
+
+ถามเรื่องโซลาร์ หรือเริ่มประเมินเบื้องต้น...
+
+Behavior
+
+On tap:
+
+open chat drawer / full view
+
+assistant greets
+
+quick actions shown
+
+current segment prefilled if chosen before
+
+Priority
+
+P0
+
+4\. Recommended chat opening flow
+
+First message
+
+Quick actions
+
+สำหรับบ้าน / วิลล่า
+
+สำหรับธุรกิจ / โรงแรม
+
+ประเมินเบื้องต้น
+
+เปรียบเทียบอุปกรณ์
+
+คุยกับวิศวกร
+
+After first useful answer
+
+Show micro-CTA:
+
+ส่งผลนี้ให้ฉันทาง LINE
+
+ให้ทีมงานช่วยดูต่อ
+
+ฝากข้อมูลเพื่อรับคำแนะนำเพิ่มเติม
+
+Priority
+
+P0
+
+5\. MVP analytics checklist
+
+Track these events
+
+hero\_primary\_cta\_click
+
+hero\_secondary\_cta\_click
+
+segment\_residential\_click
+
+segment\_business\_click
+
+knowledge\_item\_click
+
+chat\_launcher\_open
+
+chat\_first\_message\_sent
+
+estimate\_flow\_started
+
+engineer\_contact\_click
+
+contact\_form\_submit
+
+line\_handoff\_click
+
+Why
+
+Без этого нельзя будет понять:
+
+что реально конвертит
+
+какой сегмент активнее
+
+где пользователь выпадает
+
+Priority
+
+P0
+
+6\. Quick wins list
+
+Сделать прямо сейчас
+
+Сократить глобальные CTA до двух
+
+Переименовать hero primary CTA в value-based
+
+Сделать все segment cards clickable with context
+
+Сделать knowledge items clickable into chat
+
+Исправить step 3 copy
+
+Полностью локализовать Contact section
+
+Добавить guided first message в чат
+
+Показать micro lead capture после первого полезного ответа
+
+Трекать ключевые события
+
+7\. What not to change now
+
+Чтобы не разнести хороший фундамент:
+
+Не трогать пока
+
+основной hero concept
+
+разделение home / business
+
+knowledge section как идея
+
+наличие fallback form
+
+AI + engineer dual model
+
+Это всё уже хорошее.
+Сейчас нужны не революции, а точная шлифовка.
+
+8\. Final recommendation
+
+MVP verdict
+
+Лендинг уже достаточно хороший для запуска, если сделать 5–8 точечных правок.
+
+Главная цель правок
+
+Не сделать “красивее”, а:
+
+яснее первый шаг
+
+сильнее связать лендинг с чатом
+
+собирать больше тёплых лидов
+
+уменьшить когнитивный шум
+
+Главная формула
+
+Landing should not just describe the service — it should route the user into the right consultation flow.
+
+Если хочешь, я следующим сообщением могу сделать ещё более прикладную штуку:
+
+Fix list → implementation backlog
+
+в формате:
+
+задача
+
+описание
+
+acceptance criteria
+
+priority
+
+dev notes
+
+То есть уже почти как список задач для Cursor / Next.js разработчика.

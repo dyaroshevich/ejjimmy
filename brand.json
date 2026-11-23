@@ -1,0 +1,130 @@
+{
+  "brand": {
+    "name": "Ejjimmy Solar",
+    "nameTh": "Ejjimmy กระบี่",
+    "legalName": "Ejjimmy Solar Co., Ltd.",
+    "shortName": "Ejjimmy",
+    "legal": {
+      "entityName": "",
+      "taxId": "",
+      "address": "",
+      "phone": "",
+      "effective": "2026-11-22",
+      "version": "1.0"
+    },
+    "appIds": {
+      "public": "ejjimmy-public-app",
+      "admin": "ejjimmy-admin"
+    },
+    "description": "Expert solar energy solutions tailored for Krabi, Thailand — transparent pricing, local expertise, global equipment.",
+    "social": {
+      "twitter": "@ejjimmysolar"
+    },
+    "subTh": "กระบี่ · ติดตั้งโซลาร์ · ทีมงานท้องถิ่น",
+    "city": "Krabi",
+    "region": "Krabi",
+    "country": "TH",
+    "cityNames": {
+      "th": "กระบี่",
+      "en": "Krabi",
+      "zh-CN": "甲米",
+      "ru": "Краби",
+      "de": "Krabi",
+      "fr": "Krabi",
+      "ja": "クラビ",
+      "ko": "끄라비"
+    }
+  },
+  "theme": {
+    "fonts": {
+      "text": "Manrope",
+      "thai": "Prompt",
+      "fallback": "system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "weights": {
+        "text": [
+          "400",
+          "500",
+          "600",
+          "700",
+          "800"
+        ],
+        "thai": [
+          "400",
+          "500",
+          "600",
+          "700",
+          "800",
+          "900"
+        ]
+      }
+    },
+    "colors": {
+      "light": {
+        "primary": "#ff8a00",
+        "primaryDeep": "#ea580c",
+        "primaryInk": "#c2410c",
+        "secondary": "#f59e0b",
+        "success": "#059669",
+        "successInk": "#047857",
+        "dangerInk": "#b91c1c",
+        "warning": "#f59e0b",
+        "danger": "#ef4444",
+        "surface": "#ffffff",
+        "text": "#0f172a",
+        "bg": "#f8fafc",
+        "fg": "#0f172a",
+        "muted": "#475569",
+        "muted2": "#64748b",
+        "border": "#e2e8f0",
+        "borderStrong": "#cbd5e1",
+        "card": "#ffffff",
+        "card2": "#f1f5f9",
+        "accent": "#ff8a00",
+        "accentFg": "#0f172a",
+        "accentDeep": "#ea580c",
+        "ring": "#ff8a00",
+        "successBg": "#ecfdf5",
+        "warningBg": "#fffbeb",
+        "dangerBg": "#fef2f2",
+        "shadowMd": "0 6px 20px -8px rgb(15 23 42 / 0.18)",
+        "shadowLuxe": "0 24px 60px -24px rgb(234 88 12 / 0.35)"
+      },
+      "dark": {
+        "bg": "#020617",
+        "fg": "#f8fafc",
+        "muted": "#94a3b8",
+        "muted2": "#64748b",
+        "primaryInk": "#fb923c",
+        "border": "#1e293b",
+        "borderStrong": "#334155",
+        "card": "#0f172a",
+        "card2": "#1e293b",
+        "accent": "#ff8a00",
+        "accentDeep": "#fb923c",
+        "accentFg": "#0f172a",
+        "successBg": "#059669",
+        "successInk": "#6ee7b7",
+        "dangerInk": "#fca5a5",
+        "warningBg": "#f59e0b",
+        "dangerBg": "#ef4444",
+        "shadowMd": "0 6px 20px -8px rgb(0 0 0 / 0.6)",
+        "shadowLuxe": "0 24px 60px -24px rgb(255 138 0 / 0.3)"
+      }
+    }
+  },
+  "video": {
+    "name": "Ejjimmy Solar",
+    "nameTh": "Ejjimmy กระบี่",
+    "domain": "ejjimmy.vercel.app",
+    "lineHandle": "@ejjimmysolar",
+    "tagline": "พลังงานสะอาดสำหรับกระบี่",
+    "location": "Krabi, Thailand",
+    "brandLabel": "EJJIMMY SOLAR",
+    "watermark": "ejjimmy",
+    "frame": {
+      "width": 1080,
+      "height": 1920,
+      "fps": 30
+    }
+  }
+}

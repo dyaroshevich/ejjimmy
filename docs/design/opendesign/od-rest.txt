@@ -1,0 +1,93 @@
+          <div class="hotspot" style="top:48%;right:4%"><i></i><span data-en="Battery" data-ru="Батарея" data-th="แบตเตอรี่" lang="en">Battery</span></div>
+          <div class="hotspot" style="bottom:14%;left:8%"><i></i><span data-en="EV charger" data-ru="EV-зарядка" data-th="ชาร์จ EV" lang="en">EV charger</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="block" id="steps" data-od-id="uni-steps">
+    <div class="sec-head sec-head--center">
+      <p class="kicker" data-en="Process" data-ru="Процесс" data-th="ขั้นตอน" lang="en">Process</p>
+      <h2 lang="en"><span data-en="Easy start in " data-ru="Лёгкий старт за " data-th="เริ่มต้นง่าย ๆ ใน " lang="en">Easy start in </span><span class="grad" data-en="3 steps" data-ru="3 шага" data-th="3 ขั้นตอน" lang="en">3 steps</span></h2>
+    </div>
+    <div class="grid3">
+      <div class="card step rv" data-od-id="uni-step-1">
+        <div class="step-top"><span class="step-num" aria-hidden="true">1</span><span class="step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6"/><path d="M5 9.5V20h14V9.5"/></svg></span></div>
+        <h3 data-en="Building type" data-ru="Тип здания" data-th="ประเภทอาคาร" lang="en">Building type</h3>
+        <p data-en="Home or business + your rough monthly bill." data-ru="Дом или бизнес + примерный счёт." data-th="บ้านหรือธุรกิจ + ค่าไฟคร่าวๆ" lang="en">Home or business + your rough monthly bill.</p>
+      </div>
+      <div class="card step rv" data-od-id="uni-step-2">
+        <div class="step-top"><span class="step-num" aria-hidden="true">2</span><span class="step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5z"/></svg></span></div>
+        <h3 data-en="Chat estimate" data-ru="Оценка в чате" data-th="ประเมินในแชท" lang="en">Chat estimate</h3>
+        <p data-en="System size and savings, in minutes." data-ru="Размер станции и экономия — за минуты." data-th="ขนาดระบบและยอดประหยัด ในไม่กี่นาที" lang="en">System size and savings, in minutes.</p>
+      </div>
+      <div class="card step rv" data-od-id="uni-step-3">
+        <div class="step-top"><span class="step-num" aria-hidden="true">3</span><span class="step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.5 3.4-5 7-5s6.2 1.5 7 5"/></svg></span></div>
+        <h3 data-en="Engineer survey" data-ru="Замер инженера" data-th="วิศวกรสำรวจ" lang="en">Engineer survey</h3>
+        <p data-en="Callback plus a free site visit." data-ru="Звонок плюс бесплатный выезд." data-th="โทรกลับพร้อมสำรวจหน้างานฟรี" lang="en">Callback plus a free site visit.</p>
+      </div>
+    </div>
+    <div class="cta-row" style="justify-content:center"><a class="btn btn--secondary" href="#contact" data-en="Start step 1 — free" data-ru="Начать шаг 1 — бесплатно" data-th="เริ่มขั้นตอนที่ 1 — ฟรี" lang="en">Start step 1 — free</a></div>
+  </section>
+
+  <!-- KNOWLEDGE -->
+  <section class="block" id="knowledge" data-od-id="uni-knowledge">
+    <div class="sec-head sec-head--center">
+      <p class="kicker" data-en="Knowledge" data-ru="База знаний" data-th="ความรู้" lang="en">Knowledge</p>
+      <h2 lang="en"><span data-en="Answers to " data-ru="Ответы " data-th="ตอบ" lang="en">Answers to </span><span class="grad" data-en="everything" data-ru="на всё" data-th="ทุกข้อสงสัย" lang="en">everything</span></h2>
+    </div>
+    <div class="tabs-wrap"><div class="tabs" role="tablist" aria-label="Topics">
+      <button type="button" role="tab" aria-selected="true" data-tab="savings" data-en="Savings" data-ru="Экономия" data-th="การประหยัด" lang="en">Savings</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="tech" data-en="Tech" data-ru="Техника" data-th="เทคโนโลยี" lang="en">Tech</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="faq" data-en="FAQ" data-ru="Вопросы" data-th="คำถามพบบ่อย" lang="en">FAQ</button>
+    </div></div>
+    <div class="tabpanel is-active" data-panel="savings" role="tabpanel">
+      <div class="card qa">
+        <h3 data-en="How fast is payback in Krabi?" data-ru="Как быстро окупается в Краби?" data-th="คืนทุนในกระบี่เร็วแค่ไหน?" lang="en">How fast is payback in Krabi?</h3>
+        <p class="dim" data-en="3–5 years at ~5 peak sun hours daily." data-ru="3–5 лет при ~5 пиковых часах в день." data-th="3–5 ปี ด้วยแดดพีคเฉลี่ยวันละ 5 ชั่วโมง" lang="en">3–5 years at ~5 peak sun hours daily.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="What is net-metering?" data-ru="Что такое net-metering?" data-th="เน็ตมิเตอร์ริงคืออะไร?" lang="en">What is net-metering?</h3>
+        <p class="dim" data-en="Sell surplus back to the grid — we file the papers." data-ru="Продажа излишков в сеть — документы оформляем мы." data-th="ขายไฟส่วนเกินคืนกริด เราเดินเรื่องให้" lang="en">Sell surplus back to the grid — we file the papers.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="Do I need batteries?" data-ru="Нужны ли батареи?" data-th="จำเป็นต้องมีแบตเตอรี่ไหม?" lang="en">Do I need batteries?</h3>
+        <p class="dim" data-en="Only if you want backup during outages — otherwise grid-tied is cheaper." data-ru="Только для резерва при отключениях — иначе сетевой дешевле." data-th="จำเป็นเฉพาะเมื่อต้องการไฟสำรองตอนไฟดับ ไม่งั้นออนกริดถูกกว่า" lang="en">Only if you want backup during outages — otherwise grid-tied is cheaper.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="Which inverter brands?" data-ru="Какие инверторы?" data-th="ใช้อินเวอร์เตอร์ยี่ห้อไหน?" lang="en">Which inverter brands?</h3>
+        <p class="dim" data-en="Deye, GoodWe and Sigenergy — Tier-1 with local warranty." data-ru="Deye, GoodWe и Sigenergy — Tier-1 с местной гарантией." data-th="Deye, GoodWe และ Sigenergy เกรด Tier-1 รับประกันในไทย" lang="en">Deye, GoodWe and Sigenergy — Tier-1 with local warranty.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="Who handles PEA paperwork?" data-ru="Кто оформляет документы PEA?" data-th="ใครเดินเรื่อง PEA?" lang="en">Who handles PEA paperwork?</h3>
+        <p class="dim" data-en="We do — permits and grid connection included." data-ru="Мы — разрешения и подключение включены." data-th="เราจัดการให้ ครบทั้งขออนุญาตและขนานไฟ" lang="en">We do — permits and grid connection included.</p>
+      </div>
+    </div>
+    <div class="tabpanel" data-panel="tech" role="tabpanel">
+      <div class="card qa">
+        <h3 data-en="Hybrid or grid-tied?" data-ru="Гибрид или сетевой?" data-th="ไฮบริดหรือออนกริด?" lang="en">Hybrid or grid-tied?</h3>
+        <p class="dim" data-en="Hybrid adds battery backup; grid-tied costs less." data-ru="Гибрид — с батареей; сетевой — дешевле." data-th="ไฮบริดมีแบตสำรอง ออนกริดถูกกว่า" lang="en">Hybrid adds battery backup; grid-tied costs less.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="Rainy season — still worth it?" data-ru="Сезон дождей — выгодно?" data-th="หน้าฝนยังคุ้มไหม?" lang="en">Rainy season — still worth it?</h3>
+        <p class="dim" data-en="Output drops to 40–60%, still pays off." data-ru="Выработка 40–60% — всё равно выгодно." data-th="ผลิตได้ 40–60% ยังคุ้ม" lang="en">Output drops to 40–60%, still pays off.</p>
+      </div>
+    </div>
+    <div class="tabpanel" data-panel="faq" role="tabpanel">
+      <div class="card qa">
+        <h3 data-en="What maintenance is needed?" data-ru="Какое нужно обслуживание?" data-th="ต้องดูแลรักษาอย่างไร?" lang="en">What maintenance is needed?</h3>
+        <p class="dim" data-en="1–2 panel cleanings a year; service plans available." data-ru="Мойка 1–2 раза в год; есть сервис-пакеты." data-th="ล้างแผงปีละ 1–2 ครั้ง มีแพ็กเกจดูแล" lang="en">1–2 panel cleanings a year; service plans available.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="What warranties apply?" data-ru="Какие действуют гарантии?" data-th="รับประกันอะไรบ้าง?" lang="en">What warranties apply?</h3>
+        <p class="dim" data-en="25-year performance, 12-year product warranty." data-ru="25 лет на выработку, 12 лет на оборудование." data-th="รับประกันประสิทธิภาพ 25 ปี ตัวเครื่อง 12 ปี" lang="en">25-year performance, 12-year product warranty.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BRANDS -->
+
+
+  <!-- CONTACT -->
+  <section class="block block--cream" id="contact" data-od-id="uni-contact">

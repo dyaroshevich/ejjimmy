@@ -1,0 +1,133 @@
+{
+ "solar-business-roi": {
+  "voice": "th-TH-NiwatNeural",
+  "duration": 12.11,
+  "frames": 369,
+  "audio": "K:\\projects\\evecosystem\\ev-digital-factory\\out\\solar-business-roi-vo.wav",
+  "cuesSource": "lines",
+  "cues": [
+   {
+    "text": "สำหรับเจ้าของธุรกิจ โซลาร์คือตัวช่วยลดต้นทุน",
+    "start": 0.25,
+    "end": 3.03
+   },
+   {
+    "text": "คืนทุนภายใน 3-4 ปี หักภาษี BOI ได้สูงสุด 50 เปอร์เซ็นต์",
+    "start": 3.38,
+    "end": 7.49
+   },
+   {
+    "text": "มีโซลูชัน PPA ไม่ต้องลงทุนเองก้อนใหญ่",
+    "start": 7.84,
+    "end": 10.29
+   },
+   {
+    "text": "ประเมินหน้างานฟรี ได้เลยครับ",
+    "start": 10.64,
+    "end": 12.11
+   }
+  ]
+ },
+ "solar-product-demo": {
+  "voice": "th-TH-NiwatNeural",
+  "duration": 13.98,
+  "frames": 425,
+  "audio": "K:\\projects\\evecosystem\\ev-digital-factory\\out\\solar-product-demo-vo.wav",
+  "cuesSource": "lines",
+  "cues": [
+   {
+    "text": "อยากติดโซลาร์ แต่ไม่รู้จะเลือกอินเวอร์เตอร์ตัวไหน",
+    "start": 0.25,
+    "end": 2.76
+   },
+   {
+    "text": "เราติดตั้ง Deye, GoodWe และ Sigenergy รับประกันในไทย",
+    "start": 3.11,
+    "end": 6.08
+   },
+   {
+    "text": "รุ่นไฮบริด 10 กิโลวัตต์ จ่ายไฟบ้านทั้งหลัง",
+    "start": 6.43,
+    "end": 8.7
+   },
+   {
+    "text": "ดูข้อมูลการผลิตไฟได้เรียลไทม์จากมือถือ",
+    "start": 9.05,
+    "end": 11.53
+   },
+   {
+    "text": "มาดูของจริงที่โชว์รูมกระบี่ได้เลยครับ",
+    "start": 11.88,
+    "end": 13.98
+   }
+  ]
+ },
+ "solar-family-savings": {
+  "voice": "th-TH-PremwadeeNeural",
+  "duration": 16.04,
+  "frames": 487,
+  "audio": "K:\\projects\\evecosystem\\ev-digital-factory\\out\\solar-family-savings-vo.wav",
+  "cuesSource": "full-track/proportional",
+  "cues": [
+   {
+    "text": "ค่าไฟแพงขึ้นทุกปี แล้วเราจะทำอย่างไรดี",
+    "start": 0.0,
+    "end": 3.41
+   },
+   {
+    "text": "ติดโซลาร์ที่บ้าน ประหยัดได้ถึง 70 เปอร์เซ็นต์",
+    "start": 3.41,
+    "end": 7.44
+   },
+   {
+    "text": "คืนทุนภายใน 3-5 ปี แล้วก็ประหยัดไปยาวๆ",
+    "start": 7.44,
+    "end": 10.84
+   },
+   {
+    "text": "ประเมินการประหยัดด้วย AI ฟรี ได้ที่นี่",
+    "start": 10.84,
+    "end": 14.25
+   },
+   {
+    "text": "มาปรึกษากันได้เลยค่ะ",
+    "start": 14.25,
+    "end": 16.04
+   }
+  ]
+ },
+ "solar-battery-charge": {
+  "voice": "th-TH-NiwatNeural",
+  "duration": 14.14,
+  "frames": 430,
+  "audio": "K:\\projects\\evecosystem\\ev-digital-factory\\out\\solar-battery-charge-vo.wav",
+  "cuesSource": "lines",
+  "cues": [
+   {
+    "text": "ค่าไฟขึ้นทุกปี แถมบางวันไฟก็ดับ",
+    "start": 0.25,
+    "end": 2.32
+   },
+   {
+    "text": "แบตเตอรี่สำรอง 10 กิโลวัตต์ชั่วโมง เก็บไฟไว้ใช้ตอนกลางคืน",
+    "start": 2.67,
+    "end": 5.92
+   },
+   {
+    "text": "ตัดไฟทั้งหมู่บ้าน บ้านคุณยังมีไฟใช้",
+    "start": 6.27,
+    "end": 8.47
+   },
+   {
+    "text": "ชาร์จจากโซลาร์ตอนกลางวัน ไม่ต้องซื้อไฟแพงตอนเย็น",
+    "start": 8.82,
+    "end": 11.68
+   },
+   {
+    "text": "ติดตั้งวันเดียวจบ ประเมินฟรีที่กระบี่ค่ะ",
+    "start": 12.03,
+    "end": 14.14
+   }
+  ]
+ }
+}

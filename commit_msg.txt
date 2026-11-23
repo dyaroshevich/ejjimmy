@@ -1,0 +1,1 @@
+feat: Ejjimmy brand config, site config, DESIGN.md, brand.json, site.config.ts, .env.example, .gitignore

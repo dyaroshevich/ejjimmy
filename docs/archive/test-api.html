@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+</head>
+<body>
+    <h1>API Test</h1>
+    <button onclick="testApi()">Test API</button>
+    <div id="result"></div>
+
+    <script>
+        async function testApi() {
+            try {
+                const response = await fetch('http://localhost:3001/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        messages: [
+                            { role: 'user', content: 'Hello' }
+                        ]
+                    })
+                });
+                
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Error response:', errorText);
+                    document.getElementById('result').innerHTML = '<div style="color: red;">Error: ' + errorText + '</div>';
+                    return;
+                }
+                
+                const data = await response.text();
+                console.log('Success response:', data);
+                document.getElementById('result').innerHTML = '<div style="color: green;">Success: ' + data + '</div>';
+            } catch (error) {
+                console.error('Fetch error:', error.message);
+                document.getElementById('result').innerHTML = '<div style="color: red;">Fetch error: ' + error.message + '</div>';
+            }
+        }
+    </script>
+</body>
+</html>

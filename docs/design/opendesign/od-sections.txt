@@ -1,0 +1,252 @@
+  <section class="block block--alt" id="systems" data-od-id="uni-systems">
+    <div class="sec-head sec-head--center">
+      <p class="kicker" data-en="Pricing" data-ru="Цены" data-th="ราคา" lang="en">Pricing</p>
+      <h2 lang="en"><span data-en="Equipment " data-ru="Каталог " data-th="แค็ตตาล็อก" lang="en">Equipment </span><span class="grad" data-en="catalog" data-ru="оборудования" data-th="อุปกรณ์" lang="en">catalog</span></h2>
+    </div>
+    <div class="tier-strip rv" data-od-id="uni-tier-strip">
+      <a class="tier-strip__item" data-od-id="uni-tier-home" href="#contact"><span class="t-price" lang="en">from ฿89,000</span><span class="t-name" data-en="Home · 3–5 kW" data-ru="Дом · 3–5 кВт" data-th="บ้าน · 3–5 kW" lang="en">Home · 3–5 kW</span></a>
+      <a class="tier-strip__item" data-od-id="uni-tier-business" href="#contact"><span class="t-price" lang="en">from ฿289,000</span><span class="t-name" data-en="Business · 10–50 kW" data-ru="Бизнес · 10–50 кВт" data-th="ธุรกิจ · 10–50 kW" lang="en">Business · 10–50 kW</span></a>
+      <a class="tier-strip__item" data-od-id="uni-tier-premium" href="#sigen"><span class="t-price" lang="en">from ฿159,000</span><span class="t-name" data-en="Premium Hybrid · 5 kW+" data-ru="Премиум-гибрид · 5 кВт+" data-th="ไฮบริดพรีเมียม · 5 kW+" lang="en">Premium Hybrid · 5 kW+</span></a>
+    </div>
+    <div class="pills" role="group" aria-label="Categories" data-od-id="uni-cat-pills">
+      <button type="button" data-cat="all" aria-pressed="true" data-en="All" data-ru="Все" data-th="ทั้งหมด" lang="en">All</button>
+      <button type="button" data-cat="home" aria-pressed="false" data-en="Home" data-ru="Дом" data-th="บ้าน" lang="en">Home</button>
+      <button type="button" data-cat="business" aria-pressed="false" data-en="Business" data-ru="Бизнес" data-th="ธุรกิจ" lang="en">Business</button>
+      <button type="button" data-cat="hybrid" aria-pressed="false" data-en="Hybrid" data-ru="Гибрид" data-th="ไฮบริด" lang="en">Hybrid</button>
+    </div>
+    <div class="products" data-od-id="uni-products">
+      <div class="card product product--rich rv" data-cat="home">
+        <div class="product-photo"><span class="badge" data-en="Home · 5 kW" data-ru="Дом · 5 кВт" data-th="บ้าน · 5 kW" lang="en">Home · 5 kW</span><img class="brand-mark" src="https://admintawanpower.vercel.app/content/brands/goodwe.webp" alt="GoodWe" loading="eager"><img class="kit-photo" src="https://admintawanpower.vercel.app/content/products/goodwe-5kw-1phase/main.webp" alt="GoodWe 5 kW inverter" loading="lazy"></div>
+        <div class="product-body">
+          <h3 data-en="5 kW Solar Kit (GoodWe)" data-ru="Комплект 5 кВт (GoodWe)" data-th="ชุดโซล่าร์ 5 kW (GoodWe)" lang="en">5 kW Solar Kit (GoodWe)</h3>
+          <p class="kit-sub" data-en="2026 On-Grid · Jinko Tier-1 + GoodWe" data-ru="Сетевой 2026 · Jinko Tier-1 + GoodWe" data-th="ออนกริด 2026 · แผง Jinko Tier-1 + อินเวอร์เตอร์ GoodWe" lang="en">2026 On-Grid · Jinko Tier-1 + GoodWe</p>
+          <div class="product-price-row">
+            <div><span class="lbl" data-en="Full price" data-ru="Полная цена" data-th="ราคารวม" lang="en">Full price</span><span class="full-price" lang="en">฿120,000</span><span class="inst-note" data-en="Installments from ฿4,500/mo" data-ru="Рассрочка от ฿4,500/мес" data-th="ผ่อนเริ่ม ฿4,500/เดือน" lang="en">Installments from ฿4,500/mo</span></div>
+            <div class="save"><span class="lbl" data-en="Power savings" data-ru="Экономия" data-th="ประหยัดไฟ" lang="en">Power savings</span><i lang="en">~฿3,173<small data-en="/mo" data-ru="/мес" data-th="/เดือน" lang="en">/mo</small></i></div>
+          </div>
+          <div class="product-inst"><span><span data-en="Monthly installment" data-ru="Платёж в месяц" data-th="ยอดผ่อนต่อเดือน" lang="en">Monthly installment</span><b lang="en">฿4,500</b></span><span class="roi" lang="en">ROI plan</span></div>
+          <a class="btn btn--primary btn--sm btn--block" href="#contact" data-en="Ask price & installments →" data-ru="Узнать цену и рассрочку →" data-th="ขอราคาและผ่อนชำระ →" lang="en">Ask price & installments →</a>
+        </div>
+      </div>
+      <div class="card product product--rich rv" data-cat="business">
+        <div class="product-photo"><span class="badge" data-en="Business · 10 kW" data-ru="Бизнес · 10 кВт" data-th="ธุรกิจ · 10 kW" lang="en">Business · 10 kW</span><img class="brand-mark" src="https://admintawanpower.vercel.app/content/brands/goodwe.webp" alt="GoodWe" loading="eager"><img class="kit-photo" src="https://admintawanpower.vercel.app/content/products/goodwe-10kw-3phase/main.webp" alt="GoodWe 10 kW inverter" loading="lazy"></div>
+        <div class="product-body">
+          <h3 data-en="10 kW Solar Kit (GoodWe)" data-ru="Комплект 10 кВт (GoodWe)" data-th="ชุดโซล่าร์ 10 kW (GoodWe)" lang="en">10 kW Solar Kit (GoodWe)</h3>
+          <p class="kit-sub" data-en="2026 On-Grid 3-phase · Jinko + GoodWe" data-ru="Сетевой 3-фазный 2026 · Jinko + GoodWe" data-th="ออนกริด 3 เฟส 2026 · Jinko + GoodWe" lang="en">2026 On-Grid 3-phase · Jinko + GoodWe</p>
+          <div class="product-price-row">
+            <div><span class="lbl" data-en="Full price" data-ru="Полная цена" data-th="ราคารวม" lang="en">Full price</span><span class="full-price" lang="en">฿228,000</span><span class="inst-note" data-en="Installments from ฿8,550/mo" data-ru="Рассрочка от ฿8,550/мес" data-th="ผ่อนเริ่ม ฿8,550/เดือน" lang="en">Installments from ฿8,550/mo</span></div>
+            <div class="save"><span class="lbl" data-en="Power savings" data-ru="Экономия" data-th="ประหยัดไฟ" lang="en">Power savings</span><i lang="en">~฿6,345<small data-en="/mo" data-ru="/мес" data-th="/เดือน" lang="en">/mo</small></i></div>
+          </div>
+          <div class="product-inst"><span><span data-en="Monthly installment" data-ru="Платёж в месяц" data-th="ยอดผ่อนต่อเดือน" lang="en">Monthly installment</span><b lang="en">฿8,550</b></span><span class="roi" lang="en">ROI plan</span></div>
+          <a class="btn btn--primary btn--sm btn--block" href="#contact" data-en="Ask price & installments →" data-ru="Узнать цену и рассрочку →" data-th="ขอราคาและผ่อนชำระ →" lang="en">Ask price & installments →</a>
+        </div>
+      </div>
+      <div class="card product product--rich rv" data-cat="business">
+        <div class="product-photo"><span class="badge" data-en="Business · 20 kW" data-ru="Бизнес · 20 кВт" data-th="ธุรกิจ · 20 kW" lang="en">Business · 20 kW</span><img class="brand-mark" src="https://admintawanpower.vercel.app/content/brands/goodwe.webp" alt="GoodWe" loading="eager"><img class="kit-photo" src="https://admintawanpower.vercel.app/content/products/goodwe-20kw-3phase/main.webp" alt="GoodWe 20 kW solar kit" loading="lazy"></div>
+        <div class="product-body">
+          <h3 data-en="20 kW Solar Kit (GoodWe)" data-ru="Комплект 20 кВт (GoodWe)" data-th="ชุดโซล่าร์ 20 kW (GoodWe)" lang="en">20 kW Solar Kit (GoodWe)</h3>
+          <p class="kit-sub" data-en="2026 On-Grid 3-phase · 32× Jinko 715W" data-ru="Сетевой 3-фазный 2026 · 32× Jinko 715 Вт" data-th="ออนกริด 3 เฟส 2026 · Jinko 715W 32 แผง" lang="en">2026 On-Grid 3-phase · 32× Jinko 715W</p>
+          <div class="product-price-row">
+            <div><span class="lbl" data-en="Full price" data-ru="Полная цена" data-th="ราคารวม" lang="en">Full price</span><span class="full-price" lang="en">฿443,000</span><span class="inst-note" data-en="Installments from ฿16,612.5/mo" data-ru="Рассрочка от ฿16,612.5/мес" data-th="ผ่อนเริ่ม ฿16,612.5/เดือน" lang="en">Installments from ฿16,612.5/mo</span></div>
+            <div class="save"><span class="lbl" data-en="Power savings" data-ru="Экономия" data-th="ประหยัดไฟ" lang="en">Power savings</span><i lang="en">~฿12,690<small data-en="/mo" data-ru="/мес" data-th="/เดือน" lang="en">/mo</small></i></div>
+          </div>
+          <div class="product-inst"><span><span data-en="Monthly installment" data-ru="Платёж в месяц" data-th="ยอดผ่อนต่อเดือน" lang="en">Monthly installment</span><b lang="en">฿16,612.5</b></span><span class="roi" lang="en">ROI plan</span></div>
+          <a class="btn btn--primary btn--sm btn--block" href="#contact" data-en="Ask price & installments →" data-ru="Узнать цену и рассрочку →" data-th="ขอราคาและผ่อนชำระ →" lang="en">Ask price & installments →</a>
+        </div>
+      </div>
+      <div class="card product product--rich rv" data-cat="hybrid">
+        <div class="product-photo"><span class="badge" data-en="Hybrid · 10 kWh" data-ru="Гибрид · 10 кВт·ч" data-th="ไฮบริด · 10 kWh" lang="en">Hybrid · 10 kWh</span><img class="brand-mark" src="https://admintawanpower.vercel.app/content/brands/sigenergy.webp" alt="Sigenergy" loading="eager"><img class="kit-photo" src="https://admintawanpower.vercel.app/content/products/sigen-battery-5kwh/main.webp" alt="Sigenergy SigenStor battery" loading="lazy"></div>
+        <div class="product-body">
+          <h3 data-en="Hybrid 10 kWh (Sigenergy)" data-ru="Гибрид 10 кВт·ч (Sigenergy)" data-th="ไฮบริด 10 kWh (Sigenergy)" lang="en">Hybrid 10 kWh (Sigenergy)</h3>
+          <p class="kit-sub" data-en="SigenStor 5-in-1 · backup + app" data-ru="SigenStor 5-в-1 · резерв + приложение" data-th="SigenStor 5-in-1 · สำรองไฟ + แอป" lang="en">SigenStor 5-in-1 · backup + app</p>
+          <div class="product-price-row">
+            <div><span class="lbl" data-en="Full price" data-ru="Полная цена" data-th="ราคารวม" lang="en">Full price</span><span class="full-price" lang="en">฿459,000</span><span class="inst-note" data-en="Installments from ฿17,212/mo" data-ru="Рассрочка от ฿17,212/мес" data-th="ผ่อนเริ่ม ฿17,212/เดือน" lang="en">Installments from ฿17,212/mo</span></div>
+            <div class="save"><span class="lbl" data-en="Power savings" data-ru="Экономия" data-th="ประหยัดไฟ" lang="en">Power savings</span><i lang="en">~฿6,900<small data-en="/mo" data-ru="/мес" data-th="/เดือน" lang="en">/mo</small></i></div>
+          </div>
+          <div class="product-inst"><span><span data-en="Monthly installment" data-ru="Платёж в месяц" data-th="ยอดผ่อนต่อเดือน" lang="en">Monthly installment</span><b lang="en">฿17,212</b></span><span class="roi" lang="en">ROI plan</span></div>
+          <a class="btn btn--primary btn--sm btn--block" href="#contact" data-en="Ask price & installments →" data-ru="Узнать цену и рассрочку →" data-th="ขอราคาและผ่อนชำระ →" lang="en">Ask price & installments →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASES STRIP -->
+  <section class="block" id="cases" data-od-id="uni-cases">
+    <div class="sec-head sec-head--center">
+      <p class="kicker" data-en="Recent work" data-ru="Наши работы" data-th="ผลงานล่าสุด" lang="en">Recent work</p>
+      <h2 lang="en"><span data-en="Roofs already " data-ru="Крыши уже " data-th="หลังคาที่" lang="en">Roofs already </span><span class="grad" data-en="saving" data-ru="экономят" data-th="ประหยัดแล้ว" lang="en">saving</span></h2>
+    </div>
+    <div class="grid2">
+      <article class="card rv" data-od-id="uni-case-aonang">
+        <img class="case-img" src="https://admintawanpower.vercel.app/images/krabi-001.png" alt="Solar panels on a villa roof in Ao Nang, Krabi" loading="lazy">
+        <div class="case-meta"><span class="badge" lang="en">⌖ Krabi</span><span class="badge badge--success" lang="en">10 kW · −68% bill</span></div>
+        <h3 data-en="Ao Nang villa" data-ru="Вилла в Ао Нанге" data-th="วิลล่าอ่าวนาง" lang="en">Ao Nang villa</h3>
+        <p data-en="Pool + 4 air-cons. Payback in ~4 years." data-ru="Бассейн и 4 кондиционера. Окупаемость ~4 года." data-th="สระ + แอร์ 4 เครื่อง คืนทุนราว 4 ปี" lang="en">Pool + 4 air-cons. Payback in ~4 years.</p>
+        <div class="case-stats">
+          <div><span data-en="Investment" data-ru="Инвестиции" data-th="งบลงทุน" lang="en">Investment</span><b lang="en">฿890,000</b></div>
+          <div><span data-en="Installed in" data-ru="Монтаж" data-th="ติดตั้ง" lang="en">Installed in</span><b data-en="4 days" data-ru="4 дня" data-th="4 วัน" lang="en">4 days</b></div>
+        </div>
+        <a class="btn btn--secondary btn--sm" href="#contact" data-en="Get this system" data-ru="Хочу так же" data-th="เอาระบบนี้" lang="en">Get this system</a>
+      </article>
+      <article class="card rv" data-od-id="uni-case-lanta">
+        <img class="case-img" src="https://admintawanpower.vercel.app/images/krabi-002.webp" alt="Rooftop solar array on a cafe in Koh Lanta" loading="lazy">
+        <div class="case-meta"><span class="badge" lang="en">⌖ Krabi</span><span class="badge badge--success" lang="en">8 kW · −55% bill</span></div>
+        <h3 data-en="Koh Lanta café" data-ru="Кафе на Ко Ланте" data-th="คาเฟ่เกาะลันตา" lang="en">Koh Lanta café</h3>
+        <p data-en="Daytime load matched. Fridges outage-proof." data-ru="Дневная нагрузка закрыта. Холодильники защищены." data-th="ใช้ไฟกลางวันเต็ม ตู้แช่ไม่ดับ" lang="en">Daytime load matched. Fridges outage-proof.</p>
+        <div class="case-stats">
+          <div><span data-en="Investment" data-ru="Инвестиции" data-th="งบลงทุน" lang="en">Investment</span><b lang="en">฿576,000</b></div>
+          <div><span data-en="Installed in" data-ru="Монтаж" data-th="ติดตั้ง" lang="en">Installed in</span><b data-en="3 days" data-ru="3 дня" data-th="3 วัน" lang="en">3 days</b></div>
+        </div>
+        <a class="btn btn--secondary btn--sm" href="#contact" data-en="Get this system" data-ru="Хочу так же" data-th="เอาระบบนี้" lang="en">Get this system</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="block" id="features" data-od-id="uni-features">
+    <div class="sec-head sec-head--center">
+      <p class="kicker" data-en="Services" data-ru="Сервис" data-th="บริการ" lang="en">Services</p>
+      <h2 lang="en"><span data-en="What you " data-ru="Что вы " data-th="สิ่งที่คุณ" lang="en">What you </span><span class="grad" data-en="get from us" data-ru="получите" data-th="จะได้รับจากเรา" lang="en">get from us</span></h2>
+    </div>
+    <div class="grid4">
+      <div class="card feat rv" data-od-id="uni-feat-ask">
+        <span class="feat-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5z"/></svg></span>
+        <h3 data-en="Ask solar anything" data-ru="Спросите о солнце" data-th="ถามเรื่องโซลาร์ได้ทุกอย่าง" lang="en">Ask solar anything</h3>
+        <p data-en="Fast answers in chat, in your language." data-ru="Быстрые ответы в чате на вашем языке." data-th="ตอบไวในแชท ภาษาของคุณ" lang="en">Fast answers in chat, in your language.</p>
+      </div>
+      <div class="card feat rv" data-od-id="uni-feat-compare">
+        <span class="feat-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7l7-4 7 4"/><path d="M5 7v4a7 7 0 0 0 14 0V7"/><path d="M5 12h14"/></svg></span>
+        <h3 data-en="Compare gear" data-ru="Сравнение оборудования" data-th="เทียบอุปกรณ์" lang="en">Compare gear</h3>
+        <p data-en="Side-by-side specs before you decide." data-ru="Характеристики рядом — перед решением." data-th="เทียบสเปกชัดๆ ก่อนตัดสินใจ" lang="en">Side-by-side specs before you decide.</p>
+      </div>
+      <div class="card feat rv" data-od-id="uni-feat-estimate">
+        <span class="feat-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2"/><path d="M8.5 6.5h7"/><path d="M8.5 11h7"/><path d="M8.5 14.5h4"/><circle cx="15.5" cy="17.5" r="2.2"/><path d="M15.5 16v1.2l.8.8"/></svg></span>
+        <h3 data-en="Estimate savings" data-ru="Расчёт экономии" data-th="ประเมินความประหยัด" lang="en">Estimate savings</h3>
+        <p data-en="Know your savings before paying a baht." data-ru="Экономия известна до оплаты." data-th="รู้ยอดประหยัดก่อนจ่ายสักบาท" lang="en">Know your savings before paying a baht.</p>
+      </div>
+      <div class="card feat rv" data-od-id="uni-feat-engineer">
+        <span class="feat-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.9z"/></svg></span>
+        <h3 data-en="Talk to an engineer" data-ru="Разговор с инженером" data-th="คุยกับวิศวกร" lang="en">Talk to an engineer</h3>
+        <p data-en="A real engineer, not a salesperson." data-ru="Инженер, а не продавец." data-th="วิศวกรจริง ไม่ใช่เซลล์" lang="en">A real engineer, not a salesperson.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGENSTOR -->
+  <section class="block" id="sigen" data-od-id="uni-sigen">
+    <div class="sigen rv">
+      <div class="sigen-grid">
+        <div>
+          <p class="kicker" data-en="Sigenergy · AI hybrid" data-ru="Sigenergy · AI-гибрид" data-th="Sigenergy · AI ไฮบริด" lang="en">Sigenergy · AI hybrid</p>
+          <h2 lang="en">SigenStor <span class="grad" lang="en">5-in-One.</span></h2>
+          <p class="lede" data-en="World's first 5-in-One" data-ru="Первая в мире 5-в-1" data-th="5-in-One ระบบแรกของโลก" lang="en">World's first 5-in-One</p>
+          <ul class="five">
+            <li><b>01</b><span data-en="Hybrid inverter, 97% efficiency" data-ru="Гибридный инвертор, КПД 97%" data-th="อินเวอร์เตอร์ไฮบริด ประสิทธิภาพ 97%" lang="en">Hybrid inverter, 97% efficiency</span></li>
+            <li><b>02</b><span data-en="Modular battery, 5–48 kWh" data-ru="Модульная батарея 5–48 кВт·ч" data-th="แบตโมดูลาร์ 5–48 kWh" lang="en">Modular battery, 5–48 kWh</span></li>
+            <li><b>03</b><span data-en="EV charging from the sun" data-ru="Зарядка электромобиля от солнца" data-th="ชาร์จ EV จากแสงแดด" lang="en">EV charging from the sun</span></li>
+            <li><b>04</b><span data-en="0-ms backup for essentials" data-ru="Резерв 0 мс для важного" data-th="สำรองไฟ 0ms สำหรับโหลดสำคัญ" lang="en">0-ms backup for essentials</span></li>
+            <li><b>05</b><span data-en="AI energy control in the app" data-ru="ИИ-управление энергией в приложении" data-th="AI จัดการพลังงานผ่านแอป" lang="en">AI energy control in the app</span></li>
+          </ul>
+          <a class="btn btn--primary" href="#contact" data-en="Ask about SigenStor" data-ru="Спросить о SigenStor" data-th="สอบถาม SigenStor" lang="en">Ask about SigenStor</a>
+          <div class="sigen-metrics" data-od-id="uni-sigen-metrics">
+            <div><b lang="en">&lt;10ms</b><span data-en="Outage backup" data-ru="Резерв" data-th="สำรองไฟ" lang="en">Outage backup</span></div>
+            <div><b lang="en">98.4%</b><span data-en="Efficiency" data-ru="КПД" data-th="ประสิทธิภาพ" lang="en">Efficiency</span></div>
+            <div><b data-en="10 yrs" data-ru="10 лет" data-th="10 ปี" lang="en">10 yrs</b><span data-en="Warranty" data-ru="Гарантия" data-th="รับประกัน" lang="en">Warranty</span></div>
+            <div><b lang="en">AI-Ready</b><span data-en="App control" data-ru="Приложение" data-th="ควบคุมผ่านแอป" lang="en">App control</span></div>
+          </div>
+        </div>
+        <div class="sigen-media"><img class="sigen-img" src="https://admintawanpower.vercel.app/images/sigenstor-5in1.jpg" alt="SigenStor 5-in-1 home battery tower by Sigenergy" loading="lazy">
+          <div class="hotspot" style="top:18%;left:6%"><i></i><span data-en="Smart inverter" data-ru="Инвертор" data-th="อินเวอร์เตอร์" lang="en">Smart inverter</span></div>
+          <div class="hotspot" style="top:48%;right:4%"><i></i><span data-en="Battery" data-ru="Батарея" data-th="แบตเตอรี่" lang="en">Battery</span></div>
+          <div class="hotspot" style="bottom:14%;left:8%"><i></i><span data-en="EV charger" data-ru="EV-зарядка" data-th="ชาร์จ EV" lang="en">EV charger</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="block" id="steps" data-od-id="uni-steps">
+    <div class="sec-head sec-head--center">
+      <p class="kicker" data-en="Process" data-ru="Процесс" data-th="ขั้นตอน" lang="en">Process</p>
+      <h2 lang="en"><span data-en="Easy start in " data-ru="Лёгкий старт за " data-th="เริ่มต้นง่าย ๆ ใน " lang="en">Easy start in </span><span class="grad" data-en="3 steps" data-ru="3 шага" data-th="3 ขั้นตอน" lang="en">3 steps</span></h2>
+    </div>
+    <div class="grid3">
+      <div class="card step rv" data-od-id="uni-step-1">
+        <div class="step-top"><span class="step-num" aria-hidden="true">1</span><span class="step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6"/><path d="M5 9.5V20h14V9.5"/></svg></span></div>
+        <h3 data-en="Building type" data-ru="Тип здания" data-th="ประเภทอาคาร" lang="en">Building type</h3>
+        <p data-en="Home or business + your rough monthly bill." data-ru="Дом или бизнес + примерный счёт." data-th="บ้านหรือธุรกิจ + ค่าไฟคร่าวๆ" lang="en">Home or business + your rough monthly bill.</p>
+      </div>
+      <div class="card step rv" data-od-id="uni-step-2">
+        <div class="step-top"><span class="step-num" aria-hidden="true">2</span><span class="step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5z"/></svg></span></div>
+        <h3 data-en="Chat estimate" data-ru="Оценка в чате" data-th="ประเมินในแชท" lang="en">Chat estimate</h3>
+        <p data-en="System size and savings, in minutes." data-ru="Размер станции и экономия — за минуты." data-th="ขนาดระบบและยอดประหยัด ในไม่กี่นาที" lang="en">System size and savings, in minutes.</p>
+      </div>
+      <div class="card step rv" data-od-id="uni-step-3">
+        <div class="step-top"><span class="step-num" aria-hidden="true">3</span><span class="step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.5 3.4-5 7-5s6.2 1.5 7 5"/></svg></span></div>
+        <h3 data-en="Engineer survey" data-ru="Замер инженера" data-th="วิศวกรสำรวจ" lang="en">Engineer survey</h3>
+        <p data-en="Callback plus a free site visit." data-ru="Звонок плюс бесплатный выезд." data-th="โทรกลับพร้อมสำรวจหน้างานฟรี" lang="en">Callback plus a free site visit.</p>
+      </div>
+    </div>
+    <div class="cta-row" style="justify-content:center"><a class="btn btn--secondary" href="#contact" data-en="Start step 1 — free" data-ru="Начать шаг 1 — бесплатно" data-th="เริ่มขั้นตอนที่ 1 — ฟรี" lang="en">Start step 1 — free</a></div>
+  </section>
+
+  <!-- KNOWLEDGE -->
+  <section class="block" id="knowledge" data-od-id="uni-knowledge">
+    <div class="sec-head sec-head--center">
+      <p class="kicker" data-en="Knowledge" data-ru="База знаний" data-th="ความรู้" lang="en">Knowledge</p>
+      <h2 lang="en"><span data-en="Answers to " data-ru="Ответы " data-th="ตอบ" lang="en">Answers to </span><span class="grad" data-en="everything" data-ru="на всё" data-th="ทุกข้อสงสัย" lang="en">everything</span></h2>
+    </div>
+    <div class="tabs-wrap"><div class="tabs" role="tablist" aria-label="Topics">
+      <button type="button" role="tab" aria-selected="true" data-tab="savings" data-en="Savings" data-ru="Экономия" data-th="การประหยัด" lang="en">Savings</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="tech" data-en="Tech" data-ru="Техника" data-th="เทคโนโลยี" lang="en">Tech</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="faq" data-en="FAQ" data-ru="Вопросы" data-th="คำถามพบบ่อย" lang="en">FAQ</button>
+    </div></div>
+    <div class="tabpanel is-active" data-panel="savings" role="tabpanel">
+      <div class="card qa">
+        <h3 data-en="How fast is payback in Krabi?" data-ru="Как быстро окупается в Краби?" data-th="คืนทุนในกระบี่เร็วแค่ไหน?" lang="en">How fast is payback in Krabi?</h3>
+        <p class="dim" data-en="3–5 years at ~5 peak sun hours daily." data-ru="3–5 лет при ~5 пиковых часах в день." data-th="3–5 ปี ด้วยแดดพีคเฉลี่ยวันละ 5 ชั่วโมง" lang="en">3–5 years at ~5 peak sun hours daily.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="What is net-metering?" data-ru="Что такое net-metering?" data-th="เน็ตมิเตอร์ริงคืออะไร?" lang="en">What is net-metering?</h3>
+        <p class="dim" data-en="Sell surplus back to the grid — we file the papers." data-ru="Продажа излишков в сеть — документы оформляем мы." data-th="ขายไฟส่วนเกินคืนกริด เราเดินเรื่องให้" lang="en">Sell surplus back to the grid — we file the papers.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="Do I need batteries?" data-ru="Нужны ли батареи?" data-th="จำเป็นต้องมีแบตเตอรี่ไหม?" lang="en">Do I need batteries?</h3>
+        <p class="dim" data-en="Only if you want backup during outages — otherwise grid-tied is cheaper." data-ru="Только для резерва при отключениях — иначе сетевой дешевле." data-th="จำเป็นเฉพาะเมื่อต้องการไฟสำรองตอนไฟดับ ไม่งั้นออนกริดถูกกว่า" lang="en">Only if you want backup during outages — otherwise grid-tied is cheaper.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="Which inverter brands?" data-ru="Какие инверторы?" data-th="ใช้อินเวอร์เตอร์ยี่ห้อไหน?" lang="en">Which inverter brands?</h3>
+        <p class="dim" data-en="Deye, GoodWe and Sigenergy — Tier-1 with local warranty." data-ru="Deye, GoodWe и Sigenergy — Tier-1 с местной гарантией." data-th="Deye, GoodWe และ Sigenergy เกรด Tier-1 รับประกันในไทย" lang="en">Deye, GoodWe and Sigenergy — Tier-1 with local warranty.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="Who handles PEA paperwork?" data-ru="Кто оформляет документы PEA?" data-th="ใครเดินเรื่อง PEA?" lang="en">Who handles PEA paperwork?</h3>
+        <p class="dim" data-en="We do — permits and grid connection included." data-ru="Мы — разрешения и подключение включены." data-th="เราจัดการให้ ครบทั้งขออนุญาตและขนานไฟ" lang="en">We do — permits and grid connection included.</p>
+      </div>
+    </div>
+    <div class="tabpanel" data-panel="tech" role="tabpanel">
+      <div class="card qa">
+        <h3 data-en="Hybrid or grid-tied?" data-ru="Гибрид или сетевой?" data-th="ไฮบริดหรือออนกริด?" lang="en">Hybrid or grid-tied?</h3>
+        <p class="dim" data-en="Hybrid adds battery backup; grid-tied costs less." data-ru="Гибрид — с батареей; сетевой — дешевле." data-th="ไฮบริดมีแบตสำรอง ออนกริดถูกกว่า" lang="en">Hybrid adds battery backup; grid-tied costs less.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="Rainy season — still worth it?" data-ru="Сезон дождей — выгодно?" data-th="หน้าฝนยังคุ้มไหม?" lang="en">Rainy season — still worth it?</h3>
+        <p class="dim" data-en="Output drops to 40–60%, still pays off." data-ru="Выработка 40–60% — всё равно выгодно." data-th="ผลิตได้ 40–60% ยังคุ้ม" lang="en">Output drops to 40–60%, still pays off.</p>
+      </div>
+    </div>
+    <div class="tabpanel" data-panel="faq" role="tabpanel">
+      <div class="card qa">
+        <h3 data-en="What maintenance is needed?" data-ru="Какое нужно обслуживание?" data-th="ต้องดูแลรักษาอย่างไร?" lang="en">What maintenance is needed?</h3>
+        <p class="dim" data-en="1–2 panel cleanings a year; service plans available." data-ru="Мойка 1–2 раза в год; есть сервис-пакеты." data-th="ล้างแผงปีละ 1–2 ครั้ง มีแพ็กเกจดูแล" lang="en">1–2 panel cleanings a year; service plans available.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="What warranties apply?" data-ru="Какие действуют гарантии?" data-th="รับประกันอะไรบ้าง?" lang="en">What warranties apply?</h3>
+        <p class="dim" data-en="25-year performance, 12-year product warranty." data-ru="25 лет на выработку, 12 лет на оборудование." data-th="รับประกันประสิทธิภาพ 25 ปี ตัวเครื่อง 12 ปี" lang="en">25-year performance, 12-year product warranty.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BRANDS -->
+
+
+  <!-- CONTACT -->
+  <section class="block block--cream" id="contact" data-od-id="uni-contact">

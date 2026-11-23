@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TawanPost - Управление контентом</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.19/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.19/index.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981',
+                        secondary: '#f59e0b',
+                        success: '#059669',
+                        warning: '#f59e0b',
+                        danger: '#ef4444',
+                        'admin-bg': '#022c22',
+                        'admin-sidebar': '#064e3b',
+                        'admin-card': '#0f3d2e',
+                        'admin-card-hover': '#134a38',
+                        'text-dark': '#ecfdf5',
+                        'text-muted': '#a7f3d0'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    borderRadius: { sm: '4px', md: '8px' },
+                    spacing: { '4': '4px', '8': '8px', '12': '12px', '16': '16px', '24': '24px', '32': '32px' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #022c22; color: #ecfdf5; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #064e3b; }
+        ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 4px; }
+        .view-section { display: none; animation: fadeIn 0.2s ease-in-out; }
+        .view-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+        .nav-item.active { background-color: rgba(16, 185, 129, 0.15); color: #ecfdf5; border-left: 3px solid #10b981; }
+        .nav-item { border-left: 3px solid transparent; }
+        .kanban-col { min-height: 400px; }
+        .drag-over { background-color: rgba(16, 185, 129, 0.1); border: 2px dashed #10b981; }
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: #064e3b; border: 1px solid #064e3b; border-radius: 8px; overflow: hidden; }
+        .calendar-day { background: #022c22; min-height: 100px; padding: 8px; transition: background 0.2s; }
+        .calendar-day:hover { background: #0f3d2e; }
+    </style>
+</head>
+<body class="h-screen flex overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-72 bg-admin-sidebar flex flex-col border-r border-primary/20 flex-shrink-0">
+        <div class="p-6 flex items-center gap-3 border-b border-primary/20">
+            <div class="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
+                <svg class="w-5 h-5 text-admin-bg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            </div>
+            <span class="font-bold text-xl tracking-tight text-text-dark">TawanPost</span>
+        </div>
+
+        <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-6">
+            <!-- Overview -->
+            <button onclick="switchView('overview')" class="nav-item w-full flex items-center gap-3 px-3 py-3 rounded-r-md text-text-muted hover:bg-primary/10 hover:text-text-dark transition-colors active" data-view="overview">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                <span class="text-sm font-medium">Обзор</span>
+            </button>
+
+            <!-- PLAN -->
+            <div>
+                <p class="px-3 text-xs font-mono text-text-muted/50 uppercase tracking-wider mb-2">План</p>
+                <div class="space-y-1">
+                    <button onclick="switchView('calendar')" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-r-md text-text-muted hover:bg-primary/10 hover:text-text-dark transition-colors" data-view="calendar">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <span class="text-sm font-medium">Календарь</span>
+                        </div>
+                        <span class="px-2 py-0.5 rounded-full bg-admin-bg text-xs font-mono text-text-muted border border-primary/20">14</span>
+                    </button>
+                    <button onclick="switchView('pipeline')" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-r-md text-text-muted hover:bg-primary/10 hover:text-text-dark transition-colors" data-view="pipeline">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                            <span class="text-sm font-medium">Конвейер</span>
+                        </div>
+                        <span class="px-2 py-0.5 rounded-full bg-admin-bg text-xs font-mono text-text-muted border border-primary/20">6</span>
+                    </button>
+                    <button onclick="switchView('research')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-r-md text-text-muted hover:bg-primary/10 hover:text-text-dark transition-colors" data-view="research">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <span class="text-sm font-medium">Исследования</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PRODUCE -->
+            <div>
+                <p class="px-3 text-xs font-mono text-text-muted/50 uppercase tracking-wider mb-2">Производство</p>
+                <div class="space-y-1">
+                    <button onclick="switchView('ai-generator')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-r-md text-text-muted hover:bg-primary/10 hover:text-text-dark transition-colors" data-view="ai-generator">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                        <span class="text-sm font-medium">AI Генератор</span>
+                    </button>
+                    <button onclick="switchView('library')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-r-md text-text-muted hover:bg-primary/10 hover:text-text-dark transition-colors" data-view="library">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <span class="text-sm font-medium">Медиатека</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PUBLISH -->
+            <div>
+                <p class="px-3 text-xs font-mono text-text-muted/50 uppercase tracking-wider mb-2">Публикация</p>
+                <div class="space-y-1">
+                    <button onclick="switchView('publishing')" class="nav-item w-full flex items-center justify-between px-3 py-2.5 rounded-r-md text-text-muted hover:bg-primary/10 hover:text-text-dark transition-colors" data-view="publishing">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                            <span class="text-sm font-medium">Очередь</span>
+                        </div>
+                        <span class="px-2 py-0.5 rounded-full bg-admin-bg text-xs font-mono text-text-muted border border-primary/20">3</span>
+                    </button>
+                    <button onclick="switchView('analytics')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-r-md text-text-muted hover:bg-primary/10 hover:text-text-dark transition-colors" data-view="analytics">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        <span class="text-sm font-medium">Аналитика</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- MANAGE -->
+            <div>
+                <p class="px-3 text-xs font-mono text-text-muted/50 uppercase tracking-wider mb-2">Управление</p>
+                <div class="space-y-1">
+                    <button onclick="switchView('franchises')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-r-md text-text-muted hover:bg-primary/10 hover:text-text-dark transition-colors" data-view="franchises">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                        <span class="text-sm font-medium">Франчайзи</span>
+                    </button>
+                    <button onclick="switchView('settings')" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-r-md text-text-muted hover:bg-primary/10 hover:text-text-dark transition-colors" data-view="settings">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span class="text-sm font-medium">Настройки</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div class="p-4 border-t border-primary/20">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-secondary flex items-center justify-center text-admin-bg font-bold text-sm">АД</div>
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-text-dark truncate">Администратор</p>
+                    <p class="text-xs text-text-muted truncate">admin@tawanpower.th</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <!-- Top Header -->
+        <header class="h-16 bg-admin-sidebar/50 backdrop-blur-sm border-b border-primary/20 flex items-center justify-between px-6 flex-shrink-0">
+            <div class="flex items-center gap-4">
+                <h1 id="page-title" class="text-xl font-semibold text-text-dark">Обзор</h1>
+                <span class="px-2 py-0.5 rounded text-xs font-mono bg-primary/20 text-primary border border-primary/30">Phase 1</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="relative group">
+                    <button class="flex items-center gap-2 px-3 py-2 rounded-md bg-admin-card border border-primary/20 text-sm text-text-dark hover:border-primary/50 transition-colors">
+                        <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span>Tawan Krabi (Master)</span>
+                        <svg class="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                </div>
+                <button class="relative p-2 rounded-md text-text-muted hover:bg-primary/10 hover:text-text-dark transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                    <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-danger rounded-full"></span>
+                </button>
+                <button onclick="openModal()" class="flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-admin-bg font-semibold text-sm hover:bg-success transition-colors shadow-lg shadow-primary/20">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    Новый пост
+                </button>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto p-6">
+            
+            <!-- VIEW: OVERVIEW -->
+            <div id="view-overview" class="view-section active">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-admin-card rounded-md p-4 border border-primary/10">
+                        <p class="text-xs font-mono text-text-muted uppercase tracking-wider mb-1">Всего постов</p>
+                        <p class="text-2xl font-bold text-text-dark">142</p>
+                        <p class="text-xs text-success mt-1 flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>+12% за месяц</p>
+                    </div>
+                    <div class="bg-admin-card rounded-md p-4 border border-primary/10">
+                        <p class="text-xs font-mono text-text-muted uppercase tracking-wider mb-1">Запланировано</p>
+                        <p class="text-2xl font-bold text-secondary">28</p>
+                        <p class="text-xs text-text-muted mt-1">На следующие 7 дней</p>
+                    </div>
+                    <div class="bg-admin-card rounded-md p-4 border border-primary/10">
+                        <p class="text-xs font-mono text-text-muted uppercase tracking-wider mb-1">На проверке</p>
+                        <p class="text-2xl font-bold text-warning">5</p>
+                        <p class="text-xs text-text-muted mt-1">Требуют внимания редактора</p>
+                    </div>
+                    <div class="bg-admin-card rounded-md p-4 border border-primary/10">
+                        <p class="text-xs font-mono text-text-muted uppercase tracking-wider mb-1">Средний охват</p>
+                        <p class="text-2xl font-bold text-primary">4.2K</p>
+                        <p class="text-xs text-success mt-1 flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>+8.5% к прошлому</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-admin-card rounded-md border border-primary/10 p-6">
+                        <h3 class="text-sm font-semibold text-text-dark mb-4">Последняя активность</h3>
+                        <div class="space-y-4">
+                            <div class="flex gap-3">
+                                <div class="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                                <div><p class="text-sm text-text-dark">АИ опубликовал пост «Обзор установки: Вилла в Ао Нанг»</p><p class="text-xs text-text-muted font-mono mt-1">2 часа назад</p></div>
+                            </div>
+                            <div class="flex gap-3">
+                                <div class="w-2 h-2 rounded-full bg-warning mt-2 flex-shrink-0"></div>
+                                <div><p class="text-sm text-text-dark">МП отправил на проверку «5 мифов о солнечных панелях»</p><p class="text-xs text-text-muted font-mono mt-1">5 часов назад</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-admin-card rounded-md border border-primary/10 p-6">
+                        <h3 class="text-sm font-semibold text-text-dark mb-4">Топ постов за неделю</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-admin-bg rounded border border-primary/10">
+                                <div class="flex items-center gap-3">
+                                    <img src="https://image.qwenlm.ai/public_source/9a88d145-6227-4809-be6e-16c12a1026fd/1409935c5-5882-48ee-8c78-b31f538c02cc.png" class="w-10 h-10 object-cover rounded" alt="">
+                                    <span class="text-sm text-text-dark truncate max-w-[200px]">Кейс: Вилла в Ао Нанг</span>
+                                </div>
+                                <span class="text-xs font-mono text-success">4.5K охват</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-admin-bg rounded border border-primary/10">
+                                <div class="flex items-center gap-3">
+                                    <img src="https://image.qwenlm.ai/public_source/9a88d145-6227-4809-be6e-16c12a1026fd/1fe871edb-1dd6-4fcd-963a-ebb414828443.png" class="w-10 h-10 object-cover rounded" alt="">
+                                    <span class="text-sm text-text-dark truncate max-w-[200px]">5 мифов о панелях</span>
+                                </div>
+                                <span class="text-xs font-mono text-success">3.2K охват</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: CALENDAR -->
+            <div id="view-calendar" class="view-section">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center gap-3">
+                        <button class="p-2 rounded-md bg-admin-card border border-primary/20 text-text-dark hover:bg-admin-card-hover"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
+                        <h2 class="text-lg font-semibold text-text-dark">Июнь 2026</h2>
+                        <button class="p-2 rounded-md bg-admin-card border border-primary/20 text-text-dark hover:bg-admin-card-hover"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="px-3 py-1.5 rounded-md bg-primary/20 text-primary text-sm font-medium border border-primary/30">Месяц</button>
+                        <button class="px-3 py-1.5 rounded-md bg-admin-card text-text-muted text-sm font-medium border border-primary/20 hover:bg-admin-card-hover">Неделя</button>
+                    </div>
+                </div>
+                <div class="calendar-grid">
+                    <div class="calendar-day bg-admin-card text-center py-2 text-xs font-mono text-text-muted">ПН</div>
+                    <div class="calendar-day bg-admin-card text-center py-2 text-xs font-mono text-text-muted">ВТ</div>
+                    <div class="calendar-day bg-admin-card text-center py-2 text-xs font-mono text-text-muted">СР</div>
+                    <div class="calendar-day bg-admin-card text-center py-2 text-xs font-mono text-text-muted">ЧТ</div>
+                    <div class="calendar-day bg-admin-card text-center py-2 text-xs font-mono text-text-muted">ПТ</div>
+                    <div class="calendar-day bg-admin-card text-center py-2 text-xs font-mono text-text-muted">СБ</div>
+                    <div class="calendar-day bg-admin-card text-center py-2 text-xs font-mono text-text-muted">ВС</div>
+                    
+                    <div class="calendar-day text-text-muted/40">25</div><div class="calendar-day text-text-muted/40">26</div><div class="calendar-day text-text-muted/40">27</div><div class="calendar-day text-text-muted/40">28</div><div class="calendar-day text-text-muted/40">29</div><div class="calendar-day text-text-muted/40">30</div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">1</span></div>
+                    
+                    <div class="calendar-day"><span class="text-xs text-text-dark">2</span><div class="mt-1 p-1 rounded bg-primary/20 border-l-2 border-primary text-[10px] text-text-dark truncate">Кейс: Вилла Ао Нанг</div></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">3</span></div>
+                    <div class="calendar-day bg-primary/5"><span class="text-xs text-text-dark font-bold">4</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">5</span><div class="mt-1 p-1 rounded bg-secondary/20 border-l-2 border-secondary text-[10px] text-text-dark truncate">Летняя скидка 15%</div></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">6</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">7</span></div>
+                    
+                    <div class="calendar-day"><span class="text-xs text-text-dark">8</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">9</span><div class="mt-1 p-1 rounded bg-warning/20 border-l-2 border-warning text-[10px] text-text-dark truncate">5 мифов о панелях</div></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">10</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">11</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">12</span><div class="mt-1 p-1 rounded bg-danger/20 border-l-2 border-danger text-[10px] text-text-dark truncate">FB Ads: Скидка</div></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">13</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">14</span></div>
+                    
+                    <div class="calendar-day"><span class="text-xs text-text-dark">15</span><div class="mt-1 p-1 rounded bg-primary/20 border-l-2 border-primary text-[10px] text-text-dark truncate">Отель в Краби</div></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">16</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">17</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">18</span><div class="mt-1 p-1 rounded bg-primary/20 border-l-2 border-primary text-[10px] text-text-dark truncate">Гайд: Инвертор</div></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">19</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">20</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">21</span></div>
+                    
+                    <div class="calendar-day"><span class="text-xs text-text-dark">22</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">23</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">24</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">25</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">26</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">27</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">28</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">29</span></div>
+                    <div class="calendar-day"><span class="text-xs text-text-dark">30</span></div>
+                    <div class="calendar-day text-text-muted/40">1</div><div class="calendar-day text-text-muted/40">2</div><div class="calendar-day text-text-muted/40">3</div><div class="calendar-day text-text-muted/40">4</div><div class="calendar-day text-text-muted/40">5</div>
+                </div>
+            </div>
+
+            <!-- VIEW: PIPELINE -->
+            <div id="view-pipeline" class="view-section">
+                <div class="flex gap-4 overflow-x-auto pb-4 h-[calc(100vh-240px)]">
+                    <div class="flex-shrink-0 w-80 flex flex-col">
+                        <div class="flex items-center justify-between mb-3 px-1">
+                            <h3 class="text-sm font-semibold text-text-dark flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-text-muted/40"></span>Новые<span class="px-2 py-0.5 rounded-full bg-admin-bg text-xs font-mono text-text-muted border border-primary/20">3</span></h3>
+                        </div>
+                        <div class="kanban-col bg-admin-bg/50 rounded-md p-3 border border-primary/10 space-y-3 overflow-y-auto" ondrop="dropHandler(event)" ondragover="allowDrop(event)" data-status="new">
+                            <div class="bg-admin-card rounded-md border border-primary/20 shadow-sm cursor-grab active:cursor-grabbing hover:border-primary/50 transition-colors overflow-hidden" draggable="true" ondragstart="dragHandler(event)" id="card-1">
+                                <img src="https://image.qwenlm.ai/public_source/9a88d145-6227-4809-be6e-16c12a1026fd/1409935c5-5882-48ee-8c78-b31f538c02cc.png" class="w-full h-32 object-cover" alt="">
+                                <div class="p-4">
+                                    <div class="flex items-start justify-between mb-2">
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-secondary/20 text-secondary border border-secondary/30">Video</span>
+                                    </div>
+                                    <h4 class="text-sm font-medium text-text-dark mb-3 leading-snug">Солнечная экономия для отеля в Краби</h4>
+                                    <div class="flex items-center justify-between pt-3 border-t border-primary/10">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-[10px] font-bold text-primary">ИК</div>
+                                            <span class="text-xs text-text-muted">15 Июн</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-80 flex flex-col">
+                        <div class="flex items-center justify-between mb-3 px-1">
+                            <h3 class="text-sm font-semibold text-text-dark flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary"></span>В работе<span class="px-2 py-0.5 rounded-full bg-admin-bg text-xs font-mono text-text-muted border border-primary/20">2</span></h3>
+                        </div>
+                        <div class="kanban-col bg-admin-bg/50 rounded-md p-3 border border-primary/10 space-y-3 overflow-y-auto" ondrop="dropHandler(event)" ondragover="allowDrop(event)" data-status="in_progress">
+                            <div class="bg-admin-card rounded-md border border-primary/20 shadow-sm cursor-grab active:cursor-grabbing hover:border-primary/50 transition-colors overflow-hidden" draggable="true" ondragstart="dragHandler(event)" id="card-3">
+                                <img src="https://image.qwenlm.ai/public_source/9a88d145-6227-4809-be6e-16c12a1026fd/1b75ce2ff-7799-49e5-b3a3-3f9a400b14c0.png" class="w-full h-32 object-cover" alt="">
+                                <div class="p-4">
+                                    <div class="flex items-start justify-between mb-2">
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-danger/20 text-danger border border-danger/30">Ad</span>
+                                    </div>
+                                    <h4 class="text-sm font-medium text-text-dark mb-3 leading-snug">Рекламная кампания: Летняя скидка 15%</h4>
+                                    <div class="w-full bg-admin-bg rounded-full h-1.5 mb-3"><div class="bg-primary h-1.5 rounded-full" style="width: 65%"></div></div>
+                                    <div class="flex items-center justify-between pt-3 border-t border-primary/10">
+                                        <span class="text-xs text-text-muted">Дедлайн: 12 Июн</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-80 flex flex-col">
+                        <div class="flex items-center justify-between mb-3 px-1">
+                            <h3 class="text-sm font-semibold text-text-dark flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-warning"></span>На проверке<span class="px-2 py-0.5 rounded-full bg-admin-bg text-xs font-mono text-text-muted border border-primary/20">1</span></h3>
+                        </div>
+                        <div class="kanban-col bg-admin-bg/50 rounded-md p-3 border border-primary/10 space-y-3 overflow-y-auto" ondrop="dropHandler(event)" ondragover="allowDrop(event)" data-status="review">
+                            <div class="bg-admin-card rounded-md border border-warning/30 shadow-sm cursor-grab active:cursor-grabbing hover:border-warning/50 transition-colors overflow-hidden" draggable="true" ondragstart="dragHandler(event)" id="card-4">
+                                <img src="https://image.qwenlm.ai/public_source/9a88d145-6227-4809-be6e-16c12a1026fd/1fe871edb-1dd6-4fcd-963a-ebb414828443.png" class="w-full h-32 object-cover" alt="">
+                                <div class="p-4">
+                                    <div class="flex items-start justify-between mb-2">
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-secondary/20 text-secondary border border-secondary/30">Carousel</span>
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-warning/20 text-warning border border-warning/30">Global</span>
+                                    </div>
+                                    <h4 class="text-sm font-medium text-text-dark mb-3 leading-snug">5 мифов о солнечных панелях</h4>
+                                    <div class="flex items-center justify-between pt-3 border-t border-primary/10">
+                                        <button class="text-xs font-medium text-primary hover:text-success transition-colors">Одобрить →</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-80 flex flex-col">
+                        <div class="flex items-center justify-between mb-3 px-1">
+                            <h3 class="text-sm font-semibold text-text-dark flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-success"></span>Готово<span class="px-2 py-0.5 rounded-full bg-admin-bg text-xs font-mono text-text-muted border border-primary/20">4</span></h3>
+                        </div>
+                        <div class="kanban-col bg-admin-bg/50 rounded-md p-3 border border-primary/10 space-y-3 overflow-y-auto" ondrop="dropHandler(event)" ondragover="allowDrop(event)" data-status="done">
+                            <div class="bg-admin-card rounded-md border border-success/20 shadow-sm opacity-75 hover:opacity-100 transition-opacity overflow-hidden">
+                                <img src="https://image.qwenlm.ai/public_source/9a88d145-6227-4809-be6e-16c12a1026fd/10aabff47-19bc-4bae-b709-9a4dd27cfc02.png" class="w-full h-32 object-cover opacity-80" alt="">
+                                <div class="p-4">
+                                    <div class="flex items-start justify-between mb-2">
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-success/20 text-success border border-success/30">Video</span>
+                                        <svg class="w-4 h-4 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    </div>
+                                    <h4 class="text-sm font-medium text-text-dark mb-3 leading-snug line-through text-text-muted">Обзор установки: Вилла в Ао Нанг</h4>
+                                    <div class="flex items-center justify-between pt-3 border-t border-primary/10">
+                                        <span class="text-xs text-text-muted">Опубликовано: 01 Июн</span>
+                                        <span class="text-[10px] font-mono text-success">4.5K охват</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: RESEARCH -->
+            <div id="view-research" class="view-section">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-1">
+                        <div class="bg-admin-card rounded-md border border-primary/10 p-6 border-dashed border-2 border-primary/30 flex flex-col items-center justify-center text-center h-64 hover:bg-primary/5 transition-colors cursor-pointer">
+                            <svg class="w-10 h-10 text-primary mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                            <p class="text-sm font-medium text-text-dark mb-1">Загрузить исследование</p>
+                            <p class="text-xs text-text-muted">PDF, CSV, или ссылка на конкурента</p>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2 space-y-4">
+                        <div class="bg-admin-card rounded-md border border-primary/10 p-5">
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-text-dark">Анализ конкурентов: Solar Thailand</h3>
+                                    <p class="text-xs text-text-muted font-mono mt-1">Загружено: 02 Июн 2026 • AI Summary Ready</p>
+                                </div>
+                                <span class="px-2 py-1 rounded text-[10px] font-mono uppercase bg-primary/20 text-primary border border-primary/30">Обработано</span>
+                            </div>
+                            <div class="bg-admin-bg/50 rounded p-3 border border-primary/10 mb-3">
+                                <p class="text-xs text-text-dark leading-relaxed"><span class="text-primary font-semibold">AI Инсайт:</span> Конкуренты активно используют видео-кейсы с реальными счетами за электричество до/после установки. Рекомендация: создать серию "Счет до и после" для Krabi.</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-admin-bg text-text-muted border border-primary/10">#конкуренты</span>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-admin-bg text-text-muted border border-primary/10">#видео</span>
+                            </div>
+                        </div>
+                        <div class="bg-admin-card rounded-md border border-primary/10 p-5">
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <h3 class="text-sm font-semibold text-text-dark">Тренды Facebook Ads: Тропический климат</h3>
+                                    <p class="text-xs text-text-muted font-mono mt-1">Загружено: 28 Май 2026 • Обработка...</p>
+                                </div>
+                                <span class="px-2 py-1 rounded text-[10px] font-mono uppercase bg-warning/20 text-warning border border-warning/30">В процессе</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: AI GENERATOR -->
+            <div id="view-ai-generator" class="view-section">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100vh-200px)]">
+                    <div class="bg-admin-card rounded-md border border-primary/10 p-6 flex flex-col">
+                        <h3 class="text-sm font-semibold text-text-dark mb-4">Конфигурация генерации</h3>
+                        <div class="space-y-4 flex-1 overflow-y-auto">
+                            <div>
+                                <label class="block text-xs font-mono text-text-muted uppercase tracking-wider mb-1.5">Шаблон</label>
+                                <select class="w-full bg-admin-bg border border-primary/20 rounded-md px-3 py-2.5 text-sm text-text-dark focus:outline-none focus:border-primary transition-colors">
+                                    <option>Industrial Guide (Гайд)</option>
+                                    <option>Case Study (Кейс)</option>
+                                    <option>Brand Comparison (Сравнение)</option>
+                                    <option>Social Media Post (Пост)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono text-text-muted uppercase tracking-wider mb-1.5">Тема / Ключевые слова</label>
+                                <input type="text" class="w-full bg-admin-bg border border-primary/20 rounded-md px-3 py-2.5 text-sm text-text-dark focus:outline-none focus:border-primary transition-colors" placeholder="Например: экономия на кондиционировании в Краби">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono text-text-muted uppercase tracking-wider mb-1.5">Tone of Voice</label>
+                                <select class="w-full bg-admin-bg border border-primary/20 rounded-md px-3 py-2.5 text-sm text-text-dark focus:outline-none focus:border-primary transition-colors">
+                                    <option>Профессиональный, авторитетный</option>
+                                    <option>Дружелюбный, помогающий</option>
+                                    <option>Срочный, продающий (для акций)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono text-text-muted uppercase tracking-wider mb-1.5">Дополнительный контекст</label>
+                                <textarea rows="4" class="w-full bg-admin-bg border border-primary/20 rounded-md px-3 py-2.5 text-sm text-text-dark focus:outline-none focus:border-primary transition-colors resize-none" placeholder="Специфические требования, ссылки на референсы..."></textarea>
+                            </div>
+                        </div>
+                        <button class="mt-4 w-full flex items-center justify-center gap-2 px-4 py-3 rounded-md bg-primary text-admin-bg font-semibold text-sm hover:bg-success transition-colors shadow-lg shadow-primary/20">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            Сгенерировать контент
+                        </button>
+                    </div>
+                    <div class="bg-admin-card rounded-md border border-primary/10 p-6 flex flex-col">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-sm font-semibold text-text-dark">Предпросмотр результата</h3>
+                            <div class="flex gap-2">
+                                <button class="px-3 py-1.5 rounded-md bg-admin-bg text-text-muted text-xs font-medium border border-primary/20 hover:text-text-dark">Копировать</button>
+                                <button class="px-3 py-1.5 rounded-md bg-primary/20 text-primary text-xs font-medium border border-primary/30 hover:bg-primary/30">В конвейер</button>
+                            </div>
+                        </div>
+                        <div class="flex-1 bg-admin-bg/50 rounded-md border border-primary/10 p-4 overflow-y-auto">
+                            <div class="animate-pulse space-y-3">
+                                <div class="h-4 bg-primary/10 rounded w-3/4"></div>
+                                <div class="h-4 bg-primary/10 rounded w-full"></div>
+                                <div class="h-4 bg-primary/10 rounded w-5/6"></div>
+                                <div class="h-20 bg-primary/10 rounded w-full mt-4"></div>
+                                <div class="h-4 bg-primary/10 rounded w-1/2 mt-4"></div>
+                            </div>
+                            <p class="text-xs text-text-muted text-center mt-8 italic">Нажмите "Сгенерировать контент" для создания черновика на основе выбранного шаблона и мастер-промпта.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: LIBRARY -->
+            <div id="view-library" class="view-section">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex gap-2">
+                        <button class="px-3 py-1.5 rounded-md bg-primary/20 text-primary text-sm font-medium border border-primary/30">Все</button>
+                        <button class="px-3 py-1.5 rounded-md bg-admin-card text-text-muted text-sm font-medium border border-primary/20 hover:bg-admin-card-hover">Изображения</button>
+                        <button class="px-3 py-1.5 rounded-md bg-admin-card text-text-muted text-sm font-medium border border-primary/20 hover:bg-admin-card-hover">Видео</button>
+                        <button class="px-3 py-1.5 rounded-md bg-admin-card text-text-muted text-sm font-medium border border-primary/20 hover:bg-admin-card-hover">Документы</button>
+                    </div>
+                    <div class="relative">
+                        <input type="text" placeholder="Поиск медиа..." class="bg-admin-card border border-primary/20 rounded-md px-3 py-2 text-sm text-text-dark w-64 focus:outline-none focus:border-primary transition-colors">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="group relative bg-admin-card rounded-md border border-primary/10 overflow-hidden hover:border-primary/50 transition-colors">
+                        <img src="https://image.qwenlm.ai/public_source/9a88d145-6227-4809-be6e-16c12a1026fd/1409935c5-5882-48ee-8c78-b31f538c02cc.png" class="w-full h-48 object-cover" alt="">
+                        <div class="p-3">
+                            <p class="text-sm text-text-dark truncate">Вилла с панелями.jpg</p>
+                            <p class="text-xs text-text-muted font-mono mt-1">2.4 MB • 1920x1080</p>
+                        </div>
+                    </div>
+                    <div class="group relative bg-admin-card rounded-md border border-primary/10 overflow-hidden hover:border-primary/50 transition-colors">
+                        <img src="https://image.qwenlm.ai/public_source/9a88d145-6227-4809-be6e-16c12a1026fd/1fe871edb-1dd6-4fcd-963a-ebb414828443.png" class="w-full h-48 object-cover" alt="">
+                        <div class="p-3">
+                            <p class="text-sm text-text-dark truncate">Мифы о панелях.png</p>
+                            <p class="text-xs text-text-muted font-mono mt-1">1.1 MB • 1080x1080</p>
+                        </div>
+                    </div>
+                    <div class="group relative bg-admin-card rounded-md border border-primary/10 overflow-hidden hover:border-primary/50 transition-colors">
+                        <img src="https://image.qwenlm.ai/public_source/9a88d145-6227-4809-be6e-16c12a1026fd/12a7988d1-477f-4988-996e-8c06980b313e.png" class="w-full h-48 object-cover" alt="">
+                        <div class="p-3">
+                            <p class="text-sm text-text-dark truncate">Схема инвертора.jpg</p>
+                            <p class="text-xs text-text-muted font-mono mt-1">3.2 MB • 2048x2048</p>
+                        </div>
+                    </div>
+                    <div class="group relative bg-admin-card rounded-md border border-primary/10 overflow-hidden hover:border-primary/50 transition-colors">
+                        <img src="https://image.qwenlm.ai/public_source/9a88d145-6227-4809-be6e-16c12a1026fd/1b75ce2ff-7799-49e5-b3a3-3f9a400b14c0.png" class="w-full h-48 object-cover" alt="">
+                        <div class="p-3">
+                            <p class="text-sm text-text-dark truncate">Летняя акция.png</p>
+                            <p class="text-xs text-text-muted font-mono mt-1">850 KB • 1080x1080</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: PUBLISHING -->
+            <div id="view-publishing" class="view-section">
+                <div class="bg-admin-card rounded-md border border-primary/10 overflow-hidden">
+                    <div class="p-5 border-b border-primary/10 flex items-center justify-between">
+                        <h3 class="text-sm font-semibold text-text-dark">Очередь публикаций</h3>
+                        <button class="text-xs font-medium text-primary hover:text-success transition-colors">+ Добавить в очередь</button>
+                    </div>
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-primary/10 text-left bg-admin-bg/50">
+                                <th class="p-4 text-xs font-mono text-text-muted uppercase tracking-wider">Контент</th>
+                                <th class="p-4 text-xs font-mono text-text-muted uppercase tracking-wider">Платформа</th>
+                                <th class="p-4 text-xs font-mono text-text-muted uppercase tracking-wider">Запланировано</th>
+                                <th class="p-4 text-xs font-mono text-text-muted uppercase tracking-wider">Статус</th>
+                                <th class="p-4 text-xs font-mono text-text-muted uppercase tracking-wider">Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-primary/10 hover:bg-primary/5 transition-colors">
+                                <td class="p-4">
+                                    <div class="flex items-center gap-3">
+                                        <img src="https://image.qwenlm.ai/public_source/9a88d145-6227-4809-be6e-16c12a1026fd/1fe871edb-1dd6-4fcd-963a-ebb414828443.png" class="w-10 h-10 object-cover rounded" alt="">
+                                        <span class="text-text-dark">5 мифов о солнечных панелях</span>
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <div class="flex gap-1">
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-admin-bg text-text-muted border border-primary/10">IG</span>
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-admin-bg text-text-muted border border-primary/10">FB</span>
+                                    </div>
+                                </td>
+                                <td class="p-4 text-text-muted font-mono">09 Июн, 10:00</td>
+                                <td class="p-4"><span class="flex items-center gap-1.5 text-xs text-secondary"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>Запланировано</span></td>
+                                <td class="p-4">
+                                    <button class="text-text-muted hover:text-text-dark"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg></button>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-primary/10 hover:bg-primary/5 transition-colors">
+                                <td class="p-4">
+                                    <div class="flex items-center gap-3">
+                                        <img src="https://image.qwenlm.ai/public_source/9a88d145-6227-4809-be6e-16c12a1026fd/1b75ce2ff-7799-49e5-b3a3-3f9a400b14c0.png" class="w-10 h-10 object-cover rounded" alt="">
+                                        <span class="text-text-dark">Летняя скидка 15% — глобальная акция</span>
+                                    </div>
+                                </td>
+                                <td class="p-4">
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-admin-bg text-text-muted border border-primary/10">FB Ads</span>
+                                </td>
+                                <td class="p-4 text-text-muted font-mono">05 Июн, 08:00</td>
+                                <td class="p-4"><span class="flex items-center gap-1.5 text-xs text-success"><span class="w-1.5 h-1.5 rounded-full bg-success"></span>Опубликовано</span></td>
+                                <td class="p-4">
+                                    <button class="text-text-muted hover:text-text-dark"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path></svg></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- VIEW: ANALYTICS -->
+            <div id="view-analytics" class="view-section">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-admin-card rounded-md p-4 border border-primary/10">
+                        <p class="text-xs font-mono text-text-muted uppercase tracking-wider mb-1">Общий охват</p>
+                        <p class="text-2xl font-bold text-text-dark">142.5K</p>
+                        <p class="text-xs text-success mt-1">+24% к прошлому месяцу</p>
+                    </div>
+                    <div class="bg-admin-card rounded-md p-4 border border-primary/10">
+                        <p class="text-xs font-mono text-text-muted uppercase tracking-wider mb-1">Вовлеченность</p>
+                        <p class="text-2xl font-bold text-text-dark">8.4%</p>
+                        <p class="text-xs text-success mt-1">+1.2% к прошлому</p>
+                    </div>
+                    <div class="bg-admin-card rounded-md p-4 border border-primary/10">
+                        <p class="text-xs font-mono text-text-muted uppercase tracking-wider mb-1">Клики по ссылкам</p>
+                        <p class="text-2xl font-bold text-text-dark">12.3K</p>
+                        <p class="text-xs text-warning mt-1">-3% к прошлому</p>
+                    </div>
+                    <div class="bg-admin-card rounded-md p-4 border border-primary/10">
+                        <p class="text-xs font-mono text-text-muted uppercase tracking-wider mb-1">Новые подписчики</p>
+                        <p class="text-2xl font-bold text-text-dark">+1,240</p>
+                        <p class="text-xs text-success mt-1">+18% к прошлому</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-admin-card rounded-md border border-primary/10 p-6">
+                        <h3 class="text-sm font-semibold text-text-dark mb-6">Охват по платформам</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span class="text-text-dark">Facebook</span><span class="text-text-muted font-mono">58K (41%)</span></div>
+                                <div class="w-full bg-admin-bg rounded-full h-2"><div class="bg-primary h-2 rounded-full" style="width: 41%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span class="text-text-dark">Instagram</span><span class="text-text-muted font-mono">42K (30%)</span></div>
+                                <div class="w-full bg-admin-bg rounded-full h-2"><div class="bg-secondary h-2 rounded-full" style="width: 30%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span class="text-text-dark">TikTok</span><span class="text-text-muted font-mono">28K (20%)</span></div>
+                                <div class="w-full bg-admin-bg rounded-full h-2"><div class="bg-danger h-2 rounded-full" style="width: 20%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1"><span class="text-text-dark">LINE / Blog</span><span class="text-text-muted font-mono">14K (9%)</span></div>
+                                <div class="w-full bg-admin-bg rounded-full h-2"><div class="bg-warning h-2 rounded-full" style="width: 9%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-admin-card rounded-md border border-primary/10 p-6">
+                        <h3 class="text-sm font-semibold text-text-dark mb-6">Лучший контент месяца</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-admin-bg rounded border border-primary/10">
+                                <div class="flex items-center gap-3">
+                                    <img src="https://image.qwenlm.ai/public_source/9a88d145-6227-4809-be6e-16c12a1026fd/1409935c5-5882-48ee-8c78-b31f538c02cc.png" class="w-12 h-12 object-cover rounded" alt="">
+                                    <div>
+                                        <p class="text-sm text-text-dark">Кейс: Вилла в Ао Нанг</p>
+                                        <p class="text-xs text-text-muted font-mono">Facebook • Видео</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-sm font-bold text-success">4.5K</p>
+                                    <p class="text-xs text-text-muted">охват</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-admin-bg rounded border border-primary/10">
+                                <div class="flex items-center gap-3">
+                                    <img src="https://image.qwenlm.ai/public_source/9a88d145-6227-4809-be6e-16c12a1026fd/1fe871edb-1dd6-4fcd-963a-ebb414828443.png" class="w-12 h-12 object-cover rounded" alt="">
+                                    <div>
+                                        <p class="text-sm text-text-dark">5 мифов о панелях</p>
+                                        <p class="text-xs text-text-muted font-mono">Instagram • Карусель</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-sm font-bold text-success">3.2K</p>
+                                    <p class="text-xs text-text-muted">охват</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: FRANCHISES -->
+            <div id="view-franchises" class="view-section">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-admin-card rounded-md p-5 border border-primary/20">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-base font-semibold text-text-dark">Tawan Krabi</h3>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-primary/20 text-primary border border-primary/30">Master</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex justify-between text-sm"><span class="text-text-muted">Статус</span><span class="text-success font-medium">Активен</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-text-muted">Постов</span><span class="text-text-dark font-mono">142</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-text-muted">Охват</span><span class="text-text-dark font-mono">142.5K</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-admin-card rounded-md p-5 border border-primary/20">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-base font-semibold text-text-dark">Tawan Phuket</h3>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-secondary/20 text-secondary border border-secondary/30">Franchise</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex justify-between text-sm"><span class="text-text-muted">Статус</span><span class="text-success font-medium">Активен</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-text-muted">Постов</span><span class="text-text-dark font-mono">68</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-text-muted">Охват</span><span class="text-text-dark font-mono">54.2K</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-admin-card rounded-md p-5 border border-primary/20 opacity-75">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-base font-semibold text-text-dark">Tawan Bangkok</h3>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-text-muted/20 text-text-muted border border-text-muted/20">Draft</span>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex justify-between text-sm"><span class="text-text-muted">Статус</span><span class="text-warning font-medium">Настройка</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-text-muted">Постов</span><span class="text-text-dark font-mono">0</span></div>
+                            <div class="flex justify-between text-sm"><span class="text-text-muted">Охват</span><span class="text-text-muted font-mono">—</span></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-admin-card rounded-md border border-primary/10">
+                    <div class="p-5 border-b border-primary/10">
+                        <h3 class="text-sm font-semibold text-text-dark">Глобальный контент (Global Posts)</h3>
+                        <p class="text-xs text-text-muted mt-1">Посты, созданные Master и доступные всем франчайзи</p>
+                    </div>
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-primary/10 text-left">
+                                <th class="p-4 text-xs font-mono text-text-muted uppercase tracking-wider">Название</th>
+                                <th class="p-4 text-xs font-mono text-text-muted uppercase tracking-wider">Тип</th>
+                                <th class="p-4 text-xs font-mono text-text-muted uppercase tracking-wider">Дата</th>
+                                <th class="p-4 text-xs font-mono text-text-muted uppercase tracking-wider">Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-primary/10 hover:bg-primary/5 transition-colors">
+                                <td class="p-4 text-text-dark">5 мифов о солнечных панелях в сезон дождей</td>
+                                <td class="p-4"><span class="px-2 py-0.5 rounded text-[10px] font-mono bg-secondary/20 text-secondary border border-secondary/30">Carousel</span></td>
+                                <td class="p-4 text-text-muted font-mono">09 Июн 2026</td>
+                                <td class="p-4"><span class="text-xs text-success">● Опубликовано</span></td>
+                            </tr>
+                            <tr class="border-b border-primary/10 hover:bg-primary/5 transition-colors">
+                                <td class="p-4 text-text-dark">Гайд: Выбор инвертора для тропического климата</td>
+                                <td class="p-4"><span class="px-2 py-0.5 rounded text-[10px] font-mono bg-primary/20 text-primary border border-primary/30">Article</span></td>
+                                <td class="p-4 text-text-muted font-mono">18 Июн 2026</td>
+                                <td class="p-4"><span class="text-xs text-warning">● В работе</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- VIEW: SETTINGS -->
+            <div id="view-settings" class="view-section">
+                <div class="max-w-3xl mx-auto space-y-6">
+                    <div class="bg-admin-card rounded-md border border-primary/10 p-6">
+                        <h3 class="text-sm font-semibold text-text-dark mb-4">Бренд-настройки (Заблокировано для франчайзи)</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-mono text-text-muted uppercase tracking-wider mb-1.5">Основной цвет</label>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded bg-primary border border-primary/30"></div>
+                                    <input type="text" value="#10b981" class="flex-1 bg-admin-bg border border-primary/20 rounded-md px-3 py-2 text-sm text-text-dark font-mono focus:outline-none focus:border-primary">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-mono text-text-muted uppercase tracking-wider mb-1.5">Вторичный цвет</label>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded bg-secondary border border-secondary/30"></div>
+                                    <input type="text" value="#f59e0b" class="flex-1 bg-admin-bg border border-primary/20 rounded-md px-3 py-2 text-sm text-text-dark font-mono focus:outline-none focus:border-primary">
+                                </div>
+                            </div>
+                            <div class="col-span-2">
+                                <label class="block text-xs font-mono text-text-muted uppercase tracking-wider mb-1.5">Tone of Voice по умолчанию</label>
+                                <select class="w-full bg-admin-bg border border-primary/20 rounded-md px-3 py-2.5 text-sm text-text-dark focus:outline-none focus:border-primary">
+                                    <option>Профессиональный, авторитетный, регионально-ориентированный</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-admin-card rounded-md border border-primary/10 p-6">
+                        <h3 class="text-sm font-semibold text-text-dark mb-4">Интеграции платформ</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-admin-bg rounded border border-primary/10">
+                                <div class="flex items-center gap-3">
+                                    <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                                    <span class="text-sm text-text-dark">Facebook Pages</span>
+                                </div>
+                                <span class="px-2 py-1 rounded text-[10px] font-mono bg-success/20 text-success border border-success/30">Подключено</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-admin-bg rounded border border-primary/10">
+                                <div class="flex items-center gap-3">
+                                    <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                    <span class="text-sm text-text-dark">Instagram Business</span>
+                                </div>
+                                <span class="px-2 py-1 rounded text-[10px] font-mono bg-success/20 text-success border border-success/30">Подключено</span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-admin-bg rounded border border-primary/10">
+                                <div class="flex items-center gap-3">
+                                    <svg class="w-5 h-5 text-danger" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                                    <span class="text-sm text-text-dark">TikTok for Business</span>
+                                </div>
+                                <button class="px-3 py-1.5 rounded text-[10px] font-mono bg-primary/20 text-primary border border-primary/30 hover:bg-primary/30">Подключить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- New Post Modal -->
+    <div id="newPostModal" class="fixed inset-0 bg-admin-bg/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-admin-card w-full max-w-2xl rounded-md border border-primary/20 shadow-2xl flex flex-col max-h-[90vh]">
+            <div class="flex items-center justify-between p-6 border-b border-primary/10">
+                <h2 class="text-lg font-semibold text-text-dark">Создать новый контент</h2>
+                <button onclick="closeModal()" class="text-text-muted hover:text-text-dark transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-4">
+                <div>
+                    <label class="block text-xs font-mono text-text-muted uppercase tracking-wider mb-1.5">Тема / Заголовок</label>
+                    <input type="text" class="w-full bg-admin-bg border border-primary/20 rounded-md px-3 py-2.5 text-sm text-text-dark focus:outline-none focus:border-primary transition-colors" placeholder="Например: Кейс установки на 50кВт">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-mono text-text-muted uppercase tracking-wider mb-1.5">Тип контента</label>
+                        <select class="w-full bg-admin-bg border border-primary/20 rounded-md px-3 py-2.5 text-sm text-text-dark focus:outline-none focus:border-primary transition-colors">
+                            <option>Video</option><option>Post</option><option>Carousel</option><option>Story</option><option>Article</option><option>Ad</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono text-text-muted uppercase tracking-wider mb-1.5">Платформа</label>
+                        <select class="w-full bg-admin-bg border border-primary/20 rounded-md px-3 py-2.5 text-sm text-text-dark focus:outline-none focus:border-primary transition-colors">
+                            <option>Facebook</option><option>Instagram</option><option>TikTok</option><option>LINE</option><option>Blog</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-mono text-text-muted uppercase tracking-wider mb-1.5">Описание / Сценарий</label>
+                    <textarea rows="4" class="w-full bg-admin-bg border border-primary/20 rounded-md px-3 py-2.5 text-sm text-text-dark focus:outline-none focus:border-primary transition-colors resize-none" placeholder="Краткое описание содержания..."></textarea>
+                </div>
+            </div>
+            <div class="p-6 border-t border-primary/10 flex items-center justify-end gap-3">
+                <button onclick="closeModal()" class="px-4 py-2.5 rounded-md text-sm font-medium text-text-muted hover:text-text-dark hover:bg-primary/10 transition-colors">Отмена</button>
+                <button onclick="closeModal()" class="px-4 py-2.5 rounded-md bg-primary text-admin-bg text-sm font-semibold hover:bg-success transition-colors shadow-lg shadow-primary/20">Создать задачу</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const viewTitles = {
+            'overview': 'Обзор',
+            'calendar': 'Календарь',
+            'pipeline': 'Конвейер',
+            'research': 'Исследования',
+            'ai-generator': 'AI Генератор',
+            'library': 'Медиатека',
+            'publishing': 'Очередь публикаций',
+            'analytics': 'Аналитика',
+            'franchises': 'Франчайзи',
+            'settings': 'Настройки'
+        };
+
+        function switchView(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            document.getElementById('view-' + viewId).classList.add('active');
+            
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.querySelector(`.nav-item[data-view="${viewId}"]`).classList.add('active');
+            
+            document.getElementById('page-title').textContent = viewTitles[viewId] || 'TawanPost';
+        }
+
+        function openModal() { document.getElementById('newPostModal').classList.remove('hidden'); }
+        function closeModal() { document.getElementById('newPostModal').classList.add('hidden'); }
+        document.getElementById('newPostModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+            const col = ev.target.closest('.kanban-col');
+            if (col) col.classList.add('drag-over');
+        }
+        function dragHandler(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+            ev.target.style.opacity = '0.5';
+        }
+        function dropHandler(ev) {
+            ev.preventDefault();
+            const data = ev.dataTransfer.getData("text");
+            const draggedElement = document.getElementById(data);
+            const col = ev.target.closest('.kanban-col');
+            if (col && draggedElement) {
+                col.classList.remove('drag-over');
+                draggedElement.style.opacity = '1';
+                col.appendChild(draggedElement);
+            }
+        }
+        document.addEventListener('dragleave', function(ev) {
+            if (ev.target.classList && ev.target.classList.contains('kanban-col')) {
+                ev.target.classList.remove('drag-over');
+            }
+        });
+        document.addEventListener('dragend', function(ev) {
+            ev.target.style.opacity = '1';
+            document.querySelectorAll('.kanban-col').forEach(c => c.classList.remove('drag-over'));
+        });
+    </script>
+</body>
+</html>

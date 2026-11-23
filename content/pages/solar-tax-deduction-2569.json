@@ -1,0 +1,33 @@
+{
+  "slug": "solar-tax-deduction-2569",
+  "lang": "th",
+  "frame": "wrapped",
+  "draft": true,
+  "title": "ลดหย่อนภาษีโซล่าเซลล์ 200,000 บาท (พ.ร.ฎ. 805)",
+  "description": "เงื่อนไขลดหย่อนภาษีโซล่าเซลล์ 200,000 บาท ถึง 31 ธ.ค. 2571 ต้องไม่เกิน 10 kW และต้องใช้ e-Tax Invoice",
+  "blocks": [
+    {
+      "t": "kicker",
+      "v": "TODO SEO-09: kicker"
+    },
+    {
+      "t": "h1",
+      "v": "TODO SEO-09: h1"
+    },
+    {
+      "t": "p",
+      "v": "TODO SEO-09: first paragraph — 1,200 words, lang th"
+    },
+    {
+      "t": "h2",
+      "v": "TODO SEO-09: internal links"
+    },
+    {
+      "t": "ul",
+      "v": [
+        "[โซล่าเซลล์ 5 กิโลวัตต์ — ราคาและสิ่งที่ต้องมีในใบเสนอราคา](/solar-5kw-krabi)",
+        "[โซล่าเซลล์ 10 กิโลวัตต์ — ราคา 1 เฟส vs 3 เฟส](/solar-10kw-krabi)"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<!-- tawanpower-landing-unified v4: unified sec-head rhythm everywhere -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tawan Power — Turn sunlight into savings</title>
+<meta name="description" content="Tawan Power — rooftop solar across Krabi. Free AI assessment, engineer handoff. ติดตั้งโซลาร์เซลล์ในกระบี่. Солнечные панели в Краби.">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  html { scroll-behavior: smooth; }
+  :root { --sp-5: 20px; --layout-w: 1280px; --gutter: clamp(20px, 4vw, 48px); } /* tokens.css skips sp-5; without it every padding/margin using it silently drops */
+  body { margin: 0; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden; }
+  .wrap { max-width: calc(var(--layout-w) + var(--gutter) * 2); margin: 0 auto; padding: 0 var(--gutter); }
+  ::selection { background: rgb(255 138 0 / 0.28); }
+  :lang(th) { letter-spacing: 0 !important; }
+  button { cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; border-radius: 8px; }
+  .skip { position: absolute; left: -9999px; }
+  .skip:focus { left: 12px; top: 12px; background: var(--primary); color: #0f172a; padding: 12px 20px; border-radius: 12px; font-weight: 700; z-index: 300; }
+
+  /* ---------- Header ---------- */
+  .site-header { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(22px) saturate(180%); -webkit-backdrop-filter: blur(22px) saturate(180%); background: color-mix(in srgb, var(--bg) 80%, transparent); border-bottom: 1px solid var(--border); }
+  .bar { display: flex; align-items: center; gap: var(--sp-3); min-height: 76px; padding-top: var(--sp-2); padding-bottom: var(--sp-2); }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--fg); font-weight: var(--weight-extrabold); font-size: 1.05rem; white-space: nowrap; }
+  .logo-mark { width: 42px; height: 42px; border-radius: 16px; background: linear-gradient(135deg, var(--primary), var(--primary-deep)); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1rem; flex: none; box-shadow: 0 8px 20px -6px rgb(234 88 12 / 0.55); }
+  .logo small { display: block; font-size: 11px; font-weight: var(--weight-semibold); color: var(--muted); letter-spacing: 0.04em; }
+  .spacer { flex: 1; }
+  .seg { display: inline-flex; border: 1px solid var(--border-strong); border-radius: var(--radius-pill); padding: 3px; gap: 2px; background: color-mix(in srgb, var(--card) 80%, transparent); }
+  .seg button { border: 0; background: transparent; color: var(--muted); font: inherit; font-weight: 700; font-size: 12px; min-height: 44px; min-width: 44px; padding: 0 var(--sp-3); border-radius: var(--radius-pill); cursor: pointer; letter-spacing: 0.08em; }
+  .seg button[aria-pressed="true"] { background: var(--primary); color: #0f172a; }
+  .theme-btn { width: 44px; height: 44px; flex: none; border-radius: 50%; border: 1px solid var(--border-strong); background: var(--card); color: var(--fg); font-size: 17px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: transform 200ms ease, border-color 200ms ease; }
+  .theme-btn:hover { border-color: var(--primary); transform: rotate(15deg); }
+  .nav--inline { display: none; }
+  nav.nav--strip { display: flex; gap: 2px; overflow-x: auto; padding: var(--sp-1) 0 var(--sp-3); scrollbar-width: none; }
+  nav.nav--strip::-webkit-scrollbar { display: none; }
+  nav.nav--strip a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: var(--weight-semibold); padding: var(--sp-3); white-space: nowrap; border-radius: 8px; }
+  @media (min-width: 1080px) {
+    .nav--inline { display: flex; gap: 2px; margin: 0 auto; }
+    .nav--inline a { color: var(--muted); text-decoration: none; font-size: 13.5px; font-weight: var(--weight-semibold); padding: var(--sp-3) var(--sp-3); border-radius: 12px; white-space: nowrap; letter-spacing: 0.02em; }
+    .nav--inline a:hover { color: var(--fg); background: color-mix(in srgb, var(--primary) 10%, transparent); }
+    nav.nav--strip { display: none; }
+  }
+  .header-cta.btn { min-height: 44px; }
+  @media (max-width: 640px) { .logo small { display: none; } .header-cta { padding: 0 var(--sp-4); } }
+
+  /* ---------- Sections rhythm ---------- */
+  section.block { padding: clamp(56px, 7vw, 90px) 0; position: relative; scroll-margin-top: 84px; }
+  html, body { overflow-x: clip; }
+  .block--alt { background: var(--card-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  section.block--alt, section.block--cream { margin-left: calc((100vw - 100%) / -2); margin-right: calc((100vw - 100%) / -2); padding-left: max(var(--gutter), calc((100vw - var(--layout-w)) / 2)); padding-right: max(var(--gutter), calc((100vw - var(--layout-w)) / 2)); }
+  .block--cream { background: #FFF7ED; border-top: 1px solid #fed7aa; border-bottom: 1px solid #fed7aa; }
+  .dark .block--cream { background: #1c0f02; border-color: #5c3a0e; }
+  .sec-head { margin-bottom: clamp(44px, 5vw, 68px); max-width: 760px; }
+  .sec-head--center { margin-left: auto; margin-right: auto; text-align: center; }
+  .sec-head h2 { font-size: clamp(2rem, 4.2vw, 3.25rem); margin: var(--sp-3) 0 var(--sp-2); line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; }
+  .sec-head h2:lang(th) { letter-spacing: 0; line-height: 1.35; }
+  .kicker { display: inline-flex; align-items: center; gap: var(--sp-2); font-size: 12px; font-weight: var(--weight-bold); letter-spacing: 0.22em; text-transform: uppercase; color: var(--primary-deep); margin: 0 0 var(--sp-3); }
+  .dark .kicker { color: var(--primary); }
+  .kicker::before { content: ""; width: 28px; height: 2px; border-radius: 2px; background: currentColor; opacity: 0.7; }
+  .sec-head--center .kicker::after { content: ""; width: 28px; height: 2px; border-radius: 2px; background: currentColor; opacity: 0.7; }
+  .kicker:lang(th) { letter-spacing: 0; }
+  .lede { color: var(--muted-2); font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.75; margin: 0; max-width: 60ch; }
+  .sec-head--center .lede { margin-left: auto; margin-right: auto; }
+  .dark .lede { color: #e2e8f0; }
+  .grad { background-image: linear-gradient(92deg, #fb923c, #fcd34d 55%, #fb923c); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+  h1, h2 { color: #0f172a; }
+  .dark h1, .dark h2 { color: #ffffff; }
+  .dark { color: var(--fg); }
+  .dark .btn--secondary { border-color: rgb(255 255 255 / 0.22); }
+  .dark .input::placeholder { color: #94a3b8; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: clamp(40px, 5vw, 72px) 0 clamp(56px, 7vw, 90px); position: relative; overflow: clip; }
+  .hero-rays { position: absolute; inset: -12% -8% auto auto; width: min(720px, 80vw); aspect-ratio: 1; pointer-events: none; opacity: 0.12;
+    background: repeating-conic-gradient(from 0deg at 50% 50%, rgb(255 138 0 / 0.6) 0deg 1.1deg, transparent 1.1deg 6deg);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, black 0%, transparent 60%); mask-image: radial-gradient(circle at 50% 50%, black 0%, transparent 60%); }
+  .dark .hero-rays { opacity: 0.08; }
+  .hero-orb { position: absolute; border-radius: 50%; filter: blur(130px); pointer-events: none; }
+  .hero-grid { display: grid; gap: clamp(32px, 5vw, 64px); position: relative; align-items: center; }
+  @media (min-width: 980px) { .hero-grid { grid-template-columns: 1.08fr 0.92fr; } }
+  .hero-grid h1 { font-size: clamp(2.9rem, 6.5vw, 5rem); margin: var(--sp-4) 0; line-height: 1.0; letter-spacing: -0.02em; text-wrap: balance; }
+  .hero-grid h1:lang(th) { letter-spacing: 0; line-height: 1.3; }
+  .hero-grid .sub { font-size: clamp(1.08rem, 1.7vw, 1.32rem); color: var(--muted-2); margin: 0 0 var(--sp-2); max-width: 48ch; line-height: 1.7; }
+  .dark .hero-grid .sub { color: #e2e8f0; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center; margin-top: var(--sp-5); }
+  .btn--lg { min-height: 58px; padding: 0 var(--sp-8); font-size: 1.05rem; }
+  .trust { list-style: none; margin: clamp(28px, 4vw, 44px) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--sp-3) var(--sp-5); font-size: var(--text-sm); font-weight: var(--weight-semibold); }
+  .trust li { display: flex; gap: var(--sp-2); align-items: center; }
+  .trust-ic { width: 34px; height: 34px; flex: none; border-radius: 12px; background: color-mix(in srgb, var(--primary) 13%, var(--card-2)); border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; color: var(--primary-deep); }
+  .dark .trust-ic { color: var(--primary); }
+  .trust-ic svg { width: 16px; height: 16px; }
+  .hero-media { position: relative; }
+  @media (min-width: 980px) {
+    .hero-media { margin-right: calc((100vw - 100%) / -2); }
+    .hero-media .hero-img { border-radius: 32px 0 0 32px; border-right: 0; }
+  }
+  .hero-img { border-radius: 32px; border: 1px solid var(--border); width: 100%; aspect-ratio: 4 / 4.6; object-fit: cover; display: block; background: var(--card-2); box-shadow: var(--shadow-luxe); }
+  @media (min-width: 980px) { .hero-img { aspect-ratio: 4 / 4.4; } }
+  .hero-chip { position: absolute; left: var(--sp-4); bottom: var(--sp-4); display: flex; align-items: center; gap: var(--sp-3); border-radius: 20px; padding: var(--sp-3) var(--sp-5) var(--sp-3) var(--sp-3); background: color-mix(in srgb, var(--card) 82%, transparent); border: 1px solid var(--border); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: var(--shadow-md); }
+  .hero-chip b { font-size: var(--text-2xl); font-weight: var(--weight-extrabold); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .hero-chip span { font-size: var(--text-xs); color: var(--muted); font-weight: var(--weight-semibold); line-height: 1.4; }
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-3); margin-top: clamp(36px, 5vw, 64px); }
+  .metrics > div { border-radius: 20px; background: var(--card); border: 1px solid var(--border); padding: var(--sp-4) var(--sp-2); text-align: center; box-shadow: var(--shadow-sm); }
+  .metrics b { display: block; font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: var(--weight-extrabold); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; background-image: linear-gradient(92deg, var(--primary-deep), #f59e0b); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+  .metrics span { font-size: var(--text-xs); color: var(--muted); font-weight: var(--weight-semibold); }
+
+  /* ---------- Cards & grids ---------- */
+  .grid2 { display: grid; gap: var(--sp-4); }
+  @media (min-width: 760px) { .grid2 { grid-template-columns: 1fr 1fr; gap: var(--sp-5); } }
+  @media (min-width: 1200px) { .grid2 { gap: var(--sp-8); } }
+  .grid3 { display: grid; gap: var(--sp-4); }
+  @media (min-width: 960px) { .grid3 { grid-template-columns: repeat(3, 1fr); gap: var(--sp-5); } }
+  .grid4 { display: grid; gap: var(--sp-4); }
+  @media (min-width: 760px) { .grid4 { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1200px) { .grid4 { grid-template-columns: repeat(4, 1fr); gap: var(--sp-5); } }
+  /* Bento: lead card spans wide with horizontal layout on desktop */
+  @media (min-width: 1200px) {
+    #features .grid4 { grid-template-columns: repeat(3, 1fr); }
+    #features .feat:first-child { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: var(--sp-5); }
+    #features .feat:first-child .feat-ic { width: 64px; height: 64px; flex: none; }
+  }
+  .card { transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease; }
+  .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-luxe); border-color: color-mix(in srgb, var(--primary) 45%, var(--border)); }
+  .pick { display: flex; flex-direction: column; gap: var(--sp-4); padding: clamp(32px, 3.5vw, 48px); }
+  .pick-head { display: flex; align-items: center; gap: var(--sp-3); }
+  .pick-ic { width: 48px; height: 48px; flex: none; display: inline-flex; align-items: center; justify-content: center; border-radius: 16px; background: color-mix(in srgb, var(--primary) 14%, var(--card-2)); border: 1px solid var(--border); color: var(--primary-deep); }
+  .pick-ic svg { width: 24px; height: 24px; }
+  .pick-head h3 { margin: 0; font-size: clamp(1.35rem, 1.1rem + 0.8vw, 1.7rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1.05; }
+  .pick-head h3:lang(th) { letter-spacing: 0; }
+  .pick-head h3 { margin: 0; font-size: var(--text-xl); }
+  .pick-sub { margin: 3px 0 0; font-size: var(--text-sm); font-weight: 800; letter-spacing: 0.16em; color: var(--muted-2); }
+  .dark .pick-sub { color: var(--muted); }
+  .pick-sub:lang(th) { letter-spacing: 0; }
+  .pick .pick-desc { margin: 0; color: var(--muted); line-height: 1.65; font-size: clamp(1rem, 1.5vw, 1.125rem); }
+  .dark .pick-desc { color: #cbd5e1; }
+  .pick ul { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--sp-3); font-size: var(--text-base); font-weight: 600; color: var(--fg); }
+  .pick ul li { display: flex; gap: var(--sp-2); align-items: flex-start; }
+  .pick ul li::before { content: "✓"; color: var(--primary); font-weight: 900; flex: none; }
+  .pick .btn { margin-top: auto; }
+  .pick-ctas { display: grid; gap: var(--sp-2); margin-top: var(--sp-2); }
+  .pick-ctas .btn { margin-top: 0; }
+.tier-strip { display: grid; margin: 0 0 var(--sp-5); border: 1px solid var(--border); border-radius: 20px; background: var(--card); overflow: hidden; }
+.tier-strip__item { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-3); padding: 16px 24px; text-decoration: none; color: inherit; }
+.tier-strip__item + .tier-strip__item { border-top: 1px solid var(--border); }
+.tier-strip__item:hover { background: color-mix(in srgb, var(--primary) 7%, transparent); }
+.tier-strip__item .t-price { font-weight: 800; font-size: 1.2rem; color: var(--primary-deep); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.tier-strip__item .t-name { font-weight: 700; color: var(--muted, inherit); }
+@media (min-width: 760px) { .tier-strip { grid-template-columns: repeat(3, 1fr); } .tier-strip__item { flex-direction: column; align-items: flex-start; gap: 4px; padding: 20px 24px; } .tier-strip__item + .tier-strip__item { border-top: 0; border-left: 1px solid var(--border); } }
+  .pick--biz { background: linear-gradient(165deg, #2d1a04, #1a0e00); border-color: rgb(255 138 0 / 0.35); color: #fff7ed; box-shadow: var(--shadow-luxe); position: relative; }
+  .pick--biz::before { content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; background: linear-gradient(135deg, var(--primary), transparent 40%, transparent 60%, var(--primary)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0.5; pointer-events: none; }
+  .pick--biz h3 { color: #fff; }
+  .pick--biz .pick-ic { background: rgb(255 138 0 / 0.16); border-color: rgb(255 138 0 / 0.4); color: var(--primary); }
+  .pick--biz .pick-sub { color: var(--warning); }
+  .pick--biz .pick-desc { color: #fdba74; }
+  .dark .pick--biz .pick-desc { color: var(--warning); }
+  .pick--biz ul { color: #e7e5e4; }
+  .pick--biz ul li::before { color: var(--primary); }
+  .pick--biz .btn--secondary { border-color: rgb(255 255 255 / 0.25); color: #fff7ed; }
+  /* Product cards (catalog demo) */
+  .pills { display: flex; gap: var(--sp-2); flex-wrap: wrap; justify-content: center; margin: var(--sp-5) 0 var(--sp-4); }
+  .pills button { min-height: 44px; padding: 0 var(--sp-4); border-radius: var(--radius-pill); border: 1.5px solid var(--border-strong); background: var(--card); color: var(--muted); font: inherit; font-size: var(--text-xs); font-weight: var(--weight-bold); cursor: pointer; letter-spacing: 0.06em; }
+  .pills button[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: #0f172a; }
+  .products { display: grid; gap: var(--sp-4); margin-top: var(--sp-5); }
+  @media (min-width: 760px) { .products { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1100px) { .products { grid-template-columns: repeat(4, 1fr); } }
+  .product { display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-4); }
+  .product--rich { padding: 0; overflow: hidden; }
+  .product-photo { position: relative; aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; background: #fff; border-bottom: 1px solid var(--border); color: var(--primary-deep); }
+  .dark .product-photo { color: var(--primary); }
+  .product-photo svg { width: 52px; height: 52px; }
+  .product-photo .badge { position: absolute; top: 12px; left: 12px; z-index: 1; }
+.product-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.product-photo .kit-photo { object-fit: contain; padding: 20px; background: #fff; }
+.product-photo .brand-mark { position: absolute; top: 12px; right: 12px; left: auto; z-index: 1; height: 26px; width: auto; max-width: 96px; object-fit: contain; background: #fff; border-radius: 8px; padding: 3px 8px; box-shadow: 0 2px 10px rgb(2 6 23 / 0.1); }
+.kit-sub { color: var(--muted-2); font-size: 0.92rem; margin: -4px 0 12px; }
+  /* crew hero (uni-hero): rotating collage desktop + snap carousel mobile */
+  .ch-hero { position: relative; }
+  .ch-grid h1 { font-size: clamp(2.6rem, 1rem + 5vw, 5rem); line-height: 1.0; letter-spacing: -0.03em; text-wrap: balance; }
+  @media (max-width: 899px) { .ch-grid h1 { padding-right: clamp(64px, 22vw, 86px); } }
+  .ch-hero .display .hl { background: linear-gradient(transparent 62%, rgb(255 138 0 / 0.5) 62%); }
+  .ch-grid { display: grid; gap: 32px; }
+  .stamp { position: absolute; top: 30px; right: 10px; width: 74px; height: 74px; animation: ch-settle 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 1; z-index: 3; }
+  @keyframes ch-settle { from { transform: rotate(-40deg) scale(0.8); opacity: 0; } }
+  .collage { display: none; }
+  .strip-wrap { margin-top: 32px; }
+  .strip { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px 0 12px; }
+  .strip::-webkit-scrollbar { display: none; }
+  .slide { position: relative; flex: 0 0 78vw; max-width: 340px; scroll-snap-align: center; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); background: var(--card); aspect-ratio: 4 / 5; }
+  .slide img { width: 100%; height: 100%; object-fit: cover; }
+  .slide figcaption, .frame figcaption { position: absolute; left: 10px; bottom: 10px; font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: 0.1em; background: rgb(2 6 23 / 0.78); color: #fff; padding: 4px 8px; border-radius: 32px; }
+  .dots { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 12px; }
+  .dots i { width: 7px; height: 7px; border-radius: 50%; background: #cbd5e1; transition: all 0.25s; }
+  .dots i.on { width: 24px; border-radius: 32px; background: var(--primary-deep); }
+  .count { text-align: center; margin-top: 8px; font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: 0.14em; color: var(--muted-2); font-variant-numeric: tabular-nums; }
+  @media (min-width: 900px) {
+    .ch-grid { grid-template-columns: 1fr 1fr; align-items: center; gap: 40px; }
+    .stamp { top: -58px; right: 4px; width: 124px; height: 124px; filter: drop-shadow(0 14px 26px rgb(2 6 23 / 0.3)); }
+    .stamp { top: -14px; right: 6px; width: 120px; height: 120px; }
+    .collage { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .frame { position: relative; overflow: hidden; border-radius: 20px; border: 1px solid var(--border); background: var(--card); }
+    .frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.1s ease; }
+    .frame img.on { opacity: 1; }
+    .frame.f1 { aspect-ratio: 4 / 5; transform: rotate(-1.6deg); }
+    .frame.f2 { aspect-ratio: 1 / 1; margin-top: 32px; transform: rotate(1.4deg); }
+    .frame.f3 { aspect-ratio: 1 / 1; margin-top: -30px; transform: rotate(1deg); background: #eef2f7; }
+    .frame.f4 { aspect-ratio: 4 / 5; transform: rotate(-1.2deg); }
+    .frame figcaption { transition: opacity 0.4s; z-index: 2; }
+    .frame figcaption.swap { opacity: 0; }
+    .strip-wrap { display: none; }
+  }
+  .dark .frame, .dark .slide { background: #0f172a; border-color: #1e293b; }
+  .dark .dots i { background: #334155; }
+  .product-body { display: flex; flex-direction: column; gap: var(--sp-3); padding: var(--sp-5); flex: 1; }
+  .product-body h3 { margin: var(--sp-2) 0 0; font-size: var(--text-lg); }
+  .product-price-row { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--sp-2); border-bottom: 1px solid var(--border); padding-bottom: var(--sp-3); }
+  .lbl { display: block; font-size: 9px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary-deep); margin-bottom: 4px; }
+  .dark .lbl { color: var(--primary); }
+  .full-price { display: block; font-size: clamp(1.6rem, 2.4vw, 2rem); font-weight: 900; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .inst-note { display: block; font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .save { text-align: right; }
+  .save .lbl { margin-bottom: 4px; }
+  .save i { font-style: italic; font-weight: 800; font-size: var(--text-lg); color: var(--primary-deep); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .dark .save i { color: var(--primary); }
+  .save small { font-size: 9px; font-style: normal; opacity: 0.6; }
+  .product-inst { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); border-radius: var(--radius-base); background: var(--card-2); border: 1px solid var(--border); padding: var(--sp-3); }
+  .product-inst b { font-variant-numeric: tabular-nums; font-size: var(--text-base); }
+  .product-inst span span { display: block; font-size: 9px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+  .roi { font-size: 9px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--primary-deep); background: var(--card); border: 1px solid var(--border-strong); border-radius: 32px; padding: var(--sp-1) var(--sp-2); white-space: nowrap; }
+  .dark .roi { color: var(--primary); }
+  .btn--block { width: 100%; margin-top: auto; }
+  .product h3 { margin: var(--sp-1) 0 0; font-size: var(--text-base); }
+  .product .btn { margin-top: auto; }
+  .feat { display: flex; flex-direction: column; gap: var(--sp-3); padding: clamp(24px, 3vw, 32px); }
+  .feat-ic { width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 18%, var(--card-2)), var(--card-2)); border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; font-weight: 900; font-size: 20px; color: var(--primary-deep); }
+  .dark .feat-ic { color: var(--primary); }
+  .feat-ic svg { width: 24px; height: 24px; }
+  .feat h3 { margin: var(--sp-1) 0 0; font-size: var(--text-lg); }
+  .feat p { margin: 0; color: var(--muted); font-size: var(--text-sm); line-height: 1.7; }
+  .dark .feat p { color: #cbd5e1; }
+
+  /* Cases */
+  .case-img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: var(--radius-base); border: 1px solid var(--border); display: block; background: var(--card-2); margin-bottom: var(--sp-3); }
+  .case-meta { display: flex; gap: var(--sp-2); flex-wrap: wrap; margin-bottom: var(--sp-2); }
+  .case-stats { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2); margin: var(--sp-5) 0 var(--sp-4); border-radius: var(--radius-base); background: var(--card-2); border: 1px solid var(--border); padding: var(--sp-4); }
+  .case-stats div span { display: block; font-size: 10px; font-weight: var(--weight-bold); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .case-stats div b { font-size: var(--text-xl); font-weight: var(--weight-extrabold); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; background-image: linear-gradient(92deg, var(--primary-deep), #f59e0b); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+  #cases .card .btn { margin-top: var(--sp-3); }
+  .card h3 { font-size: var(--text-xl); margin: 0 0 var(--sp-1); }
+  .card p { color: var(--muted); font-size: var(--text-sm); line-height: 1.7; margin: 0; }
+  .dark .card p { color: #cbd5e1; }
+  article.card { padding: clamp(20px, 2.5vw, 28px); }
+
+  /* SigenStor */
+  .sigen { background: linear-gradient(160deg, #0b1226 0%, #020617 55%, #1a0e00 130%); color: #f8fafc; border: 1px solid #334155; border-radius: clamp(28px, 4vw, 56px); padding: clamp(32px, 5vw, 72px); box-shadow: 0 40px 100px -30px rgb(255 138 0 / 0.4); position: relative; overflow: hidden; }
+  @media (min-width: 980px) {
+    #sigen .sigen { margin-left: calc((100vw - 100%) / -2); margin-right: calc((100vw - 100%) / -2); border-radius: 0; border-left: 0; border-right: 0; padding-left: max(var(--gutter), calc((100vw - var(--layout-w)) / 2)); padding-right: max(var(--gutter), calc((100vw - var(--layout-w)) / 2)); }
+  }
+  .sigen::before { content: ""; position: absolute; inset: auto -120px -160px auto; width: 480px; height: 480px; border-radius: 50%; background: rgb(255 138 0 / 0.14); filter: blur(40px); pointer-events: none; }
+  .sigen h2 { color: #ffffff; font-size: clamp(2rem, 4.2vw, 3.25rem); margin: var(--sp-3) 0 var(--sp-2); line-height: 1.08; letter-spacing: -0.02em; }
+  .sigen .kicker { color: #f59e0b; }
+  .sigen .lede { color: #e2e8f0; }
+  .sigen-grid { display: grid; gap: var(--sp-6); position: relative; }
+  @media (min-width: 960px) { .sigen-grid { grid-template-columns: 1fr 1fr; align-items: center; gap: var(--sp-8); } }
+  .sigen-img { width: 100%; min-height: 560px; aspect-ratio: 4 / 5; object-fit: contain; background: #000; border-radius: 28px; border: 1px solid rgb(255 255 255 / 0.14); display: block; box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.7); }
+  .five { display: grid; margin: var(--sp-5) 0; padding: 0; list-style: none; }
+  .five li { display: flex; gap: var(--sp-3); align-items: center; border-bottom: 1px solid rgb(255 255 255 / 0.09); padding: var(--sp-4) 0; font-size: var(--text-base); }
+  .five li:last-child { border-bottom: 0; }
+  .five b { color: #ff8a00; font-variant-numeric: tabular-nums; min-width: 30px; font-size: var(--text-xs); letter-spacing: 0.1em; }
+  /* Sigen metrics + hotspots */
+  .sigen-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-2); margin-top: var(--sp-5); padding-top: var(--sp-4); border-top: 1px solid rgb(255 255 255 / 0.1); }
+  @media (max-width: 640px) { .sigen-metrics { grid-template-columns: repeat(2, 1fr); } }
+  .sigen-metrics > div { min-width: 0; }
+  .sigen-metrics b { display: block; font-size: clamp(1.05rem, 1.9vw, 1.6rem); font-weight: var(--weight-extrabold); color: #fff; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; white-space: nowrap; }
+  .sigen-metrics span { font-size: 11px; color: #94a3b8; font-weight: var(--weight-semibold); letter-spacing: 0.08em; text-transform: uppercase; }
+  .sigen-media { position: relative; }
+  .hotspot { position: absolute; display: flex; align-items: center; gap: 8px; z-index: 2; }
+  .hotspot i { width: 14px; height: 14px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 0 5px rgb(255 138 0 / 0.25), 0 0 16px rgb(255 138 0 / 0.7); flex: none; animation: hotpulse 2.4s ease-in-out infinite; font-style: normal; }
+  @keyframes hotpulse { 0%, 100% { box-shadow: 0 0 0 5px rgb(255 138 0 / 0.25), 0 0 16px rgb(255 138 0 / 0.7); } 50% { box-shadow: 0 0 0 9px rgb(255 138 0 / 0.12), 0 0 16px rgb(255 138 0 / 0.7); } }
+  .hotspot span { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; background: rgb(2 6 23 / 0.82); border: 1px solid rgb(255 255 255 / 0.16); color: #fff; padding: var(--sp-2) var(--sp-3); border-radius: 12px; backdrop-filter: blur(8px); white-space: nowrap; }
+  @media (prefers-reduced-motion: reduce) { .hotspot i { animation: none; } }
+
+  /* Steps */
+  .step { text-align: left; padding: clamp(28px, 3.5vw, 40px); position: relative; overflow: hidden; display: flex; flex-direction: column; gap: var(--sp-2); }
+  #steps .cta-row { justify-content: center; margin-top: var(--sp-8); }
+  .step-num { font-size: clamp(3.5rem, 6vw, 5rem); font-weight: var(--weight-black, 900); line-height: 1; background-image: linear-gradient(180deg, var(--primary), transparent 130%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; font-variant-numeric: tabular-nums; }
+  .step-top { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-3); }
+  .step-ic { width: 52px; height: 52px; flex: none; border-radius: 16px; background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 18%, var(--card-2)), var(--card-2)); border: 1px solid var(--border); display: inline-flex; align-items: center; justify-content: center; color: var(--primary-deep); }
+  .dark .step-ic { color: var(--primary); }
+  .step-ic svg { width: 24px; height: 24px; }
+  .step h3 { margin: var(--sp-3) 0 var(--sp-2); font-size: var(--text-xl); }
+  .step p { margin: 0; font-size: var(--text-sm); color: var(--muted); line-height: 1.7; }
+  .dark .step p { color: #cbd5e1; }
+
+  /* Tabs / QA */
+  .tabs-wrap { display: flex; justify-content: center; margin-bottom: var(--sp-5); }
+  .tabs { display: inline-flex; gap: 4px; flex-wrap: wrap; justify-content: center; max-width: 100%; padding: 4px; border-radius: var(--radius-pill); border: 1px solid var(--border); background: var(--card); }
+  .tabs button { min-height: 44px; padding: 0 var(--sp-5); border-radius: var(--radius-pill); border: 0; background: transparent; color: var(--muted); font: inherit; font-size: var(--text-sm); font-weight: var(--weight-bold); cursor: pointer; }
+  .tabs button[aria-selected="true"] { background: var(--primary); color: #0f172a; box-shadow: 0 6px 18px -6px rgb(234 88 12 / 0.6); }
+  .tabpanel { display: none; }
+  .tabpanel.is-active { display: grid; gap: var(--sp-3); }
+  @media (min-width: 860px) { .tabpanel.is-active { grid-template-columns: 1fr 1fr; } }
+  .qa { padding: var(--sp-5); display: grid; gap: var(--sp-2); }
+  .qa h3 { margin: 0 0 var(--sp-2); font-size: var(--text-base); }
+  .qa p { margin: 0; font-size: var(--text-sm); }
+  .qa p.dim { color: var(--muted); }
+
+  /* Trust */
+  .brands { display: grid; gap: var(--sp-3); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+@media (max-width: 699px) {
+  .brands { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 calc(var(--gutter) * -1); padding: 4px var(--gutter) 12px; }
+  .brands::-webkit-scrollbar { display: none; }
+  .brands .badge { flex: 0 0 78vw; max-width: 320px; scroll-snap-align: center; }
+}
+.brands > * { min-width: 0; }
+.brands .badge { min-height: 88px; font-size: 1.1rem; padding: 0 var(--sp-4); letter-spacing: 0.04em; justify-content: center; overflow: hidden; white-space: nowrap; }
+.brand-logo img { height: 48px; width: auto; max-width: 110px; object-fit: contain; flex: none; }
+  .brand-logo { gap: var(--sp-2); }
+
+  /* Contact */
+  .lead { border-radius: clamp(28px, 4vw, 48px); box-shadow: var(--shadow-luxe); overflow: hidden; }
+  .lead-grid { display: grid; gap: var(--sp-6); align-items: start; }
+  @media (min-width: 960px) { .lead-grid { grid-template-columns: 1fr 1fr; gap: var(--sp-8); } }
+  .lead-form-side { padding: clamp(28px, 4vw, 56px); }
+  .form-grid { display: grid; gap: var(--sp-4); }
+  .info { margin-top: var(--sp-5); font-size: var(--text-sm); display: grid; gap: var(--sp-2); color: var(--muted); }
+  .info strong { color: var(--fg); font-size: var(--text-lg); font-variant-numeric: tabular-nums; }
+  .privacy { font-size: var(--text-xs); color: var(--muted); margin: var(--sp-3) 0 0; line-height: 1.7; }
+  .success { display: none; text-align: center; padding: var(--sp-6); }
+  .success.is-show { display: block; }
+  .success p { margin-top: var(--sp-3); }
+
+  /* Footer */
+  footer.site-footer { background: #020617; color: #f8fafc; border-top: 1px solid rgb(255 255 255 / 0.06); width: 100%; max-width: none; margin: 0; border-radius: 0; padding: clamp(48px, 6vw, 80px) 0 48px; position: relative; overflow: hidden; }
+  footer.site-footer::before { content: ""; position: absolute; top: -140px; right: -140px; width: 440px; height: 440px; border-radius: 50%; background: rgb(255 138 0 / 0.07); filter: blur(110px); pointer-events: none; }
+  .foot-cta { text-align: center; padding: clamp(56px, 7vw, 96px) clamp(24px, 4vw, 56px); border-radius: clamp(28px, 4vw, 56px); background: linear-gradient(120deg, #ea580c 0%, #f59e0b 60%, #ea580c 100%); color: #0f172a; border: 0; box-shadow: 0 40px 100px -30px rgb(234 88 12 / 0.45); position: relative; overflow: hidden; margin: 0 0 clamp(40px, 5vw, 72px); }
+  .foot-cta::before { content: ""; position: absolute; inset: -40% -10% auto auto; width: 560px; height: 560px; border-radius: 50%; background: rgb(255 255 255 / 0.16); filter: blur(20px); pointer-events: none; }
+  .foot-cta > * { position: relative; max-width: 880px; margin-left: auto; margin-right: auto; }
+  .foot-cta h2 { font-size: clamp(2rem, 4.2vw, 3.25rem); margin: var(--sp-3) 0 var(--sp-5); color: #0f172a; line-height: 1.08; letter-spacing: -0.02em; }
+  .foot-cta h2 .grad { background-image: linear-gradient(92deg, #0f172a, #431407); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+  .foot-cta .kicker { color: #431407; }
+  .foot-cta .btn--primary { background: #0f172a; color: #fff; box-shadow: 0 20px 45px -12px rgb(0 0 0 / 0.45); }
+  .foot-cta .btn--primary:hover { background: #1e293b; color: #fff; }
+  .foot-qr-mini { width: 70px; height: 70px; flex: none; margin-left: auto; border-radius: 16px; border: 1px solid var(--border); background: #fff; display: block; }
+  .btn--line { background: #06c755; color: #fff; }
+  .btn--line:hover { background: #05a847; color: #fff; }
+  .foot-grid { display: grid; gap: var(--sp-6); margin-bottom: var(--sp-8); position: relative; }
+  @media (min-width: 900px) { .foot-grid { grid-template-columns: 4fr 2fr 2fr 4fr; gap: var(--sp-5); } }
+  .foot-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .foot-mark { width: 48px; height: 48px; flex: none; border-radius: 16px; background: var(--primary-deep); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 900; font-size: 24px; box-shadow: 0 12px 30px -8px rgb(234 88 12 / 0.5); }
+  .foot-brand b { display: block; font-size: 22px; font-weight: 900; letter-spacing: -0.02em; text-transform: uppercase; line-height: 1; color: #fff; }
+  .foot-brand small { display: block; font-size: 10px; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.3em; margin-top: var(--sp-1); }
+  .foot-tag { color: #94a3b8; font-size: var(--text-sm); line-height: 1.75; margin: var(--sp-4) 0 0; max-width: 34ch; }
+  .foot-col h4 { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.2em; color: var(--primary); margin: 0 0 var(--sp-3); }
+  .foot-col a { display: block; color: #94a3b8; text-decoration: none; font-size: var(--text-sm); font-weight: var(--weight-semibold); padding: var(--sp-2) 0; min-height: 44px; line-height: 1.45; }
+  .foot-col a:hover { color: #fff; }
+  .foot-contact-card { background: transparent; border: 0; border-radius: 0; padding: 0; box-shadow: none; }
+  .foot-contact-card h4 { color: #fcd34d; }
+  .foot-contact-row { display: flex; align-items: center; gap: var(--sp-3); text-decoration: none; margin-top: var(--sp-3); }
+  .foot-contact-ic { width: 40px; height: 40px; flex: none; border-radius: 12px; background: rgb(234 88 12 / 0.2); color: #fb923c; display: inline-flex; align-items: center; justify-content: center; }
+  .foot-contact-ic svg { width: 18px; height: 18px; }
+  .foot-contact-row small { display: block; font-size: 10px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.14em; }
+  .foot-contact-row b { display: block; font-size: var(--text-base); font-weight: 800; color: #fff; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+  /* Contact bullets stack vertically (trust row stays horizontal in hero) */
+  #contact .trust { flex-direction: column; align-items: stretch; gap: var(--sp-3); }
+  #contact .trust li { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: var(--sp-3) var(--sp-4); font-size: var(--text-base); }
+  #contact .trust-ic { width: 40px; height: 40px; border-radius: 16px; }
+  #contact .trust-ic svg { width: 19px; height: 19px; }
+  .foot-base { color: var(--muted); font-size: var(--text-sm); display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-5); justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: var(--sp-4); margin-top: var(--sp-5); }
+  /* Sticky AI bar (mirrors production) */
+  .ai-bar { position: fixed; left: 0; right: 0; bottom: max(20px, env(safe-area-inset-bottom)); z-index: 90; padding: 0 var(--sp-4); pointer-events: none; }
+  .ai-bar-inner { max-width: 672px; margin: 0 auto; pointer-events: auto; display: flex; align-items: center; gap: 12px; border-radius: 24px; padding: 12px 12px 12px 28px; background: rgb(12 10 6 / 0.88); border: 1px solid rgb(255 138 0 / 0.45); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 20px 60px -12px rgb(0 0 0 / 0.5); text-decoration: none; }
+  .ai-bar-text { flex: 1; min-width: 0; }
+  .ai-bar-text small { display: block; font-size: 10px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: #fb923c; margin-bottom: 4px; }
+  .ai-bar-text b { display: block; font-size: 15px; font-weight: 700; color: rgb(255 255 255 / 0.85); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ai-bar-mic { width: 44px; height: 44px; flex: none; border: 0; background: transparent; color: rgb(255 255 255 / 0.6); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; border-radius: 16px; }
+  .ai-bar-mic svg { width: 24px; height: 24px; }
+  .ai-bar-send { width: 52px; height: 52px; flex: none; border: 0; border-radius: 50%; background: var(--primary-deep); color: #fff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 10px 26px -6px rgb(234 88 12 / 0.7); }
+  .ai-bar-send svg { width: 22px; height: 22px; }
+  body { padding-bottom: 0; }
+
+  /* Scroll reveal */
+  /* Scroll reveal: hidden ONLY when JS is running (progressive enhancement —
+     no-JS or no-IntersectionObserver still shows all content) */
+  .js .rv { opacity: 0; transform: translateY(28px); transition: opacity 300ms cubic-bezier(0.16,1,0.3,1), transform 300ms cubic-bezier(0.16,1,0.3,1); }
+  .js .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .rv { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-en="Skip to content" data-ru="Перейти к содержанию" data-th="ข้ามไปยังเนื้อหา" lang="en">Skip to content</a>
+
+<header class="site-header" data-od-id="uni-header">
+  <div class="wrap bar">
+    <a class="logo" href="#top" aria-label="Tawan Power — home"><span class="logo-mark" aria-hidden="true">S1</span><span lang="en">Tawan Power <small data-en="Krabi · Solar installer" data-ru="Краби · Солнечные станции" data-th="กระบี่ · ติดตั้งโซลาร์" lang="en">Krabi · Solar installer</small></span></a>
+    <nav class="nav nav--inline" aria-label="Sections" data-od-id="uni-nav-desktop">
+      <a href="#segments" data-en="Solutions" data-ru="Решения" data-th="โซลูชัน" lang="en">Solutions</a>
+      <a href="#systems" data-en="Catalog" data-ru="Каталог" data-th="แค็ตตาล็อก" lang="en">Catalog</a>
+      <a href="#cases" data-en="Work" data-ru="Работы" data-th="ผลงาน" lang="en">Work</a>
+      <a href="#sigen" data-en="5-in-1" data-ru="5-в-1" data-th="5-อิน-วัน" lang="en">5-in-1</a>
+      <a href="#steps" data-en="Process" data-ru="Процесс" data-th="ขั้นตอน" lang="en">Process</a>
+      <a href="#knowledge" data-en="Blog" data-ru="Блог" data-th="บล็อก" lang="en">Blog</a>
+    </nav>
+    <div class="spacer"></div>
+    <button type="button" class="theme-btn" id="localeBtn" aria-label="Language">EN</button>
+    <button type="button" class="theme-btn" data-theme-btn="toggle" aria-label="Toggle theme" aria-pressed="false">☾</button>
+    <a class="btn btn--secondary btn--sm header-cta" href="#contact" data-en="Free assessment" data-ru="Бесплатная оценка" data-th="ประเมินฟรี" lang="en">Free assessment</a>
+  </div>
+  <div class="wrap"><nav class="nav nav--strip" aria-label="Sections" data-od-id="uni-nav">
+    <a href="#segments" data-en="Solutions" data-ru="Решения" data-th="โซลูชัน" lang="en">Solutions</a>
+    <a href="#systems" data-en="Catalog" data-ru="Каталог" data-th="แค็ตตาล็อก" lang="en">Catalog</a>
+    <a href="#cases" data-en="Work" data-ru="Работы" data-th="ผลงาน" lang="en">Work</a>
+    <a href="#sigen" data-en="5-in-1" data-ru="5-в-1" data-th="5-อิน-วัน" lang="en">5-in-1</a>
+    <a href="#systems" data-en="Pricing" data-ru="Цены" data-th="ราคา" lang="en">Pricing</a>
+    <a href="#knowledge" data-en="Knowledge" data-ru="База знаний" data-th="ความรู้" lang="en">Knowledge</a>
+    <a href="#steps" data-en="Process" data-ru="Процесс" data-th="ขั้นตอน" lang="en">Process</a>
+    <a href="#knowledge" data-en="Blog" data-ru="Блог" data-th="บล็อก" lang="en">Blog</a>
+    <a href="#cases" data-en="Cases" data-ru="Кейсы" data-th="เคส" lang="en">Cases</a>
+  </nav></div>
+</header>
+
+<main id="main">
+<div class="wrap" id="top">
+
+  <!-- HERO -->
+  <section class="block rv" data-od-id="uni-hero" aria-label="Intro" style="padding-top: clamp(48px, 6vw, 96px);">
+    <div class="ch-hero">
+      <svg class="stamp" viewBox="0 0 100 100" aria-hidden="true">
+        <defs><path id="chCirc" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"></path></defs>
+        <circle cx="50" cy="50" r="49" fill="#0f172a"></circle>
+        <text font-size="12.5" font-weight="800" fill="#ff8a00" letter-spacing="2.5"><textPath href="#chCirc">FREE ROOF CHECK • KRABI • FREE ROOF CHECK •</textPath></text>
+        <text x="50" y="58" text-anchor="middle" font-size="26" font-weight="800" fill="#fff">S1</text>
+      </svg>
+      <div class="ch-grid">
+        <div>
+          <p class="kicker" data-en="LOCAL CREW" data-ru="МЕСТНАЯ КОМАНДА" data-th="ทีมช่างกระบี่" lang="en">LOCAL CREW</p>
+          <h1 class="display" lang="en"><span data-en="Installed by " data-ru="Устанавливают " data-th="ติดตั้งโดย" lang="en">Installed by </span><span class="hl" data-en="neighbours," data-ru="соседи," data-th="เพื่อนบ้าน," lang="en">neighbours,</span> <span data-en="not strangers." data-ru="а не чужаки." data-th="ไม่ใช่คนแปลกหน้า" lang="en">not strangers.</span></h1>
+          <p class="sub" data-en="Our own engineers on your roof — no subcontractors, no disappearing after payment. 120+ systems across Krabi Town, Ao Nang and Klong Thom." data-ru="Наши инженеры на вашей крыше — без субподряда и исчезновений после оплаты. 120+ систем: Краби, Ао Нанг, Клонг Том." data-th="วิศวกรของเราบนหลังคาคุณ — ไม่มีผู้รับเหมาช่วง ไม่หายหลังรับเงิน 120+ ระบบทั่วกระบี่ อ่าวนาง และคลองท่อม" lang="en">Our own engineers on your roof — no subcontractors, no disappearing after payment. 120+ systems across Krabi Town, Ao Nang and Klong Thom.</p>
+          <div class="cta-row">
+            <a class="btn btn--primary btn--lg" href="https://line.me/ti/p/@750iqwoa" data-en="Meet us on LINE →" data-ru="Мы в LINE →" data-th="คุยกับเราทาง LINE →" lang="en">Meet us on LINE →</a>
+            <a class="btn btn--secondary" href="#systems" data-en="See savings" data-ru="Смотреть экономию" data-th="ดูความคุ้มค่า" lang="en">See savings</a>
+          </div>
+        </div>
+        <div class="collage" id="uniCollage"></div>
+      </div>
+      <div class="strip-wrap">
+        <div class="strip" id="uniStrip"></div>
+        <div class="dots" id="uniDots" aria-hidden="true"></div>
+        <p class="count" id="uniCount" lang="en">1 / 12</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" data-od-id="uni-trust">
+    <div class="sec-head sec-head--center">
+      <p class="kicker" data-en="Partners" data-ru="Партнёры" data-th="พันธมิตร" lang="en">Partners</p>
+      <h2 lang="en"><span data-en="We build with " data-ru="Строим с " data-th="เราสร้างกับ" lang="en">We build with </span><span class="grad" data-en="the best" data-ru="лучшими" data-th="แบรนด์ที่ดีที่สุด" lang="en">the best</span></h2>
+    </div>
+    <div class="brands" style="justify-content:center">
+      <span class="badge brand-logo"><img src="https://admintawanpower.vercel.app/content/brands/jinko-solar.webp" alt="JinkoSolar" loading="eager" width="96" height="28">JinkoSolar</span><span class="badge brand-logo"><img src="https://admintawanpower.vercel.app/content/brands/huawei.webp" alt="HUAWEI" loading="eager" width="96" height="28">HUAWEI</span><span class="badge brand-logo"><img src="https://admintawanpower.vercel.app/content/brands/goodwe.webp" alt="GoodWe" loading="eager" width="96" height="28">GoodWe</span><span class="badge brand-logo"><img src="https://admintawanpower.vercel.app/content/brands/sigenergy.webp" alt="Sigenergy" loading="eager" width="96" height="28">Sigenergy</span><span class="badge brand-logo"><img src="https://admintawanpower.vercel.app/content/brands/solaredge.webp" alt="SolarEdge" loading="eager" width="96" height="28">SolarEdge</span>
+    </div>
+  </section>
+
+  <!-- SEGMENTS -->
+  <section class="block" id="segments" data-od-id="uni-segments">
+    <div class="sec-head sec-head--center">
+      <p class="kicker" data-en="Solutions" data-ru="Решения" data-th="โซลูชัน" lang="en">Solutions</p>
+      <h2 lang="en"><span data-en="Choose the " data-ru="Выберите " data-th="เลือก" lang="en">Choose the </span><span class="grad" data-en="right solution" data-ru="подходящее решение" data-th="โซลูชันที่เหมาะกับคุณ" lang="en">right solution</span></h2>
+    </div>
+    <div class="grid2">
+      <div class="card pick rv" data-od-id="uni-segment-home">
+        <div class="pick-head">
+          <span class="pick-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22v-8h6v8"/></svg></span>
+          <div>
+            <h3 data-en="For homes" data-ru="Для дома" data-th="สำหรับบ้าน" lang="en">For homes</h3>
+            <p class="pick-sub" data-en="Residential" data-ru="Жильё" data-th="ที่อยู่อาศัย" lang="en">Residential</p>
+          </div>
+        </div>
+        <p class="pick-desc" data-en="Turn your rooftop into income. Cut bills up to 70% with a smart system" data-ru="Превратите крышу в доход. Снизьте счета до 70% с умной системой" data-th="เปลี่ยนหลังคาบ้านเป็นแหล่งรายได้ ลดค่าไฟสูงสุด 70% ด้วยระบบอัจฉริยะ" lang="en">Turn your rooftop into income. Cut bills up to 70% with a smart system</p>
+        <ul>
+          <li data-en="Free AI savings assessment" data-ru="Бесплатная AI-оценка экономии" data-th="ประเมินการประหยัดด้วย AI ฟรี" lang="en">Free AI savings assessment</li>
+          <li data-en="25-year equipment warranty" data-ru="Гарантия на оборудование 25 лет" data-th="รับประกันอุปกรณ์ 25 ปี" lang="en">25-year equipment warranty</li>
+        </ul>
+        <div class="pick-ctas">
+          <a class="btn btn--primary" href="#contact" data-en="Start free assessment" data-ru="Бесплатная оценка" data-th="เริ่มประเมินฟรี" lang="en">Start free assessment</a>
+          <a class="btn btn--secondary" href="#contact" data-en="Talk to an engineer" data-ru="Связаться с инженером" data-th="คุยกับวิศวกร" lang="en">Talk to an engineer</a>
+        </div>
+      </div>
+      <div class="card pick pick--biz rv" data-od-id="uni-segment-business">
+        <div class="pick-head">
+          <span class="pick-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 7h.01"/><path d="M15 7h.01"/><path d="M9 11h.01"/><path d="M15 11h.01"/><path d="M10 21v-3h4v3"/></svg></span>
+          <div>
+            <h3 data-en="For business" data-ru="Для бизнеса" data-th="สำหรับธุรกิจ" lang="en">For business</h3>
+            <p class="pick-sub" data-en="Commercial" data-ru="Коммерция" data-th="เชิงพาณิชย์" lang="en">Commercial</p>
+          </div>
+        </div>
+        <p class="pick-desc" data-en="Fast payback. Boost profit by cutting energy costs and elevate your brand" data-ru="Быстрая окупаемость. Растите прибыль, снижая затраты на энергию" data-th="คืนทุนไว เพิ่มผลกำไรด้วยการลดต้นทุนพลังงาน และยกระดับภาพลักษณ์ธุรกิจ" lang="en">Fast payback. Boost profit by cutting energy costs and elevate your brand</p>
+        <ul>
+          <li data-en="In-depth ROI analysis" data-ru="Глубокий ROI-анализ" data-th="วิเคราะห์จุดคืนทุน (ROI) เชิงลึก" lang="en">In-depth ROI analysis</li>
+          <li data-en="Smart Solar PPA solutions" data-ru="Умные Solar PPA решения" data-th="โซลูชัน Solar PPA อัจฉริยะ" lang="en">Smart Solar PPA solutions</li>
+        </ul>
+        <div class="pick-ctas">
+          <a class="btn btn--secondary" href="#contact" data-en="Assess the value" data-ru="Оценить выгоду" data-th="ประเมินความคุ้มค่า" lang="en">Assess the value</a>
+          <a class="btn btn--primary" href="#contact" data-en="Discuss your project" data-ru="Обсудить проект" data-th="ปรึกษาโครงการ" lang="en">Discuss your project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SYSTEMS -->
+  <section class="block block--alt" id="systems" data-od-id="uni-systems">
+    <div class="sec-head sec-head--center">
+      <p class="kicker" data-en="Pricing" data-ru="Цены" data-th="ราคา" lang="en">Pricing</p>
+      <h2 lang="en"><span data-en="Equipment " data-ru="Каталог " data-th="แค็ตตาล็อก" lang="en">Equipment </span><span class="grad" data-en="catalog" data-ru="оборудования" data-th="อุปกรณ์" lang="en">catalog</span></h2>
+    </div>
+    <div class="tier-strip rv" data-od-id="uni-tier-strip">
+      <a class="tier-strip__item" data-od-id="uni-tier-home" href="#contact"><span class="t-price" lang="en">from ฿89,000</span><span class="t-name" data-en="Home · 3–5 kW" data-ru="Дом · 3–5 кВт" data-th="บ้าน · 3–5 kW" lang="en">Home · 3–5 kW</span></a>
+      <a class="tier-strip__item" data-od-id="uni-tier-business" href="#contact"><span class="t-price" lang="en">from ฿289,000</span><span class="t-name" data-en="Business · 10–50 kW" data-ru="Бизнес · 10–50 кВт" data-th="ธุรกิจ · 10–50 kW" lang="en">Business · 10–50 kW</span></a>
+      <a class="tier-strip__item" data-od-id="uni-tier-premium" href="#sigen"><span class="t-price" lang="en">from ฿159,000</span><span class="t-name" data-en="Premium Hybrid · 5 kW+" data-ru="Премиум-гибрид · 5 кВт+" data-th="ไฮบริดพรีเมียม · 5 kW+" lang="en">Premium Hybrid · 5 kW+</span></a>
+    </div>
+    <div class="pills" role="group" aria-label="Categories" data-od-id="uni-cat-pills">
+      <button type="button" data-cat="all" aria-pressed="true" data-en="All" data-ru="Все" data-th="ทั้งหมด" lang="en">All</button>
+      <button type="button" data-cat="home" aria-pressed="false" data-en="Home" data-ru="Дом" data-th="บ้าน" lang="en">Home</button>
+      <button type="button" data-cat="business" aria-pressed="false" data-en="Business" data-ru="Бизнес" data-th="ธุรกิจ" lang="en">Business</button>
+      <button type="button" data-cat="hybrid" aria-pressed="false" data-en="Hybrid" data-ru="Гибрид" data-th="ไฮบริด" lang="en">Hybrid</button>
+    </div>
+    <div class="products" data-od-id="uni-products">
+      <div class="card product product--rich rv" data-cat="home">
+        <div class="product-photo"><span class="badge" data-en="Home · 5 kW" data-ru="Дом · 5 кВт" data-th="บ้าน · 5 kW" lang="en">Home · 5 kW</span><img class="brand-mark" src="https://admintawanpower.vercel.app/content/brands/goodwe.webp" alt="GoodWe" loading="eager"><img class="kit-photo" src="https://admintawanpower.vercel.app/content/products/goodwe-5kw-1phase/main.webp" alt="GoodWe 5 kW inverter" loading="lazy"></div>
+        <div class="product-body">
+          <h3 data-en="5 kW Solar Kit (GoodWe)" data-ru="Комплект 5 кВт (GoodWe)" data-th="ชุดโซล่าร์ 5 kW (GoodWe)" lang="en">5 kW Solar Kit (GoodWe)</h3>
+          <p class="kit-sub" data-en="2026 On-Grid · Jinko Tier-1 + GoodWe" data-ru="Сетевой 2026 · Jinko Tier-1 + GoodWe" data-th="ออนกริด 2026 · แผง Jinko Tier-1 + อินเวอร์เตอร์ GoodWe" lang="en">2026 On-Grid · Jinko Tier-1 + GoodWe</p>
+          <div class="product-price-row">
+            <div><span class="lbl" data-en="Full price" data-ru="Полная цена" data-th="ราคารวม" lang="en">Full price</span><span class="full-price" lang="en">฿120,000</span><span class="inst-note" data-en="Installments from ฿4,500/mo" data-ru="Рассрочка от ฿4,500/мес" data-th="ผ่อนเริ่ม ฿4,500/เดือน" lang="en">Installments from ฿4,500/mo</span></div>
+            <div class="save"><span class="lbl" data-en="Power savings" data-ru="Экономия" data-th="ประหยัดไฟ" lang="en">Power savings</span><i lang="en">~฿3,173<small data-en="/mo" data-ru="/мес" data-th="/เดือน" lang="en">/mo</small></i></div>
+          </div>
+          <div class="product-inst"><span><span data-en="Monthly installment" data-ru="Платёж в месяц" data-th="ยอดผ่อนต่อเดือน" lang="en">Monthly installment</span><b lang="en">฿4,500</b></span><span class="roi" lang="en">ROI plan</span></div>
+          <a class="btn btn--primary btn--sm btn--block" href="#contact" data-en="Ask price & installments →" data-ru="Узнать цену и рассрочку →" data-th="ขอราคาและผ่อนชำระ →" lang="en">Ask price & installments →</a>
+        </div>
+      </div>
+      <div class="card product product--rich rv" data-cat="business">
+        <div class="product-photo"><span class="badge" data-en="Business · 10 kW" data-ru="Бизнес · 10 кВт" data-th="ธุรกิจ · 10 kW" lang="en">Business · 10 kW</span><img class="brand-mark" src="https://admintawanpower.vercel.app/content/brands/goodwe.webp" alt="GoodWe" loading="eager"><img class="kit-photo" src="https://admintawanpower.vercel.app/content/products/goodwe-10kw-3phase/main.webp" alt="GoodWe 10 kW inverter" loading="lazy"></div>
+        <div class="product-body">
+          <h3 data-en="10 kW Solar Kit (GoodWe)" data-ru="Комплект 10 кВт (GoodWe)" data-th="ชุดโซล่าร์ 10 kW (GoodWe)" lang="en">10 kW Solar Kit (GoodWe)</h3>
+          <p class="kit-sub" data-en="2026 On-Grid 3-phase · Jinko + GoodWe" data-ru="Сетевой 3-фазный 2026 · Jinko + GoodWe" data-th="ออนกริด 3 เฟส 2026 · Jinko + GoodWe" lang="en">2026 On-Grid 3-phase · Jinko + GoodWe</p>
+          <div class="product-price-row">
+            <div><span class="lbl" data-en="Full price" data-ru="Полная цена" data-th="ราคารวม" lang="en">Full price</span><span class="full-price" lang="en">฿228,000</span><span class="inst-note" data-en="Installments from ฿8,550/mo" data-ru="Рассрочка от ฿8,550/мес" data-th="ผ่อนเริ่ม ฿8,550/เดือน" lang="en">Installments from ฿8,550/mo</span></div>
+            <div class="save"><span class="lbl" data-en="Power savings" data-ru="Экономия" data-th="ประหยัดไฟ" lang="en">Power savings</span><i lang="en">~฿6,345<small data-en="/mo" data-ru="/мес" data-th="/เดือน" lang="en">/mo</small></i></div>
+          </div>
+          <div class="product-inst"><span><span data-en="Monthly installment" data-ru="Платёж в месяц" data-th="ยอดผ่อนต่อเดือน" lang="en">Monthly installment</span><b lang="en">฿8,550</b></span><span class="roi" lang="en">ROI plan</span></div>
+          <a class="btn btn--primary btn--sm btn--block" href="#contact" data-en="Ask price & installments →" data-ru="Узнать цену и рассрочку →" data-th="ขอราคาและผ่อนชำระ →" lang="en">Ask price & installments →</a>
+        </div>
+      </div>
+      <div class="card product product--rich rv" data-cat="business">
+        <div class="product-photo"><span class="badge" data-en="Business · 20 kW" data-ru="Бизнес · 20 кВт" data-th="ธุรกิจ · 20 kW" lang="en">Business · 20 kW</span><img class="brand-mark" src="https://admintawanpower.vercel.app/content/brands/goodwe.webp" alt="GoodWe" loading="eager"><img class="kit-photo" src="https://admintawanpower.vercel.app/content/products/goodwe-20kw-3phase/main.webp" alt="GoodWe 20 kW solar kit" loading="lazy"></div>
+        <div class="product-body">
+          <h3 data-en="20 kW Solar Kit (GoodWe)" data-ru="Комплект 20 кВт (GoodWe)" data-th="ชุดโซล่าร์ 20 kW (GoodWe)" lang="en">20 kW Solar Kit (GoodWe)</h3>
+          <p class="kit-sub" data-en="2026 On-Grid 3-phase · 32× Jinko 715W" data-ru="Сетевой 3-фазный 2026 · 32× Jinko 715 Вт" data-th="ออนกริด 3 เฟส 2026 · Jinko 715W 32 แผง" lang="en">2026 On-Grid 3-phase · 32× Jinko 715W</p>
+          <div class="product-price-row">
+            <div><span class="lbl" data-en="Full price" data-ru="Полная цена" data-th="ราคารวม" lang="en">Full price</span><span class="full-price" lang="en">฿443,000</span><span class="inst-note" data-en="Installments from ฿16,612.5/mo" data-ru="Рассрочка от ฿16,612.5/мес" data-th="ผ่อนเริ่ม ฿16,612.5/เดือน" lang="en">Installments from ฿16,612.5/mo</span></div>
+            <div class="save"><span class="lbl" data-en="Power savings" data-ru="Экономия" data-th="ประหยัดไฟ" lang="en">Power savings</span><i lang="en">~฿12,690<small data-en="/mo" data-ru="/мес" data-th="/เดือน" lang="en">/mo</small></i></div>
+          </div>
+          <div class="product-inst"><span><span data-en="Monthly installment" data-ru="Платёж в месяц" data-th="ยอดผ่อนต่อเดือน" lang="en">Monthly installment</span><b lang="en">฿16,612.5</b></span><span class="roi" lang="en">ROI plan</span></div>
+          <a class="btn btn--primary btn--sm btn--block" href="#contact" data-en="Ask price & installments →" data-ru="Узнать цену и рассрочку →" data-th="ขอราคาและผ่อนชำระ →" lang="en">Ask price & installments →</a>
+        </div>
+      </div>
+      <div class="card product product--rich rv" data-cat="hybrid">
+        <div class="product-photo"><span class="badge" data-en="Hybrid · 10 kWh" data-ru="Гибрид · 10 кВт·ч" data-th="ไฮบริด · 10 kWh" lang="en">Hybrid · 10 kWh</span><img class="brand-mark" src="https://admintawanpower.vercel.app/content/brands/sigenergy.webp" alt="Sigenergy" loading="eager"><img class="kit-photo" src="https://admintawanpower.vercel.app/content/products/sigen-battery-5kwh/main.webp" alt="Sigenergy SigenStor battery" loading="lazy"></div>
+        <div class="product-body">
+          <h3 data-en="Hybrid 10 kWh (Sigenergy)" data-ru="Гибрид 10 кВт·ч (Sigenergy)" data-th="ไฮบริด 10 kWh (Sigenergy)" lang="en">Hybrid 10 kWh (Sigenergy)</h3>
+          <p class="kit-sub" data-en="SigenStor 5-in-1 · backup + app" data-ru="SigenStor 5-в-1 · резерв + приложение" data-th="SigenStor 5-in-1 · สำรองไฟ + แอป" lang="en">SigenStor 5-in-1 · backup + app</p>
+          <div class="product-price-row">
+            <div><span class="lbl" data-en="Full price" data-ru="Полная цена" data-th="ราคารวม" lang="en">Full price</span><span class="full-price" lang="en">฿459,000</span><span class="inst-note" data-en="Installments from ฿17,212/mo" data-ru="Рассрочка от ฿17,212/мес" data-th="ผ่อนเริ่ม ฿17,212/เดือน" lang="en">Installments from ฿17,212/mo</span></div>
+            <div class="save"><span class="lbl" data-en="Power savings" data-ru="Экономия" data-th="ประหยัดไฟ" lang="en">Power savings</span><i lang="en">~฿6,900<small data-en="/mo" data-ru="/мес" data-th="/เดือน" lang="en">/mo</small></i></div>
+          </div>
+          <div class="product-inst"><span><span data-en="Monthly installment" data-ru="Платёж в месяц" data-th="ยอดผ่อนต่อเดือน" lang="en">Monthly installment</span><b lang="en">฿17,212</b></span><span class="roi" lang="en">ROI plan</span></div>
+          <a class="btn btn--primary btn--sm btn--block" href="#contact" data-en="Ask price & installments →" data-ru="Узнать цену и рассрочку →" data-th="ขอราคาและผ่อนชำระ →" lang="en">Ask price & installments →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASES STRIP -->
+  <section class="block" id="cases" data-od-id="uni-cases">
+    <div class="sec-head sec-head--center">
+      <p class="kicker" data-en="Recent work" data-ru="Наши работы" data-th="ผลงานล่าสุด" lang="en">Recent work</p>
+      <h2 lang="en"><span data-en="Roofs already " data-ru="Крыши уже " data-th="หลังคาที่" lang="en">Roofs already </span><span class="grad" data-en="saving" data-ru="экономят" data-th="ประหยัดแล้ว" lang="en">saving</span></h2>
+    </div>
+    <div class="grid2">
+      <article class="card rv" data-od-id="uni-case-aonang">
+        <img class="case-img" src="https://admintawanpower.vercel.app/images/krabi-001.png" alt="Solar panels on a villa roof in Ao Nang, Krabi" loading="lazy">
+        <div class="case-meta"><span class="badge" lang="en">⌖ Krabi</span><span class="badge badge--success" lang="en">10 kW · −68% bill</span></div>
+        <h3 data-en="Ao Nang villa" data-ru="Вилла в Ао Нанге" data-th="วิลล่าอ่าวนาง" lang="en">Ao Nang villa</h3>
+        <p data-en="Pool + 4 air-cons. Payback in ~4 years." data-ru="Бассейн и 4 кондиционера. Окупаемость ~4 года." data-th="สระ + แอร์ 4 เครื่อง คืนทุนราว 4 ปี" lang="en">Pool + 4 air-cons. Payback in ~4 years.</p>
+        <div class="case-stats">
+          <div><span data-en="Investment" data-ru="Инвестиции" data-th="งบลงทุน" lang="en">Investment</span><b lang="en">฿890,000</b></div>
+          <div><span data-en="Installed in" data-ru="Монтаж" data-th="ติดตั้ง" lang="en">Installed in</span><b data-en="4 days" data-ru="4 дня" data-th="4 วัน" lang="en">4 days</b></div>
+        </div>
+        <a class="btn btn--secondary btn--sm" href="#contact" data-en="Get this system" data-ru="Хочу так же" data-th="เอาระบบนี้" lang="en">Get this system</a>
+      </article>
+      <article class="card rv" data-od-id="uni-case-lanta">
+        <img class="case-img" src="https://admintawanpower.vercel.app/images/krabi-002.webp" alt="Rooftop solar array on a cafe in Koh Lanta" loading="lazy">
+        <div class="case-meta"><span class="badge" lang="en">⌖ Krabi</span><span class="badge badge--success" lang="en">8 kW · −55% bill</span></div>
+        <h3 data-en="Koh Lanta café" data-ru="Кафе на Ко Ланте" data-th="คาเฟ่เกาะลันตา" lang="en">Koh Lanta café</h3>
+        <p data-en="Daytime load matched. Fridges outage-proof." data-ru="Дневная нагрузка закрыта. Холодильники защищены." data-th="ใช้ไฟกลางวันเต็ม ตู้แช่ไม่ดับ" lang="en">Daytime load matched. Fridges outage-proof.</p>
+        <div class="case-stats">
+          <div><span data-en="Investment" data-ru="Инвестиции" data-th="งบลงทุน" lang="en">Investment</span><b lang="en">฿576,000</b></div>
+          <div><span data-en="Installed in" data-ru="Монтаж" data-th="ติดตั้ง" lang="en">Installed in</span><b data-en="3 days" data-ru="3 дня" data-th="3 วัน" lang="en">3 days</b></div>
+        </div>
+        <a class="btn btn--secondary btn--sm" href="#contact" data-en="Get this system" data-ru="Хочу так же" data-th="เอาระบบนี้" lang="en">Get this system</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="block" id="features" data-od-id="uni-features">
+    <div class="sec-head sec-head--center">
+      <p class="kicker" data-en="Services" data-ru="Сервис" data-th="บริการ" lang="en">Services</p>
+      <h2 lang="en"><span data-en="What you " data-ru="Что вы " data-th="สิ่งที่คุณ" lang="en">What you </span><span class="grad" data-en="get from us" data-ru="получите" data-th="จะได้รับจากเรา" lang="en">get from us</span></h2>
+    </div>
+    <div class="grid4">
+      <div class="card feat rv" data-od-id="uni-feat-ask">
+        <span class="feat-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5z"/></svg></span>
+        <h3 data-en="Ask solar anything" data-ru="Спросите о солнце" data-th="ถามเรื่องโซลาร์ได้ทุกอย่าง" lang="en">Ask solar anything</h3>
+        <p data-en="Fast answers in chat, in your language." data-ru="Быстрые ответы в чате на вашем языке." data-th="ตอบไวในแชท ภาษาของคุณ" lang="en">Fast answers in chat, in your language.</p>
+      </div>
+      <div class="card feat rv" data-od-id="uni-feat-compare">
+        <span class="feat-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7l7-4 7 4"/><path d="M5 7v4a7 7 0 0 0 14 0V7"/><path d="M5 12h14"/></svg></span>
+        <h3 data-en="Compare gear" data-ru="Сравнение оборудования" data-th="เทียบอุปกรณ์" lang="en">Compare gear</h3>
+        <p data-en="Side-by-side specs before you decide." data-ru="Характеристики рядом — перед решением." data-th="เทียบสเปกชัดๆ ก่อนตัดสินใจ" lang="en">Side-by-side specs before you decide.</p>
+      </div>
+      <div class="card feat rv" data-od-id="uni-feat-estimate">
+        <span class="feat-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2"/><path d="M8.5 6.5h7"/><path d="M8.5 11h7"/><path d="M8.5 14.5h4"/><circle cx="15.5" cy="17.5" r="2.2"/><path d="M15.5 16v1.2l.8.8"/></svg></span>
+        <h3 data-en="Estimate savings" data-ru="Расчёт экономии" data-th="ประเมินความประหยัด" lang="en">Estimate savings</h3>
+        <p data-en="Know your savings before paying a baht." data-ru="Экономия известна до оплаты." data-th="รู้ยอดประหยัดก่อนจ่ายสักบาท" lang="en">Know your savings before paying a baht.</p>
+      </div>
+      <div class="card feat rv" data-od-id="uni-feat-engineer">
+        <span class="feat-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.9z"/></svg></span>
+        <h3 data-en="Talk to an engineer" data-ru="Разговор с инженером" data-th="คุยกับวิศวกร" lang="en">Talk to an engineer</h3>
+        <p data-en="A real engineer, not a salesperson." data-ru="Инженер, а не продавец." data-th="วิศวกรจริง ไม่ใช่เซลล์" lang="en">A real engineer, not a salesperson.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGENSTOR -->
+  <section class="block" id="sigen" data-od-id="uni-sigen">
+    <div class="sigen rv">
+      <div class="sigen-grid">
+        <div>
+          <p class="kicker" data-en="Sigenergy · AI hybrid" data-ru="Sigenergy · AI-гибрид" data-th="Sigenergy · AI ไฮบริด" lang="en">Sigenergy · AI hybrid</p>
+          <h2 lang="en">SigenStor <span class="grad" lang="en">5-in-One.</span></h2>
+          <p class="lede" data-en="World's first 5-in-One" data-ru="Первая в мире 5-в-1" data-th="5-in-One ระบบแรกของโลก" lang="en">World's first 5-in-One</p>
+          <ul class="five">
+            <li><b>01</b><span data-en="Hybrid inverter, 97% efficiency" data-ru="Гибридный инвертор, КПД 97%" data-th="อินเวอร์เตอร์ไฮบริด ประสิทธิภาพ 97%" lang="en">Hybrid inverter, 97% efficiency</span></li>
+            <li><b>02</b><span data-en="Modular battery, 5–48 kWh" data-ru="Модульная батарея 5–48 кВт·ч" data-th="แบตโมดูลาร์ 5–48 kWh" lang="en">Modular battery, 5–48 kWh</span></li>
+            <li><b>03</b><span data-en="EV charging from the sun" data-ru="Зарядка электромобиля от солнца" data-th="ชาร์จ EV จากแสงแดด" lang="en">EV charging from the sun</span></li>
+            <li><b>04</b><span data-en="0-ms backup for essentials" data-ru="Резерв 0 мс для важного" data-th="สำรองไฟ 0ms สำหรับโหลดสำคัญ" lang="en">0-ms backup for essentials</span></li>
+            <li><b>05</b><span data-en="AI energy control in the app" data-ru="ИИ-управление энергией в приложении" data-th="AI จัดการพลังงานผ่านแอป" lang="en">AI energy control in the app</span></li>
+          </ul>
+          <a class="btn btn--primary" href="#contact" data-en="Ask about SigenStor" data-ru="Спросить о SigenStor" data-th="สอบถาม SigenStor" lang="en">Ask about SigenStor</a>
+          <div class="sigen-metrics" data-od-id="uni-sigen-metrics">
+            <div><b lang="en">&lt;10ms</b><span data-en="Outage backup" data-ru="Резерв" data-th="สำรองไฟ" lang="en">Outage backup</span></div>
+            <div><b lang="en">98.4%</b><span data-en="Efficiency" data-ru="КПД" data-th="ประสิทธิภาพ" lang="en">Efficiency</span></div>
+            <div><b data-en="10 yrs" data-ru="10 лет" data-th="10 ปี" lang="en">10 yrs</b><span data-en="Warranty" data-ru="Гарантия" data-th="รับประกัน" lang="en">Warranty</span></div>
+            <div><b lang="en">AI-Ready</b><span data-en="App control" data-ru="Приложение" data-th="ควบคุมผ่านแอป" lang="en">App control</span></div>
+          </div>
+        </div>
+        <div class="sigen-media"><img class="sigen-img" src="https://admintawanpower.vercel.app/images/sigenstor-5in1.jpg" alt="SigenStor 5-in-1 home battery tower by Sigenergy" loading="lazy">
+          <div class="hotspot" style="top:18%;left:6%"><i></i><span data-en="Smart inverter" data-ru="Инвертор" data-th="อินเวอร์เตอร์" lang="en">Smart inverter</span></div>
+          <div class="hotspot" style="top:48%;right:4%"><i></i><span data-en="Battery" data-ru="Батарея" data-th="แบตเตอรี่" lang="en">Battery</span></div>
+          <div class="hotspot" style="bottom:14%;left:8%"><i></i><span data-en="EV charger" data-ru="EV-зарядка" data-th="ชาร์จ EV" lang="en">EV charger</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="block" id="steps" data-od-id="uni-steps">
+    <div class="sec-head sec-head--center">
+      <p class="kicker" data-en="Process" data-ru="Процесс" data-th="ขั้นตอน" lang="en">Process</p>
+      <h2 lang="en"><span data-en="Easy start in " data-ru="Лёгкий старт за " data-th="เริ่มต้นง่าย ๆ ใน " lang="en">Easy start in </span><span class="grad" data-en="3 steps" data-ru="3 шага" data-th="3 ขั้นตอน" lang="en">3 steps</span></h2>
+    </div>
+    <div class="grid3">
+      <div class="card step rv" data-od-id="uni-step-1">
+        <div class="step-top"><span class="step-num" aria-hidden="true">1</span><span class="step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6"/><path d="M5 9.5V20h14V9.5"/></svg></span></div>
+        <h3 data-en="Building type" data-ru="Тип здания" data-th="ประเภทอาคาร" lang="en">Building type</h3>
+        <p data-en="Home or business + your rough monthly bill." data-ru="Дом или бизнес + примерный счёт." data-th="บ้านหรือธุรกิจ + ค่าไฟคร่าวๆ" lang="en">Home or business + your rough monthly bill.</p>
+      </div>
+      <div class="card step rv" data-od-id="uni-step-2">
+        <div class="step-top"><span class="step-num" aria-hidden="true">2</span><span class="step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5z"/></svg></span></div>
+        <h3 data-en="Chat estimate" data-ru="Оценка в чате" data-th="ประเมินในแชท" lang="en">Chat estimate</h3>
+        <p data-en="System size and savings, in minutes." data-ru="Размер станции и экономия — за минуты." data-th="ขนาดระบบและยอดประหยัด ในไม่กี่นาที" lang="en">System size and savings, in minutes.</p>
+      </div>
+      <div class="card step rv" data-od-id="uni-step-3">
+        <div class="step-top"><span class="step-num" aria-hidden="true">3</span><span class="step-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.5 3.4-5 7-5s6.2 1.5 7 5"/></svg></span></div>
+        <h3 data-en="Engineer survey" data-ru="Замер инженера" data-th="วิศวกรสำรวจ" lang="en">Engineer survey</h3>
+        <p data-en="Callback plus a free site visit." data-ru="Звонок плюс бесплатный выезд." data-th="โทรกลับพร้อมสำรวจหน้างานฟรี" lang="en">Callback plus a free site visit.</p>
+      </div>
+    </div>
+    <div class="cta-row" style="justify-content:center"><a class="btn btn--secondary" href="#contact" data-en="Start step 1 — free" data-ru="Начать шаг 1 — бесплатно" data-th="เริ่มขั้นตอนที่ 1 — ฟรี" lang="en">Start step 1 — free</a></div>
+  </section>
+
+  <!-- KNOWLEDGE -->
+  <section class="block" id="knowledge" data-od-id="uni-knowledge">
+    <div class="sec-head sec-head--center">
+      <p class="kicker" data-en="Knowledge" data-ru="База знаний" data-th="ความรู้" lang="en">Knowledge</p>
+      <h2 lang="en"><span data-en="Answers to " data-ru="Ответы " data-th="ตอบ" lang="en">Answers to </span><span class="grad" data-en="everything" data-ru="на всё" data-th="ทุกข้อสงสัย" lang="en">everything</span></h2>
+    </div>
+    <div class="tabs-wrap"><div class="tabs" role="tablist" aria-label="Topics">
+      <button type="button" role="tab" aria-selected="true" data-tab="savings" data-en="Savings" data-ru="Экономия" data-th="การประหยัด" lang="en">Savings</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="tech" data-en="Tech" data-ru="Техника" data-th="เทคโนโลยี" lang="en">Tech</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="faq" data-en="FAQ" data-ru="Вопросы" data-th="คำถามพบบ่อย" lang="en">FAQ</button>
+    </div></div>
+    <div class="tabpanel is-active" data-panel="savings" role="tabpanel">
+      <div class="card qa">
+        <h3 data-en="How fast is payback in Krabi?" data-ru="Как быстро окупается в Краби?" data-th="คืนทุนในกระบี่เร็วแค่ไหน?" lang="en">How fast is payback in Krabi?</h3>
+        <p class="dim" data-en="3–5 years at ~5 peak sun hours daily." data-ru="3–5 лет при ~5 пиковых часах в день." data-th="3–5 ปี ด้วยแดดพีคเฉลี่ยวันละ 5 ชั่วโมง" lang="en">3–5 years at ~5 peak sun hours daily.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="What is net-metering?" data-ru="Что такое net-metering?" data-th="เน็ตมิเตอร์ริงคืออะไร?" lang="en">What is net-metering?</h3>
+        <p class="dim" data-en="Sell surplus back to the grid — we file the papers." data-ru="Продажа излишков в сеть — документы оформляем мы." data-th="ขายไฟส่วนเกินคืนกริด เราเดินเรื่องให้" lang="en">Sell surplus back to the grid — we file the papers.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="Do I need batteries?" data-ru="Нужны ли батареи?" data-th="จำเป็นต้องมีแบตเตอรี่ไหม?" lang="en">Do I need batteries?</h3>
+        <p class="dim" data-en="Only if you want backup during outages — otherwise grid-tied is cheaper." data-ru="Только для резерва при отключениях — иначе сетевой дешевле." data-th="จำเป็นเฉพาะเมื่อต้องการไฟสำรองตอนไฟดับ ไม่งั้นออนกริดถูกกว่า" lang="en">Only if you want backup during outages — otherwise grid-tied is cheaper.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="Which inverter brands?" data-ru="Какие инверторы?" data-th="ใช้อินเวอร์เตอร์ยี่ห้อไหน?" lang="en">Which inverter brands?</h3>
+        <p class="dim" data-en="Deye, GoodWe and Sigenergy — Tier-1 with local warranty." data-ru="Deye, GoodWe и Sigenergy — Tier-1 с местной гарантией." data-th="Deye, GoodWe และ Sigenergy เกรด Tier-1 รับประกันในไทย" lang="en">Deye, GoodWe and Sigenergy — Tier-1 with local warranty.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="Who handles PEA paperwork?" data-ru="Кто оформляет документы PEA?" data-th="ใครเดินเรื่อง PEA?" lang="en">Who handles PEA paperwork?</h3>
+        <p class="dim" data-en="We do — permits and grid connection included." data-ru="Мы — разрешения и подключение включены." data-th="เราจัดการให้ ครบทั้งขออนุญาตและขนานไฟ" lang="en">We do — permits and grid connection included.</p>
+      </div>
+    </div>
+    <div class="tabpanel" data-panel="tech" role="tabpanel">
+      <div class="card qa">
+        <h3 data-en="Hybrid or grid-tied?" data-ru="Гибрид или сетевой?" data-th="ไฮบริดหรือออนกริด?" lang="en">Hybrid or grid-tied?</h3>
+        <p class="dim" data-en="Hybrid adds battery backup; grid-tied costs less." data-ru="Гибрид — с батареей; сетевой — дешевле." data-th="ไฮบริดมีแบตสำรอง ออนกริดถูกกว่า" lang="en">Hybrid adds battery backup; grid-tied costs less.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="Rainy season — still worth it?" data-ru="Сезон дождей — выгодно?" data-th="หน้าฝนยังคุ้มไหม?" lang="en">Rainy season — still worth it?</h3>
+        <p class="dim" data-en="Output drops to 40–60%, still pays off." data-ru="Выработка 40–60% — всё равно выгодно." data-th="ผลิตได้ 40–60% ยังคุ้ม" lang="en">Output drops to 40–60%, still pays off.</p>
+      </div>
+    </div>
+    <div class="tabpanel" data-panel="faq" role="tabpanel">
+      <div class="card qa">
+        <h3 data-en="What maintenance is needed?" data-ru="Какое нужно обслуживание?" data-th="ต้องดูแลรักษาอย่างไร?" lang="en">What maintenance is needed?</h3>
+        <p class="dim" data-en="1–2 panel cleanings a year; service plans available." data-ru="Мойка 1–2 раза в год; есть сервис-пакеты." data-th="ล้างแผงปีละ 1–2 ครั้ง มีแพ็กเกจดูแล" lang="en">1–2 panel cleanings a year; service plans available.</p>
+      </div>
+      <div class="card qa">
+        <h3 data-en="What warranties apply?" data-ru="Какие действуют гарантии?" data-th="รับประกันอะไรบ้าง?" lang="en">What warranties apply?</h3>
+        <p class="dim" data-en="25-year performance, 12-year product warranty." data-ru="25 лет на выработку, 12 лет на оборудование." data-th="รับประกันประสิทธิภาพ 25 ปี ตัวเครื่อง 12 ปี" lang="en">25-year performance, 12-year product warranty.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BRANDS -->
+
+
+  <!-- CONTACT -->
+  <section class="block block--cream" id="contact" data-od-id="uni-contact">
+    <div class="sec-head">
+      <p class="kicker" data-en="Contact us" data-ru="Свяжитесь с нами" data-th="ติดต่อเรา" lang="en">Contact us</p>
+          <h2 lang="en"><span data-en="Leave your info, " data-ru="Оставьте контакты — " data-th="ฝากข้อมูล" lang="en">Leave your info, </span><br><span class="grad" data-en="we'll call back" data-ru="перезвоним" data-th="ให้เราติดต่อกลับ" lang="en">we'll call back</span></h2>
+      <p class="lede" data-en="Expert engineers will design the best system for you." data-ru="Инженеры спроектируют лучшую систему для вас." data-th="วิศวกรจะออกแบบระบบที่ดีที่สุดให้คุณ" lang="en">Expert engineers will design the best system for you.</p>
+    </div>
+    <div class="lead-grid">
+      <div>
+        <ul class="trust" style="margin-top:0">
+          <li><span class="trust-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3.5v5.2c0 5-3.4 9.4-8 11.3-4.6-1.9-8-6.3-8-11.3V5.5L12 2z"/></svg></span><span data-en="Your data is safe" data-ru="Данные в безопасности" data-th="ข้อมูลของคุณปลอดภัย" lang="en">Your data is safe</span></li>
+          <li><span class="trust-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span><span data-en="Callback within 24 hours" data-ru="Перезвоним за 24 часа" data-th="ติดต่อกลับภายใน 24 ชม." lang="en">Callback within 24 hours</span></li>
+          <li><span class="trust-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><span data-en="Free preliminary assessment" data-ru="Предоценка бесплатно" data-th="ประเมินเบื้องต้นฟรี" lang="en">Free preliminary assessment</span></li>
+        </ul>
+        <div class="info">
+          <p><strong><a href="https://line.me/ti/p/@750iqwoa" style="color: inherit;" lang="en">LINE @750iqwoa</a></strong> <span data-en="· daily 9:00–18:00" data-ru="· ежедневно 9:00–18:00" data-th="· ทุกวัน 9:00–18:00" lang="en">· daily 9:00–18:00</span></p>
+          <p class="privacy" data-en="Your data is used only to arrange the survey. PDPA compliant." data-ru="Данные используются только для замера." data-th="ข้อมูลใช้เพื่อนัดสำรวจเท่านั้น เป็นไปตาม PDPA" lang="en">Your data is used only to arrange the survey. PDPA compliant.</p>
+        </div>
+      </div>
+      <div class="card rv" style="padding: clamp(24px, 3vw, 36px);">
+        <div>
+          <form class="form-grid" id="leadForm" novalidate data-od-id="uni-lead-form">
+            <div class="field">
+              <label for="fName" data-en="Name" data-ru="Имя" data-th="ชื่อ" lang="en">Name</label>
+              <input class="input" id="fName" type="text" autocomplete="name" required data-ph-en="Anna" data-ph-ru="Анна" data-ph-th="แอนนา" placeholder="Anna">
+            </div>
+            <div class="field">
+              <label for="fPhone" data-en="Phone / LINE" data-ru="Телефон / LINE" data-th="เบอร์โทร / LINE" lang="en">Phone / LINE</label>
+              <input class="input" id="fPhone" type="tel" autocomplete="tel" required placeholder="+66 …">
+            </div>
+            <div class="field">
+              <label for="fArea" data-en="Area" data-ru="Район" data-th="พื้นที่" lang="en">Area</label>
+              <select class="input" id="fArea">
+                <option lang="en">Krabi Town</option><option lang="en">Ao Nang</option><option lang="en">Koh Lanta</option><option lang="en">Klong Thom</option>
+                <option data-en="Other area" data-ru="Другой район" data-th="พื้นที่อื่น" lang="en">Other area</option>
+              </select>
+            </div>
+            <button class="btn btn--primary btn--lg" type="submit" data-en="Call me back" data-ru="Перезвоните мне" data-th="โทรกลับหาฉัน" lang="en">Call me back</button>
+          </form>
+          <div class="success" id="leadSuccess" role="status">
+            <span class="badge badge--success" data-en="Received ✓" data-ru="Получено ✓" data-th="ได้รับแล้ว ✓" lang="en">Received ✓</span>
+            <p data-en="Thanks — we'll call within 24 hours." data-ru="Спасибо — перезвоним за 24 часа." data-th="ขอบคุณ เราจะโทรกลับภายใน 24 ชั่วโมง" lang="en">Thanks — we'll call within 24 hours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer class="site-footer" data-od-id="uni-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="foot-brand" href="#top" aria-label="Tawan Power — home"><span class="foot-mark" aria-hidden="true">1</span><span><b lang="en">Tawan Power</b><small data-en="Krabi · Solar installer" data-ru="Краби · Солнечные станции" data-th="กระบี่ · ติดตั้งโซลาร์" lang="en">Krabi · Solar installer</small></span></a>
+        <p class="foot-tag" data-en="Krabi solar energy experts delivering cost-effective, sustainable solutions — turning every rooftop into clean power." data-ru="Эксперты солнечной энергетики Краби — выгодные экологичные решения: каждая крыша даёт чистую энергию." data-th="ผู้เชี่ยวชาญพลังงานแสงอาทิตย์ในกระบี่ โซลูชันคุ้มค่า ยั่งยืน เปลี่ยนทุกหลังคาเป็นพลังงานสะอาด" lang="en">Krabi solar energy experts delivering cost-effective, sustainable solutions — turning every rooftop into clean power.</p>
+        <p style="margin-top:var(--sp-4)"><a class="btn btn--line btn--sm" href="https://line.me/ti/p/@750iqwoa" target="_blank" rel="noopener" data-en="Chat with us on LINE" data-ru="Написать в LINE" data-th="แชทกับเราทาง LINE" lang="en">Chat with us on LINE</a></p>
+      </div>
+      <div class="foot-col">
+        <h4 data-en="Solutions" data-ru="Решения" data-th="โซลูชัน" lang="en">Solutions</h4>
+        <a href="#segments" data-en="Home systems" data-ru="Домашние системы" data-th="ระบบบ้าน" lang="en">Home systems</a>
+        <a href="#segments" data-en="Business systems" data-ru="Бизнес-системы" data-th="ระบบธุรกิจ" lang="en">Business systems</a>
+        <a href="#sigen" data-en="Premium Hybrid" data-ru="Премиум-гибрид" data-th="ไฮบริดพรีเมียม" lang="en">Premium Hybrid</a>
+        <a href="#systems" data-en="Equipment catalog" data-ru="Каталог оборудования" data-th="แค็ตตาล็อกอุปกรณ์" lang="en">Equipment catalog</a>
+      </div>
+      <div class="foot-col">
+        <h4 data-en="Tools" data-ru="Инструменты" data-th="เครื่องมือ" lang="en">Tools</h4>
+        <a href="#systems" data-en="Payback calculator" data-ru="Калькулятор окупаемости" data-th="คำนวณจุดคืนทุน" lang="en">Payback calculator</a>
+        <a href="#knowledge" data-en="Knowledge hub" data-ru="База знаний" data-th="ศูนย์ความรู้" lang="en">Knowledge hub</a>
+        <a href="#steps" data-en="Installation steps" data-ru="Этапы установки" data-th="ขั้นตอนติดตั้ง" lang="en">Installation steps</a>
+        <a href="#contact" data-en="Privacy policy" data-ru="Конфиденциальность" data-th="นโยบายความเป็นส่วนตัว" lang="en">Privacy policy</a>
+      </div>
+      <div class="foot-contact-card">
+        <h4 data-en="Contact us" data-ru="Контакты" data-th="ติดต่อเรา" lang="en" style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.2em;color:#fcd34d;margin:0 0 var(--sp-2)">Contact us</h4>
+        <a class="foot-contact-row" href="#contact">
+          <span class="foot-contact-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.9.34 1.84.57 2.8.7A2 2 0 0 1 22 16.9z"/></svg></span>
+          <span><small data-en="Talk to an engineer" data-ru="Связаться с инженером" data-th="คุยกับวิศวกร" lang="en">Talk to an engineer</small><b lang="en">080-XXX-XXXX</b></span>
+        </a>
+        <a class="foot-contact-row" href="https://line.me/ti/p/@750iqwoa" target="_blank" rel="noopener">
+          <span class="foot-contact-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5z"/></svg></span>
+          <span><small data-en="Chat via LINE / AI" data-ru="Чат LINE / AI" data-th="แชท LINE / AI" lang="en">Chat via LINE / AI</small><b lang="en">@750iqwoa</b></span>
+          <img class="foot-qr-mini" src="https://admintawanpower.vercel.app/images/line-oa-qr.png" alt="LINE OA QR code" loading="lazy" width="70" height="70">
+        </a>
+      </div>
+    </div>
+    <div class="foot-base">
+      <p><strong style="color:#fff" lang="en">Tawan Power</strong> <span data-en="· Krabi Town · Ao Nang · Koh Lanta · Klong Thom" data-ru="· Краби · Ао Нанг · Ко Ланта · Клонг Том" data-th="· เมืองกระบี่ · อ่าวนาง · เกาะลันตา · คลองท่อม" lang="en">· Krabi Town · Ao Nang · Koh Lanta · Klong Thom</span></p>
+      <p data-en="© 2026 Tawan Power. All rights reserved." data-ru="© 2026 Tawan Power. Все права защищены." data-th="© 2026 Tawan Power สงวนลิขสิทธิ์" lang="en">© 2026 Tawan Power. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="ai-bar" data-od-id="uni-ai-bar">
+  <a class="ai-bar-inner" href="#contact" aria-label="Chat">
+    <span class="ai-bar-text"><small data-en="AI &amp; support team" data-ru="AI и поддержка" data-th="ทีม AI และซัพพอร์ต" lang="en">AI &amp; support team</small><b data-en="Ask about solar or start an assessment…" data-ru="Спросите о солнце или начните оценку…" data-th="ถามเรื่องโซลาร์หรือเริ่มประเมิน…" lang="en">Ask about solar or start an assessment…</b></span>
+    <span class="ai-bar-mic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg></span>
+    <span class="ai-bar-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>
+  </a>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement, body = document.body;
+  function persist(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function recall(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+
+  /* Theme: single toggle button, persisted, honors OS preference */
+  var themeBtn = document.querySelector('[data-theme-btn="toggle"]');
+  function paintThemeBtn(dark) {
+    if (!themeBtn) return;
+    themeBtn.textContent = dark ? "☀" : "☾";
+    themeBtn.setAttribute("aria-pressed", dark ? "true" : "false");
+    themeBtn.setAttribute("aria-label", dark ? "Light theme" : "Dark theme");
+  }
+  function setTheme(name, save) {
+    var dark = name === "dark";
+    root.classList.toggle("dark", dark);
+    body.classList.toggle("dark", dark);
+    paintThemeBtn(dark);
+    if (save !== false) persist("s1k-theme", name);
+  }
+  function currentTheme() { return root.classList.contains("dark") ? "dark" : "light"; }
+  if (themeBtn) themeBtn.addEventListener("click", function () {
+    setTheme(currentTheme() === "dark" ? "light" : "dark");
+  });
+  var savedTheme = recall("s1k-theme");
+  if (savedTheme === "dark" || savedTheme === "light") { setTheme(savedTheme, false); }
+  else if (window.matchMedia("(prefers-color-scheme: dark)").matches) { setTheme("dark", false); }
+  else { paintThemeBtn(false); }
+
+  /* Locale: single compact button cycling TH → EN → RU */
+  var localeBtn = document.getElementById("localeBtn");
+  var localeOrder = ["th", "en", "ru"];
+  function paintLocaleBtn(code) {
+    if (!localeBtn) return;
+    localeBtn.textContent = code.toUpperCase();
+    localeBtn.setAttribute("aria-label", "Language: " + code.toUpperCase());
+  }
+  function currentLang() { return root.getAttribute("lang") || "en"; }
+  if (localeBtn) localeBtn.addEventListener("click", function () {
+    var order = localeOrder, cur = currentLang(), next = order[(order.indexOf(cur) + 1 + order.length) % order.length];
+    setLang(next);
+  });
+  function setLang(code, save) {
+    document.querySelectorAll("[data-en]").forEach(function (el) {
+      var v = el.dataset[code];
+      if (v != null) { el.textContent = v; el.setAttribute("lang", code); }
+    });
+    document.querySelectorAll("[data-ph-en]").forEach(function (el) {
+      var v = el.dataset["ph" + code];
+      if (v != null) el.setAttribute("placeholder", v);
+    });
+    root.setAttribute("lang", code);
+    paintLocaleBtn(code);
+    if (save !== false) persist("s1k-locale", code);
+  }
+  var savedLang = recall("s1k-locale");
+  if (savedLang === "en" || savedLang === "ru" || savedLang === "th") { setLang(savedLang, false); }
+  else { paintLocaleBtn("en"); }
+
+  /* Catalog pills filter */
+  var catBtns = document.querySelectorAll('[data-cat]');
+  catBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      catBtns.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      var cat = b.dataset.cat;
+      document.querySelectorAll(".product[data-cat]").forEach(function (card) {
+        var show = cat === "all" || card.dataset.cat === cat;
+        card.style.display = show ? "" : "none";
+      });
+    });
+  });
+
+  /* Crew hero: rotating collage (desktop) + snap carousel (mobile) */
+  (function () {
+    var POOLS = [
+      { cls: "f1", photos: [
+        { src: "crew/roof-1103.jpg", en: "AO NANG · 10 kW", ru: "АО НАНГ · 10 кВт", th: "อ่าวนาง · 10 kW" },
+        { src: "crew/crew-shirt.jpg", en: "OUR CREW", ru: "НАША КОМАНДА", th: "ทีมของเรา" },
+        { src: "crew/crew-portal.jpg", en: "KRABI ORANGE", ru: "КРАБИ ОРАНЖ", th: "ส้มกระบี่" } ] },
+      { cls: "f2", photos: [
+        { src: "crew/batt-0584.jpg", en: "DYNESS · 20 kWh", ru: "DYNESS · 20 кВт·ч", th: "Dyness · 20 kWh" },
+        { src: "crew/crew-inverter.jpg", en: "TIER-1 GEAR", ru: "TIER-1", th: "อุปกรณ์ Tier-1" },
+        { src: "crew/crew-showroom.jpg", en: "NEW SHOWROOM", ru: "НОВЫЙ ШОУРУМ", th: "โชว์รูมใหม่" } ] },
+      { cls: "f3", photos: [
+        { src: "crew/crew-smile.jpg", en: "LOCAL ENGINEERS", ru: "МЕСТНЫЕ ИНЖЕНЕРЫ", th: "วิศวกรท้องถิ่น" },
+        { src: "crew/sigen-batt.webp", en: "SIGENSTOR 5-IN-1", ru: "SIGENSTOR 5-В-1", th: "SigenStor 5-in-1" },
+        { src: "crew/roof-1904.jpg", en: "BUSINESS · 10 kW", ru: "БИЗНЕС · 10 кВт", th: "ธุรกิจ · 10 kW" } ] },
+      { cls: "f4", photos: [
+        { src: "crew/eng-1518.jpg", en: "OUR ENGINEER", ru: "НАШ ИНЖЕНЕР", th: "วิศวกรของเรา" },
+        { src: "crew/crew-paint.jpg", en: "OWN HANDS", ru: "СВОИМИ РУКАМИ", th: "ทำเองทุกขั้น" },
+        { src: "crew/crew-shirtwide.jpg", en: "TAWAN POWER", ru: "TAWAN POWER", th: "Tawan Power" } ] }
+    ];
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function curLang() { return document.documentElement.getAttribute("lang") || "en"; }
+    function capText(p) { var l = curLang(); return p[l] || p.en; }
+    function paintCap(cap, p) {
+      cap.dataset.en = p.en; cap.dataset.ru = p.ru; cap.dataset.th = p.th;
+      cap.textContent = capText(p); cap.setAttribute("lang", curLang());
+    }
+    POOLS.forEach(function (f) { f.photos.forEach(function (p) { var im = new Image(); im.src = p.src; }); });
+    var box = document.getElementById("uniCollage");
+    if (box) POOLS.forEach(function (f, fi) {
+      var fig = document.createElement("figure");
+      fig.className = "frame " + f.cls;
+      var a = document.createElement("img"); a.src = f.photos[0].src; a.alt = ""; a.className = "on";
+      var b = document.createElement("img"); b.src = f.photos[1].src; b.alt = "";
+      var cap = document.createElement("figcaption"); paintCap(cap, f.photos[0]);
+      fig.appendChild(a); fig.appendChild(b); fig.appendChild(cap);
+      box.appendChild(fig);
+      if (reduced) return;
+      var idx = 0, showingA = true;
+      setInterval(function () {
+        idx = (idx + 1) % f.photos.length;
+        var next = f.photos[idx], hidden = showingA ? b : a, shown = showingA ? a : b;
+        hidden.src = next.src;
+        cap.classList.add("swap");
+        setTimeout(function () {
+          hidden.classList.add("on"); shown.classList.remove("on");
+          showingA = !showingA;
+          paintCap(cap, next);
+          cap.classList.remove("swap");
+        }, 380);
+      }, 4200 + fi * 1300);
+    });
+    var strip = document.getElementById("uniStrip");
+    if (strip) {
+      var dots = document.getElementById("uniDots"), count = document.getElementById("uniCount"), slides = [];
+      POOLS.forEach(function (f) { f.photos.forEach(function (p) { slides.push(p); }); });
+      slides.forEach(function (p, i) {
+        var fig = document.createElement("figure"); fig.className = "slide";
+        var im = document.createElement("img"); im.src = p.src; im.alt = p.en; if (i > 1) im.loading = "lazy";
+        var cap = document.createElement("figcaption"); paintCap(cap, p);
+        fig.appendChild(im); fig.appendChild(cap); strip.appendChild(fig);
+        var d = document.createElement("i"); if (i === 0) d.className = "on"; dots.appendChild(d);
+      });
+      var cur = 0, timer = null;
+      function mark() {
+        dots.querySelectorAll("i").forEach(function (d, di) { d.classList.toggle("on", di === cur); });
+        count.textContent = (cur + 1) + " / " + slides.length;
+      }
+      function go(i) {
+        cur = (i + slides.length) % slides.length;
+        strip.children[cur].scrollIntoView({ behavior: reduced ? "auto" : "smooth", inline: "center", block: "nearest" });
+        mark();
+        // Update active dot visual
+        dots.forEach(d => d.classList.toggle("on", d.parentElement.dataset.index === cur));
+      }
+      strip.addEventListener("scroll", function () {
+        var best = 0, bd = 1e9, cx = strip.scrollLeft + strip.clientWidth / 2;
+        Array.prototype.forEach.call(strip.children, function (el, i) {
+          var d = Math.abs(el.offsetLeft + el.clientWidth / 2 - cx);
+          if (d < bd) { bd = d; best = i; }
+        });
+        if (best !== cur) { cur = best; mark(); }
+      }, { passive: true });
+      function play() { if (!reduced) timer = setInterval(function () { go(cur + 1); }, 5000); // 5s consistent interval
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+      strip.addEventListener("pointerdown", stop, { passive: true });
+      strip.addEventListener("pointerup", function () { stop(); play(); }, { passive: true });
+      document.addEventListener("visibilitychange", function () { document.hidden ? stop() : (timer || play()); });
+      play();
+    }
+  })();
+
+  /* Knowledge tabs */
+  var tabs = document.querySelectorAll('#knowledge [role="tab"]');
+  tabs.forEach(function (t) {
+    t.addEventListener("click", function () {
+      tabs.forEach(function (x) { x.setAttribute("aria-selected", x === t ? "true" : "false"); });
+      document.querySelectorAll("#knowledge .tabpanel").forEach(function (p) {
+        p.classList.toggle("is-active", p.dataset.panel === t.dataset.tab);
+      });
+    });
+  });
+
+  /* Lead form */
+  document.getElementById("leadForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.getElementById("fName"), phone = document.getElementById("fPhone"), ok = true;
+    [name, phone].forEach(function (f) {
+      var bad = !f.value.trim();
+      f.setAttribute("aria-invalid", bad ? "true" : "false");
+      f.style.borderColor = bad ? "var(--danger)" : "";
+      if (bad) ok = false;
+    });
+    if (!ok) { name.focus(); return; }
+    document.getElementById("leadForm").style.display = "none";
+    document.getElementById("leadSuccess").classList.add("is-show");
+  });
+
+  /* Scroll reveal */
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  root.classList.add("js");
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px 12% 0px" });
+    document.querySelectorAll(".rv").forEach(function (el) { io.observe(el); });
+    /* Safety net: reveal everything after 2.5s even if IO never fires */
+    setTimeout(function () {
+      document.querySelectorAll(".rv:not(.in)").forEach(function (el) { el.classList.add("in"); });
+    }, 2500);
+  } else {
+    document.querySelectorAll(".rv").forEach(function (el) { el.classList.add("in"); });
+  }
+})();
+</script>
+</body>
+</html>
