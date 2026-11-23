@@ -15,7 +15,8 @@ import {
   Moon,
   Bell,
   BellOff,
-  FileEdit
+  FileEdit,
+  Gift
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
@@ -193,6 +194,7 @@ export default function AdminClientLayout({
     { id: 'leads', name: t('navLeads'), href: '/admin/leads', icon: Users },
     { id: 'products', name: t('navProducts'), href: '/admin/products', icon: Package },
     { id: 'content', name: 'Content', href: '/admin/content', icon: FileEdit },
+    { id: 'lead-magnets', name: 'Магніти', href: '/admin/lead-magnets', icon: Gift },
     { id: 'super', name: t('navSuper'), href: '/admin/super', icon: Settings },
   ];
   // The same question the layout asks before rendering, so a link never leads to a 404.

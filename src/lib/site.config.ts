@@ -38,7 +38,7 @@ export type SectionId =
   | 'blog';
 
 /** A top-level entry in the staff shell. */
-export type AdminItem = 'dashboard' | 'leads' | 'products' | 'content' | 'super';
+export type AdminItem = 'dashboard' | 'leads' | 'products' | 'content' | 'lead-magnets' | 'super';
 
 export interface SiteAdmin {
   items: AdminItem[];

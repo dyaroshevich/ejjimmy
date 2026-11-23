@@ -15,6 +15,7 @@ const OWNED: Array<[AdminItem, string]> = [
   ['leads', '/admin/leads'],
   ['products', '/admin/products'],
   ['content', '/admin/content'],
+  ['content', '/admin/lead-magnets'],
   ['super', '/admin/super'],
   // Last: `/admin` prefixes every other admin path, so it owns only the dashboard itself.
   ['dashboard', '/admin'],
