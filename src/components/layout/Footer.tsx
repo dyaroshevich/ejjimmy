@@ -29,11 +29,23 @@ const TOOLS: readonly NavItem[] = [
   { key: 'toolSeoTax', href: '/seo/solar-tax-deduction-2569', label: 'ลดหย่อนภาษีโซล่าเซลล์ 2569' },
 ];
 
-const LEAD_MAGNETS: readonly NavItem[] = [
-  { key: 'lmChecklist', href: '/lead-magnets/lm-01', label: 'เช็คลิสต์ 9 คำถามก่อนเซ็นสัญญา' },
-  { key: 'lmYield', href: '/lead-magnets/lm-02', label: 'ตารางผลิตไฟฟ้า 8 อำเภอในกระบี่' },
-  { key: 'lmRoof', href: '/lead-magnets/lm-04', label: 'เช็คลิสต์ตรวจหลังคา 12 ข้อ' },
-  { key: 'lmInverter', href: '/lead-magnets/lm-08', label: 'เปรียบเทียบอินเวอร์เตอร์ Huawei/Deye/Sigenergy' },
+/** Бесплатные лид-магниты — маркетинговые названия из БД (поле value.marketing_title_th) */
+const FREE_MAGNETS: readonly NavItem[] = [
+  { key: 'lm-01', href: '/lead-magnets/lm-01', label: 'Бесплатно: 9 คำถามที่ต้องถามช่างก่อนเซ็นสัญญาโซล่าเซลล์' },
+  { key: 'lm-02', href: '/lead-magnets/lm-02', label: 'Бесплатно: ตารางผลิตไฟฟ้าตามพื้นที่ 8 อำเภอในกระบี่' },
+  { key: 'lm-04', href: '/lead-magnets/lm-04', label: 'Бесплатно: เช็คลิสต์ 12 ข้อ ตรวจหลังคาก่อนติดตั้งโซล่าเซลล์' },
+  { key: 'lm-08', href: '/lead-magnets/lm-08', label: '📊 เปรียบเทียบอินเวอร์เตอร์ Huawei vs Deye vs Sigenergy — แบบไม่ขายของ' },
+  { key: 'lm-15', href: '/lead-magnets/lm-15', label: 'Бесплатно: แผนที่แดดภาคใต้: kWh/kWp ต่อปี 8 จังหวัด' },
+  { key: 'lm-16', href: '/lead-magnets/lm-16', label: 'Бесплатно: 7 ความผิดพลาดตอนติดตั้งที่พบบ่อยในภูเก็ต–กระบี่' },
+  { key: 'lm-22', href: '/lead-magnets/lm-22', label: 'เช็คลิสต์บำรุงรักษา 12 เดือน (ฟรีสำหรับลูกค้าติดตั้ง)' },
+];
+
+/** Платные лид-магниты (tripwire) — с ценой в бат */
+const PAID_MAGNETS: readonly NavItem[] = [
+  { key: 'lm-17', href: '/lead-magnets/lm-17', label: '💰 ตรวจระบบโซล่าเซลล์เดิม + รายงานเทอร์มอล — 1500฿' },
+  { key: 'lm-18', href: '/lead-magnets/lm-18', label: '💰 ตรวจหลังคา+ประเมินโหลดก่อนติดตั้ง EV Charger — 990฿' },
+  { key: 'lm-19', href: '/lead-magnets/lm-19', label: '💰 สำรวจหลังคาและวัดเงา + แบบจำลอง 3D — 1500฿' },
+  { key: 'lm-20', href: '/lead-magnets/lm-20', label: '💰 ตรวจความร้อนระบบด้วยโดรน (20 kW ขึ้นไป) — 2500฿' },
 ];
 
 export default function Footer({ showTheme = true }: { showTheme?: boolean }) {
@@ -83,9 +95,16 @@ export default function Footer({ showTheme = true }: { showTheme?: boolean }) {
           </div>
 
           <div className="foot-col">
-            <h4>ลิด-แม็กเนต</h4>
-            {LEAD_MAGNETS.map((l) => (
-              <NavLink key={l.key} href={l.href}>{l.label ?? t(l.key)}</NavLink>
+            <h4>Бесплатные материалы</h4>
+            {FREE_MAGNETS.map((l) => (
+              <NavLink key={l.key} href={l.href}>{l.label}</NavLink>
+            ))}
+          </div>
+
+          <div className="foot-col">
+            <h4>Платные инструменты</h4>
+            {PAID_MAGNETS.map((l) => (
+              <NavLink key={l.key} href={l.href}>{l.label}</NavLink>
             ))}
           </div>
 
