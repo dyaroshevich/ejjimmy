@@ -9,7 +9,7 @@ import { landingAnchor } from '@/lib/locale-path';
 import { useSite } from '@/lib/site-context';
 import type { SectionId } from '@/lib/site.config';
 
-type NavItem = { key: string; href: string; section?: SectionId };
+type NavItem = { key: string; href: string; label?: string; section?: SectionId };
 
 const SOLUTIONS: readonly NavItem[] = [
   { key: 'solHome', href: '/#segments', section: 'segments' },
@@ -23,6 +23,17 @@ const TOOLS: readonly NavItem[] = [
   { key: 'toolKnowledge', href: '/#knowledge', section: 'knowledge' },
   { key: 'toolSteps', href: '/#steps', section: 'steps' },
   { key: 'toolPrivacy', href: '/privacy' },
+  { key: 'toolSeo5kw', href: '/seo/solar-5kw-krabi', label: 'โซล่าเซลล์ 5 กิโลวัตต์ — ราคา' },
+  { key: 'toolSeo10kw', href: '/seo/solar-10kw-krabi', label: 'โซล่าเซลล์ 10 กิโลวัตต์ — ราคา' },
+  { key: 'toolSeoBattery', href: '/seo/solar-battery-price', label: 'แบตเตอรี่โซล่าเซลล์ — ราคา' },
+  { key: 'toolSeoTax', href: '/seo/solar-tax-deduction-2569', label: 'ลดหย่อนภาษีโซล่าเซลล์ 2569' },
+];
+
+const LEAD_MAGNETS: readonly NavItem[] = [
+  { key: 'lmChecklist', href: '/lead-magnets/lm-01', label: 'เช็คลิสต์ 9 คำถามก่อนเซ็นสัญญา' },
+  { key: 'lmYield', href: '/lead-magnets/lm-02', label: 'ตารางผลิตไฟฟ้า 8 อำเภอในกระบี่' },
+  { key: 'lmRoof', href: '/lead-magnets/lm-04', label: 'เช็คลิสต์ตรวจหลังคา 12 ข้อ' },
+  { key: 'lmInverter', href: '/lead-magnets/lm-08', label: 'เปรียบเทียบอินเวอร์เตอร์ Huawei/Deye/Sigenergy' },
 ];
 
 export default function Footer({ showTheme = true }: { showTheme?: boolean }) {
@@ -67,7 +78,14 @@ export default function Footer({ showTheme = true }: { showTheme?: boolean }) {
           <div className="foot-col">
             <h4>{t('colTools')}</h4>
             {tools.map((l) => (
-              <NavLink key={l.key} href={l.href}>{t(l.key)}</NavLink>
+              <NavLink key={l.key} href={l.href}>{l.label ?? t(l.key)}</NavLink>
+            ))}
+          </div>
+
+          <div className="foot-col">
+            <h4>ลิด-แม็กเนต</h4>
+            {LEAD_MAGNETS.map((l) => (
+              <NavLink key={l.key} href={l.href}>{l.label ?? t(l.key)}</NavLink>
             ))}
           </div>
 

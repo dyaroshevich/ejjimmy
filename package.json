@@ -65,6 +65,7 @@
     "ai": "^3.4.33",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "csv-parse": "^7.0.3",
     "date-fns": "^4.3.0",
     "dompurify": "^3.4.5",
     "dotenv": "^17.3.1",

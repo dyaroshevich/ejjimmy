@@ -68,7 +68,7 @@ const nextConfig = {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
   reactStrictMode: true,
-  distDir: process.env.NEXT_EJJIMMY_DIST_DIR ?? ".next-ejjimmy",
+  distDir: process.env.NEXT_EJJIMMY_DIST_DIR ?? ".next",
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
