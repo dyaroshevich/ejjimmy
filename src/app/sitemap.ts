@@ -38,6 +38,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const entries: Entry[] = [
     ...localized(SITE, '/', now, 'weekly', 1),
+    ...localized(SITE, '/catalog', now, 'weekly', 0.9),
     ...localized(SITE, '/blog', now, 'weekly', 0.8),
     ...localized(SITE, '/cases', now, 'weekly', 0.7),
     ...localized(SITE, '/segments', now, 'monthly', 0.6),
@@ -88,6 +89,40 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         0.6
       )
     );
+  }
+
+  // Dynamic storefront routes: the catalog's product pages, the system pages, the SEO landings
+  // and the lead magnets. These routes read the prefixed Ejjimmy tables, so the sitemap must too.
+  const { data: catalogRows } = await createClient(url, key)
+    .from('ejjimmy_solar_products')
+    .select('id, type')
+    .eq('is_active', true);
+  for (const r of catalogRows || []) {
+    if (!r.id) continue;
+    const path = r.type === 'system' ? 'systems' : 'products';
+    entries.push({ url: `${SITE}/${path}/${r.id}`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 });
+  }
+
+  const { data: seoRows } = await createClient(url, key)
+    .from('ejjimmy_blog_posts')
+    .select('slug, updated_at')
+    .eq('is_published', true);
+  for (const p of seoRows || []) {
+    // The Ejjimmy SEO landings store the slug with a leading slash under /seo/<slug>.
+    const slug = (p.slug || '').replace(/^\//, '');
+    if (!slug) continue;
+    entries.push({ url: `${SITE}/seo/${slug}`, lastModified: new Date(p.updated_at || now), changeFrequency: 'monthly', priority: 0.6 });
+  }
+
+  const { data: magnets } = await createClient(url, key)
+    .from('ejjimmy_content_keys')
+    .select('key')
+    .eq('locale', 'th')
+    .like('key', 'lead_magnet_%');
+  for (const m of magnets || []) {
+    const id = (m.key || '').replace(/^lead_magnet_/, '');
+    if (!id) continue;
+    entries.push({ url: `${SITE}/lead-magnets/${id}`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 });
   }
 
   return entries;

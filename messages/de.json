@@ -20,7 +20,9 @@
     "error": "An error occurred",
     "success": "Success",
     "warning": "Warning",
-    "info": "Information"
+    "info": "Information",
+    "cookieMsg": "เราใช้คุกกี้เพื่อปรับปรุงประสบการณ์ — อ่านเพิ่มเติมใน",
+    "cookieOk": "ตกลง"
   },
   "navigation": {
     "home": "Home",
@@ -115,7 +117,9 @@
     "rights": "© 2026 {brand}. Alle Rechte vorbehalten.",
     "brandTop": "{city}, Thailand",
     "brandSub": "{city} · Solar-Installateur",
-    "areas": "· {city}-Stadt · Ao Nang · Koh Lanta · Klong Thom"
+    "areas": "· {city}-Stadt · Ao Nang · Koh Lanta · Klong Thom",
+    "freeMagnets": "เอกสารฟรี",
+    "paidTools": "เครื่องมือแบบจ่ายเงิน"
   },
   "meta": {
     "title": "{brand} — Günstiges Solar in {city} | Bis zu 70% sparen",
@@ -283,7 +287,36 @@
     "tierBusiness": "Gewerbe · 10–50 kW",
     "tierHybrid": "Premium-Hybrid · 5 kW+",
     "unitKw": "kW",
-    "unitKwh": "kWh"
+    "unitKwh": "kWh",
+    "unitModel": "รุ่น",
+    "dataConfidence": "ความน่าเชื่อถือของข้อมูล",
+    "supplier": "ผู้จัดจำหน่าย",
+    "warranty": "การรับประกัน",
+    "months": "เดือน",
+    "category": "หมวดหมู่",
+    "freeQuoteNote": "ประเมินฟรี ไม่มีข้อผูกมัด",
+    "leadNote": "ฝากข้อมูล วิศวกรจะติดต่อกลับภายใน 24 ชั่วโมง",
+    "notes": "หมายเหตุ",
+    "brand": "แบรนด์",
+    "power": "กำลังไฟ",
+    "capacity": "ความจุ",
+    "retailPrice": "ราคาขายปลีก",
+    "primaryKeyword": "คำค้นหลัก",
+    "secondaryKeywords": "คำค้นรอง",
+    "internalLinks": "ลิงก์ภายใน",
+    "ctaLabel": "คำเชิญชวน",
+    "related": "อ่านเพิ่มเติม",
+    "seoTitle": "บทความ",
+    "segment": "กลุ่มลูกค้า",
+    "gridType": "ประเภทระบบไฟ",
+    "bomPending": "ส่วนประกอบรอวิศวกรยืนยัน",
+    "order": "สั่งติดตั้งระบบ",
+    "freeVisit": "เข้าสำรวจหน้างานฟรี",
+    "visitNote": "เราจะไปวัดหลังคาและเสนอระบบที่เหมาะกับการใช้งานของคุณ",
+    "orderFor": "ขอระบบ {name}",
+    "marketContext": "ข้อมูลตลาด",
+    "ourPosition": "ตำแหน่งของเรา",
+    "entryBarrier": "อุปสรรคในการเข้าสู่ตลาด"
   },
   "cases": {
     "badge": "Aktuelle Projekte",
@@ -1226,5 +1259,33 @@
       "user: ราคาเท่าไหร่ครับ",
       "tan: รุ่น GoodWe 5kW เริ่มต้น 150,000 บาท รุ่นพรีเมียม Sigenergy 200,000-250,000 บาท รวมติดตั้ง"
     ]
+  },
+  "magnet": {
+    "getFree": "รับฟรี",
+    "paid": "แผ่นเครื่องมือแบบจ่ายเงิน",
+    "free": "เอกสารฟรี",
+    "benefits": "สิ่งที่คุณจะได้รับ",
+    "format": "รูปแบบ",
+    "pages": "จำนวนหน้า",
+    "languages": "ภาษา",
+    "dataNeeded": "ข้อมูลที่เราต้องการจากคุณ",
+    "why": "ทำไมสิ่งนี้จึงสำคัญ",
+    "buy": "ซื้อเครื่องมือ",
+    "priceNote": "ราคา ฿{price} (หักจากค่าติดตั้งระบบ)",
+    "freeNote": "ฝากข้อมูล แล้วเราจะส่งเอกสารทาง LINE OA",
+    "namePh": "ชื่อของคุณ",
+    "phonePh": "+66 8x xxx xxxx",
+    "errorFill": "กรุณากรอกชื่อและเบอร์โทร",
+    "thanks": "ขอบคุณ! เราจะส่งเอกสารทาง LINE OA ในเร็ว ๆ นี้",
+    "errorServer": "เกิดข้อผิดพลาด: {error}",
+    "errorNetwork": "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่ภายหลัง",
+    "pdp": "ข้อมูลของคุณปลอดภัยตาม PDPA ใช้เพื่อติดต่อกลับเท่านั้น",
+    "credit": "ราคานี้หักจากค่าติดตั้งระบบโซล่าเซลล์"
+  },
+  "seo": {
+    "order": "ขอใบเสนอราคา",
+    "consult": "ปรึกษาผู้เชี่ยวชาญ",
+    "freeCalc": "ประเมินระบบฟรี",
+    "lead": "ฝากข้อมูล แล้ววิศวกรจะติดต่อกลับภายใน 24 ชั่วโมง"
   }
 }

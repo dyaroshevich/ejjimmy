@@ -1,6 +1,9 @@
 import { createClient } from '@/lib/supabase-server';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { canonicalUrl } from '@/lib/canonical';
+import { sites } from '@/lib/site.config';
 
 interface Product {
   id: string;
@@ -35,10 +38,10 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 
   const p = product as Product;
   return {
-    title: `${p.name} — цена и характеристики | Ejjimmy Solar`,
-    description: p.description || `${p.name} ${p.brand ? p.brand : ''} ${p.model ? p.model : ''} от Ejjimmy Solar в Краби`,
+    title: `${p.name} — ราคาและข้อมูล | Ejjimmy Solar`,
+    description: p.description || `${p.name} ${p.brand ?? ''} ${p.model ?? ''} จาก Ejjimmy Solar ในกระบี่`,
     alternates: {
-      canonical: `https://ejjimmy-clean.vercel.app/products/${params.id}`,
+      canonical: canonicalUrl(sites.ejjimmy, `/products/${params.id}`),
     },
   };
 }
@@ -57,52 +60,62 @@ export default async function ProductPage({ params }: { params: { id: string } }
     notFound();
   }
 
+  const t = await getTranslations('products');
   const p = product as Product;
   const spec = p.specifications || {};
+  const money = (n: number) => `฿${n.toLocaleString('th-TH')}`;
 
   return (
     <section className="block block--cream" id="product-page">
       <div className="wrap">
         <div className="sec-head sec-head--center">
-          <p className="kicker">Каталог оборудования</p>
-          <h1>{p.name}</h1>
+          <p className="kicker">{t('kicker')}</p>
+          <h1 lang="th">{p.name}</h1>
         </div>
 
         <div className="grid2">
           <div className="card">
-            <h3>Характеристики</h3>
+            <h3>{t('techSpecs')}</h3>
             <ul className="list-disc list-inside mt-2 text-sm text-muted">
-              {p.brand && <li>Бренд: {p.brand}</li>}
-              {p.model && <li>Модель: {p.model}</li>}
-              {p.category && <li>Категория: {p.category}</li>}
-              {p.power_kw && <li>Мощность: {p.power_kw} кВт</li>}
-              {p.capacity_kwh && <li>Ёмкость: {p.capacity_kwh} кВт·ч</li>}
-              {p.price_thb && <li>Цена: ฿{p.price_thb.toLocaleString()}</li>}
-              {p.original_price_thb && <li>Розничная цена: ฿{p.original_price_thb.toLocaleString()}</li>}
-              {spec.confidence && <li>Достоверность данных: {spec.confidence}</li>}
-              {spec.supplier && <li>Поставщики: {spec.supplier}</li>}
-              {spec.warranty_months && <li>Гарантия: {spec.warranty_months} месяцев</li>}
+              {p.brand && <li>{t('brand')}: <span lang="en">{p.brand}</span></li>}
+              {p.model && <li>{t('unitModel')}: <span lang="en">{p.model}</span></li>}
+              {p.category && <li>{t('category')}: <span lang="th">{p.category}</span></li>}
+              {p.power_kw && <li>{t('power')}: {p.power_kw} kW</li>}
+              {p.capacity_kwh && <li>{t('capacity')}: {p.capacity_kwh} kWh</li>}
+              {p.price_thb && <li>{t('price')}: {money(p.price_thb)}</li>}
+              {p.original_price_thb && (
+                <li>
+                  {t('retailPrice')}: {money(p.original_price_thb)}
+                </li>
+              )}
+              {spec.confidence && <li>{t('dataConfidence')}: <span lang="th">{spec.confidence}</span></li>}
+              {spec.supplier && <li>{t('supplier')}: <span lang="th">{spec.supplier}</span></li>}
+              {spec.warranty_months && (
+                <li>
+                  {t('warranty')}: {spec.warranty_months} {t('months')}
+                </li>
+              )}
             </ul>
           </div>
 
           <div className="card pick">
             <div className="pick-head">
-              <h3>Заказать расчёт</h3>
-              <p className="pick-sub">Бесплатно и без обязательств</p>
+              <h3>{t('getQuote')}</h3>
+              <p className="pick-sub">{t('freeQuoteNote')}</p>
             </div>
-            <p className="pick-desc">
-              Оставьте заявку — и наш инженер свяжется с вами в течение 24 часов.
-            </p>
+            <p className="pick-desc">{t('leadNote')}</p>
             <a href="#contact" className="btn btn--primary btn--lg">
-              Получить расчёт для {p.name}
+              {t('quoteFor', { name: p.name })}
             </a>
           </div>
         </div>
 
-        {spec.notes && (
+        {(spec.notes || p.description) && (
           <div className="card mt-6">
-            <h3>Описание</h3>
-            <p className="prose prose-slate dark:prose-invert">{spec.notes}</p>
+            <h3>{t('descTitle')}</h3>
+            <p className="prose prose-slate dark:prose-invert" lang="th">
+              {spec.notes || p.description}
+            </p>
           </div>
         )}
       </div>

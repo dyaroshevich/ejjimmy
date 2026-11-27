@@ -20,7 +20,9 @@
     "error": "An error occurred",
     "success": "Success",
     "warning": "Warning",
-    "info": "Information"
+    "info": "Information",
+    "cookieMsg": "We use cookies to improve your experience — read the",
+    "cookieOk": "OK"
   },
   "navigation": {
     "home": "Home",
@@ -115,7 +117,9 @@
     "rights": "© 2026 {brand}. All rights reserved.",
     "brandTop": "{city}, Thailand",
     "brandSub": "{city} · Solar installer",
-    "areas": "· {city} Town · Ao Nang · Koh Lanta · Klong Thom"
+    "areas": "· {city} Town · Ao Nang · Koh Lanta · Klong Thom",
+    "freeMagnets": "Free resources",
+    "paidTools": "Paid tools"
   },
   "meta": {
     "title": "{brand} — Affordable Solar in {city} | Cut Bills up to 70%",
@@ -283,7 +287,36 @@
     "tierBusiness": "Business · 10–50 kW",
     "tierHybrid": "Premium Hybrid · 5 kW+",
     "unitKw": "kW",
-    "unitKwh": "kWh"
+    "unitKwh": "kWh",
+    "unitModel": "Model",
+    "dataConfidence": "Data confidence",
+    "supplier": "Supplier",
+    "warranty": "Warranty",
+    "months": "months",
+    "category": "Category",
+    "freeQuoteNote": "Free, no obligation",
+    "leadNote": "Leave your contact and an engineer will call within 24 hours",
+    "notes": "Notes",
+    "brand": "Brand",
+    "power": "Power",
+    "capacity": "Capacity",
+    "retailPrice": "Retail price",
+    "primaryKeyword": "Primary keyword",
+    "secondaryKeywords": "Secondary keywords",
+    "internalLinks": "Internal links",
+    "ctaLabel": "Call to action",
+    "related": "Read more",
+    "seoTitle": "Article",
+    "segment": "Segment",
+    "gridType": "Grid type",
+    "bomPending": "Configuration confirmed by engineer",
+    "order": "Order a system",
+    "freeVisit": "Free site survey",
+    "visitNote": "We will measure your roof and propose a configuration that fits your use",
+    "orderFor": "Order {name}",
+    "marketContext": "Market context",
+    "ourPosition": "Our position",
+    "entryBarrier": "Barriers to entry"
   },
   "cases": {
     "badge": "Recent work",
@@ -1226,5 +1259,33 @@
       "user: How much?",
       "tan: GoodWe 5kW starts at 150,000 baht. Premium Sigenergy with battery 200,000-250,000 baht. All-inclusive installation."
     ]
+  },
+  "magnet": {
+    "getFree": "Get it free",
+    "paid": "Paid tool",
+    "free": "Free resource",
+    "benefits": "What you get",
+    "format": "Format",
+    "pages": "Pages",
+    "languages": "Languages",
+    "dataNeeded": "What we need from you",
+    "why": "Why it matters",
+    "buy": "Buy the tool",
+    "priceNote": "Price ฿{price} (credited towards installation)",
+    "freeNote": "Leave your contact and we will send the file via LINE OA",
+    "namePh": "Your name",
+    "phonePh": "+66 8x xxx xxxx",
+    "errorFill": "Please enter your name and phone",
+    "thanks": "Thank you! We will send the file via LINE OA shortly",
+    "errorServer": "Error: {error}",
+    "errorNetwork": "Network error. Please try again later",
+    "pdp": "Your data is protected under PDPA and used only to contact you",
+    "credit": "The price is credited towards your solar installation"
+  },
+  "seo": {
+    "order": "Get a quote",
+    "consult": "Talk to an expert",
+    "freeCalc": "Free system quote",
+    "lead": "Leave your contact and an engineer will call within 24 hours"
   }
 }

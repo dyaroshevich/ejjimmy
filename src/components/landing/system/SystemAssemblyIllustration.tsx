@@ -92,7 +92,7 @@ export default function SystemAssemblyIllustration({
       >
         <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-orange-600/20 border border-orange-500/30 backdrop-blur-sm">
           <span className="text-[10px] font-black uppercase tracking-[0.3em] text-orange-900">
-            Собирается покирпично — как баггер
+            สร้างทีละชิ้น — เหมือนต่อเลโก้
           </span>
         </div>
       </motion.div>

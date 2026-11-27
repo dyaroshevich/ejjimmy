@@ -1,3 +1,6 @@
+# ICM research workspace (separate untracked project, not app source)
+/docs/workspace-01a20c87/
+
 # dependencies
 /node_modules
 /.pnp

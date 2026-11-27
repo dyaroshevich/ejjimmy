@@ -21,7 +21,7 @@ type NavItem = { key: string; href: string; section?: SectionId };
 
 const INLINE: readonly NavItem[] = [
   { key: 'navSolutions', href: '/#segments', section: 'segments' },
-  { key: 'navCatalog', href: '/#systems', section: 'systems' },
+  { key: 'navCatalog', href: '/catalog' },
   { key: 'navPortfolio', href: '/#cases', section: 'cases' },
   { key: 'navHybrid', href: '/#sigen', section: 'sigen' },
   { key: 'navSteps', href: '/#steps', section: 'steps' },

@@ -53,7 +53,9 @@ export const LeadSchema = z.object({
     .nullable()
     .optional(),
   
-  source: z.enum(['web', 'line', 'chat', 'line_login', 'Website Form'])
+  // `lead_magnet` comes from /lead-magnets/[id]; the enum stays closed so a caller cannot
+  // smuggle an arbitrary source string into the leads table.
+  source: z.enum(['web', 'line', 'chat', 'line_login', 'Website Form', 'lead_magnet'])
     .optional()
     .default('chat'),
   

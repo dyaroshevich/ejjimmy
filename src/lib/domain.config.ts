@@ -64,7 +64,9 @@ export function monthlyInstalment(priceThb: number | null | undefined): number |
 
 /** True when a catalogue row belongs in the hybrid tier. */
 export function isHybridSystem(typeText: string, brandName: string): boolean {
-  if (/hybrid/i.test(typeText)) return true;
+  // `hybrid` and `ไฮบริด` come from the template's rows; `гибрид` is what the Ejjimmy
+  // research import writes into `name`/`spec` (e.g. "Гибрид 5 кВт 1 фаза").
+  if (/hybrid|гибрид|ไฮบริด/i.test(typeText)) return true;
   const brand = brandName.trim().toLowerCase();
   return categories.hybridBrands.some((b) => brand.includes(b.toLowerCase()));
 }

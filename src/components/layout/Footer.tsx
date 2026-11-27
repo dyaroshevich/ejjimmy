@@ -15,7 +15,7 @@ const SOLUTIONS: readonly NavItem[] = [
   { key: 'solHome', href: '/#segments', section: 'segments' },
   { key: 'solBusiness', href: '/#segments', section: 'segments' },
   { key: 'solHybrid', href: '/#sigen', section: 'sigen' },
-  { key: 'solCatalog', href: '/#systems', section: 'systems' },
+  { key: 'solCatalog', href: '/catalog' },
 ];
 
 const TOOLS: readonly NavItem[] = [
@@ -31,12 +31,12 @@ const TOOLS: readonly NavItem[] = [
 
 /** Бесплатные лид-магниты — маркетинговые названия из БД (поле value.marketing_title_th) */
 const FREE_MAGNETS: readonly NavItem[] = [
-  { key: 'lm-01', href: '/lead-magnets/lm-01', label: 'Бесплатно: 9 คำถามที่ต้องถามช่างก่อนเซ็นสัญญาโซล่าเซลล์' },
-  { key: 'lm-02', href: '/lead-magnets/lm-02', label: 'Бесплатно: ตารางผลิตไฟฟ้าตามพื้นที่ 8 อำเภอในกระบี่' },
-  { key: 'lm-04', href: '/lead-magnets/lm-04', label: 'Бесплатно: เช็คลิสต์ 12 ข้อ ตรวจหลังคาก่อนติดตั้งโซล่าเซลล์' },
+  { key: 'lm-01', href: '/lead-magnets/lm-01', label: '9 คำถามที่ต้องถามช่างก่อนเซ็นสัญญาโซล่าเซลล์' },
+  { key: 'lm-02', href: '/lead-magnets/lm-02', label: 'ตารางผลิตไฟฟ้าตามพื้นที่ 8 อำเภอในกระบี่' },
+  { key: 'lm-04', href: '/lead-magnets/lm-04', label: 'เช็คลิสต์ 12 ข้อ ตรวจหลังคาก่อนติดตั้งโซล่าเซลล์' },
   { key: 'lm-08', href: '/lead-magnets/lm-08', label: '📊 เปรียบเทียบอินเวอร์เตอร์ Huawei vs Deye vs Sigenergy — แบบไม่ขายของ' },
-  { key: 'lm-15', href: '/lead-magnets/lm-15', label: 'Бесплатно: แผนที่แดดภาคใต้: kWh/kWp ต่อปี 8 จังหวัด' },
-  { key: 'lm-16', href: '/lead-magnets/lm-16', label: 'Бесплатно: 7 ความผิดพลาดตอนติดตั้งที่พบบ่อยในภูเก็ต–กระบี่' },
+  { key: 'lm-15', href: '/lead-magnets/lm-15', label: 'แผนที่แดดภาคใต้: kWh/kWp ต่อปี 8 จังหวัด' },
+  { key: 'lm-16', href: '/lead-magnets/lm-16', label: '7 ความผิดพลาดตอนติดตั้งที่พบบ่อยในภูเก็ต–กระบี่' },
   { key: 'lm-22', href: '/lead-magnets/lm-22', label: 'เช็คลิสต์บำรุงรักษา 12 เดือน (ฟรีสำหรับลูกค้าติดตั้ง)' },
 ];
 
@@ -95,14 +95,14 @@ export default function Footer({ showTheme = true }: { showTheme?: boolean }) {
           </div>
 
           <div className="foot-col">
-            <h4>Бесплатные материалы</h4>
+            <h4>{t('freeMagnets')}</h4>
             {FREE_MAGNETS.map((l) => (
               <NavLink key={l.key} href={l.href}>{l.label}</NavLink>
             ))}
           </div>
 
           <div className="foot-col">
-            <h4>Платные инструменты</h4>
+            <h4>{t('paidTools')}</h4>
             {PAID_MAGNETS.map((l) => (
               <NavLink key={l.key} href={l.href}>{l.label}</NavLink>
             ))}
